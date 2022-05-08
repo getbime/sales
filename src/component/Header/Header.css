@@ -1,0 +1,16 @@
+.header {
+    /* border: 1px solid black; */
+    width: 110%;
+    margin-top: 2rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-right: 2rem;
+
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+
+    border-radius: 2px;
+    box-shadow: 1px 2px 5px #dfdbdb;
+}
+
