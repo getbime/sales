@@ -4,13 +4,7 @@ import LineChart from '../../chart/LineChart'
 import DualAxesChart from '../../chart/DualAxes'
 
 const StatSection = () => {
-    const styling = {
-        width:'38%', 
-        height:'17rem', 
-        backgroundColor:'#f7faff', 
-        padding:'2rem',
-        borderRadius: '4px'
-        }
+   
     return (
         <Box className='main-box' sx={{
             marginTop: '3rem',
@@ -24,8 +18,8 @@ const StatSection = () => {
             justifyContent:'center',
            
             }}>
-            <LineChart  styling={styling}/>
-            <DualAxesChart  styling={styling}/>
+            <LineChart />
+            <DualAxesChart />
         </Box>
     );
 }

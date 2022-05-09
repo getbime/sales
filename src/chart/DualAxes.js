@@ -2,7 +2,7 @@ import './chart.css'
 import { DualAxes } from '@ant-design/plots';
 import Box from '@mui/material/Box'
 
-const DualAxesChart = ({styling}) => {
+const DualAxesChart = () => {
   const data = [
     {
       time: '2019-03',
@@ -47,7 +47,7 @@ const DualAxesChart = ({styling}) => {
     ],
   };
   return (
-    <Box sx={{...styling}} className="box-children">
+    <Box className="box-children" >
         <DualAxes {...config} />
     </Box>  
   )
