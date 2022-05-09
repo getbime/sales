@@ -9,8 +9,8 @@
 @media screen and (max-width: 600px) {
 
     .box-children {
-        width: 90%;
-        padding: 0;
+        width: 89%;
+        padding: 1rem;
         margin: 0;
     }
      
