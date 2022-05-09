@@ -8,6 +8,7 @@ import TogleNav from './component/TogleNav/TogleNav'
 import Footer from './component/Footer/Footer'
 import Registration from './component/Registration/Registration'
 import Login from './component/Login/Login'
+import ForgetPassword from './component/ForgetPassword/ForgetPassword'
 
 
 
@@ -29,7 +30,8 @@ function App() {
             <StatSec/> */}
 
             {/* <Registration /> */}
-            <Login />
+            {/* <Login /> */}
+            <ForgetPassword />
             <Footer />
           </div>
 
