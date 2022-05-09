@@ -16,6 +16,9 @@ const StatSection = () => {
             paddingTop:'2rem',
             paddingBottom: '2rem',
             justifyContent:'center',
+            '@media (max-width: 600px)': {
+                marginTop: 0
+              },
            
             }}>
             <LineChart />

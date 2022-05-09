@@ -6,6 +6,8 @@ import Nav from './component/Nav/Nav'
 import StatSec from './component/StatSection/StatSec';
 import TogleNav from './component/TogleNav/TogleNav'
 import Footer from './component/Footer/Footer'
+import Registration from './component/Registration/Registration'
+
 
 
 
@@ -22,8 +24,11 @@ function App() {
 
           <div className="right-con">
             <Header setState={setState} state={state}/>
-            <MainBody />
-            <StatSec/>
+
+            {/* <MainBody />
+            <StatSec/> */}
+
+            <Registration />
             <Footer />
           </div>
 
