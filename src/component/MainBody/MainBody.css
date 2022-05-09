@@ -1,5 +1,5 @@
 .main-body {
-    width: 113%;
+    width: 97%;
 
     margin-top: 3rem;
     padding-top: 2rem;
@@ -13,3 +13,25 @@
     justify-content: center;
 
 }
+@media screen and (max-width: 600px) {
+    .main-body {
+      margin-top: 0.5rem;
+      box-shadow: none;
+      flex-direction: column;
+      width: 90%;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    .basic-card {
+      /* border: 1px solid black; */
+      /* height: 9rem; */
+      
+    }
+    /* .basic-card-content {
+      border: 1px solid black;
+      padding: 0;
+      
+    } */
+        
+  }

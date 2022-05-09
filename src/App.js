@@ -1,17 +1,33 @@
+import * as React from 'react';
 import './App.css';
 import Header from './component/Header/Header';
 import MainBody from './component/MainBody/MainBody';
 import Nav from './component/Nav/Nav'
+import StatSec from './component/StatSection/StatSec';
+import TogleNav from './component/TogleNav/TogleNav'
+
+
 
 function App() {
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  
   return (
-    <div className="App">
-      <Nav />
-      <div className="right-con">
-        <Header />
-        <MainBody />
-      </div>
+      <div className="App">
+          <TogleNav setState={setState} state={state}/>        
+          <Nav className="nav"/>
+
+          <div className="right-con">
+            <Header setState={setState} state={state}/>
+            <MainBody />
+            <StatSec/>
+          </div>
+
+        
     </div>
+    
   );
 }
 

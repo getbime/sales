@@ -1,11 +1,11 @@
 .App {
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  gap: 22rem;
 }
 
 .right-con {
-  margin-left: 18rem;
+  width: 80%;
 }
 
 .App-logo {
@@ -40,5 +40,21 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    display: none;
+    height: 100vh;
+    background-color: aqua;
+  }
+  .right-con {
+    margin-left: 0;
+    width: 100%;
+    border: 1px solid black;
+  }
+  .App{
+    gap: 0;
   }
 }

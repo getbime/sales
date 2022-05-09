@@ -1,5 +1,7 @@
 import './Header.css'
 import Avatar from '@mui/material/Avatar';
+import ToggleButton from '@mui/material/ToggleButton';
+import ViewListIcon from '@mui/icons-material/ViewList';
 
 function stringToColor(string) {
     let hash = 0;
@@ -32,11 +34,20 @@ function stringAvatar(name) {
     };
   }
 
-const Header = () => {
+const Header = ({setState,state}) => {
 
+    const handleClick = (anchor, open) =>{
+      setState({ ...state, [anchor]: open });
+    }
     return (
             <div className="header">
-                 <Avatar {...stringAvatar('Kent Dodds')} />
+              <div className="toggle">
+                <ToggleButton value="list" aria-label="list" sx={{border: 'none'}} onClick={()=>handleClick('left',true)}>
+                  <ViewListIcon />
+                </ToggleButton>
+              </div>
+              
+              <Avatar {...stringAvatar('Kent Dodds')} />
             </div>
 
     );
