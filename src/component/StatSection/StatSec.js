@@ -16,7 +16,7 @@ const StatSection = () => {
             marginTop: '3rem',
             display:'flex', 
             gap: '2rem', 
-            width:'97%',
+            width:'100%',
             backgroundColor: 'white',
             borderRadius:'2px',
             paddingTop:'2rem',
