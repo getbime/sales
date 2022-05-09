@@ -1,23 +1,31 @@
+import './StatSec.css'
 import Box from '@mui/material/Box'
 import LineChart from '../../chart/LineChart'
 import DualAxesChart from '../../chart/DualAxes'
-import { PaddingOutlined } from '@mui/icons-material';
 
 const StatSection = () => {
+    const styling = {
+        width:'38%', 
+        height:'17rem', 
+        backgroundColor:'#f7faff', 
+        padding:'2rem',
+        borderRadius: '4px'
+        }
     return (
-        <Box sx={{
+        <Box className='main-box' sx={{
             marginTop: '3rem',
             display:'flex', 
-            gap: '4rem', 
+            gap: '2rem', 
             width:'97%',
             backgroundColor: 'white',
             borderRadius:'2px',
-            paddingTop:'3rem',
-            justifyContent:'center'
+            paddingTop:'2rem',
+            paddingBottom: '2rem',
+            justifyContent:'center',
            
             }}>
-            <LineChart />
-            <DualAxesChart />
+            <LineChart  styling={styling}/>
+            <DualAxesChart  styling={styling}/>
         </Box>
     );
 }

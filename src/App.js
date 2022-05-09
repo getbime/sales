@@ -5,6 +5,7 @@ import MainBody from './component/MainBody/MainBody';
 import Nav from './component/Nav/Nav'
 import StatSec from './component/StatSection/StatSec';
 import TogleNav from './component/TogleNav/TogleNav'
+import Footer from './component/Footer/Footer'
 
 
 
@@ -23,6 +24,7 @@ function App() {
             <Header setState={setState} state={state}/>
             <MainBody />
             <StatSec/>
+            <Footer />
           </div>
 
         

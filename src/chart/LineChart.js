@@ -1,9 +1,10 @@
+import './chart.css'
 import React from 'react';
 import { Line } from '@ant-design/charts';
 import Box from '@mui/material/Box'
 
 
-const LineChart = () => {
+const LineChart = ({styling}) => {
   const data = [
     { year: '1991', value: 3 },
     { year: '1992', value: 4 },
@@ -26,13 +27,7 @@ const LineChart = () => {
     },
   };
   return (
-    <Box sx={{
-        width:'38%', 
-        height:'17rem', 
-        backgroundColor:'#f7faff', 
-        padding:'2rem',
-        borderRadius: '4px'
-        }}>
+    <Box sx={{...styling}} className="box-children">
         <Line {...config} />
     </Box>
   )
