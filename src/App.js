@@ -7,7 +7,7 @@ import StatSec from './component/StatSection/StatSec';
 import TogleNav from './component/TogleNav/TogleNav'
 import Footer from './component/Footer/Footer'
 import Registration from './component/Registration/Registration'
-
+import Login from './component/Login/Login'
 
 
 
@@ -28,7 +28,8 @@ function App() {
             {/* <MainBody />
             <StatSec/> */}
 
-            <Registration />
+            {/* <Registration /> */}
+            <Login />
             <Footer />
           </div>
 
