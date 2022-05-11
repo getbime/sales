@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import InputAdornment from '@mui/material/InputAdornment';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const Income = () => {
     return (
@@ -44,10 +44,10 @@ const Income = () => {
                 position: 'absolute',
                 alignSelf: 'flex-end',
                 justifySelf: 'flex-end',
-                marginLeft: '26rem',
+                marginLeft: '30.5%',
                 marginBottom: '2rem',
                 '@media (max-width: 600px)': {
-                    marginLeft: '19rem',
+                    marginLeft: '75.5%',
                   },
 
             }}>
@@ -63,7 +63,7 @@ const Income = () => {
                     backgroundColor: 'white',
                     boxShadow: 'none'
                 }}>
-                    <AddIcon />
+                    <RemoveIcon />
                 </Fab>
             </Stack>
         </Stack>

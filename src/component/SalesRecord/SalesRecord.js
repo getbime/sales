@@ -3,7 +3,7 @@ import CustomTabs from '../CustomTabs/CustomTabs'
 
 import Box from '@mui/material/Box';
 
-const Registration = () => {
+const SalesRecord = () => {
     const labels = {
         itemOne: "Income",
         itemTwo: "Expences"
@@ -12,14 +12,16 @@ const Registration = () => {
     return (
 
         <Box sx={{
-            width: '97%',
+            maxWidth: '97%',
+            // border: '1px solid black',
             backgroundColor: 'white',
             marginTop: '2rem',
             paddingTop: '2rem',
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
                 marginTop: 0,
-                width: '100%'
+                maxWidth: '98%',
+
               },
 
         }}>
@@ -68,4 +70,4 @@ const Registration = () => {
     );
 }
  
-export default Registration;
+export default SalesRecord;
