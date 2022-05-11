@@ -9,6 +9,7 @@ import Footer from './component/Footer/Footer'
 import Registration from './component/Registration/Registration'
 import Login from './component/Login/Login'
 import ForgetPassword from './component/ForgetPassword/ForgetPassword'
+import SalesRecord from './component/SalesRecord/SalesRecord'
 
 
 
@@ -31,7 +32,8 @@ function App() {
 
             {/* <Registration /> */}
             {/* <Login /> */}
-            <ForgetPassword />
+            {/* <ForgetPassword /> */}
+            <SalesRecord />
             <Footer />
           </div>
 

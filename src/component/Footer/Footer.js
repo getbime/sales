@@ -8,7 +8,8 @@ const Footer = () => {
             marginTop: '2.3rem',
             width: '97%',
             paddingTop: '1rem',
-            paddingBottom: '1rem'
+            paddingBottom: '1rem',
+            position: 'static'
         }}>
             <Typography sx={{fontSize: 12, color: '#828bb2'}}>2022 © Influence - A Product of Nutcoders</Typography>
         </Box>
