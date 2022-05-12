@@ -1,13 +1,33 @@
 import * as React from 'react';
 import CustomTabs from '../CustomTabs/CustomTabs'
+import TabPanel from '../CustomTabs/TabPanel'
+import Income from './Income'
+import Expences from './Expences';
+import HeadTab from '../CustomTabs/HeadTab'
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 import Box from '@mui/material/Box';
 
 const SalesRecord = () => {
+    
+    function a11yProps(index) {
+        return {
+          id: `simple-tab-${index}`,
+          'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+
     const labels = {
         itemOne: "Income",
-        itemTwo: "Expences"
+        itemTwo: "Expenses"
     }
+
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
    
     return (
 
@@ -59,7 +79,25 @@ const SalesRecord = () => {
                         // paddingBottom: '10rem'
                         
                     }}>
-                        <CustomTabs labels={labels}/>
+                        <CustomTabs >
+                            <HeadTab labels={labels} value={value} handleChange={handleChange}>
+                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+
+                                    <Tab label={labels.itemOne} {...a11yProps(0)} sx={{width:'50%'}}/>
+                                    <Tab label={labels.itemTwo} {...a11yProps(1)} sx={{width:'50%'}}/>
+                                </Tabs>
+                            </HeadTab>
+                            <Box>
+                                <TabPanel value={value} index={0}>
+                                    <Income />
+                                </TabPanel>
+
+                                <TabPanel value={value} index={1}>
+                                    <Expences />
+                                </TabPanel>
+                            </Box>
+                             
+                        </CustomTabs>
                         
                     </Box>
                         

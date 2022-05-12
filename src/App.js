@@ -10,6 +10,8 @@ import Registration from './component/Registration/Registration'
 import Login from './component/Login/Login'
 import ForgetPassword from './component/ForgetPassword/ForgetPassword'
 import SalesRecord from './component/SalesRecord/SalesRecord'
+import Viewdata from './component/ViewData/ViewData'
+
 
 
 
@@ -33,7 +35,8 @@ function App() {
             {/* <Registration /> */}
             {/* <Login /> */}
             {/* <ForgetPassword /> */}
-            <SalesRecord />
+            {/* <SalesRecord /> */}
+            <Viewdata />
             <Footer />
           </div>
 
