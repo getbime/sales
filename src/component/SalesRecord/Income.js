@@ -27,7 +27,7 @@ const Income = () => {
         {
             productName: "",
             price: 0,
-            quantity: 0,
+            quantity: 1,
             totalPrice: 0,
         },
     ]);
@@ -36,20 +36,21 @@ const Income = () => {
         setInputFields([...inputFields, {
             productName: "",
             price: 0,
-            quantity: 0,
+            quantity: 1,
             totalPrice: 0,
         },])
     }
     const handleRemoveNewForm = ()=>{
         const values = [...inputFields]
-        values.pop()
+        values.length>1 && values.pop()
         setInputFields(values)
     }
 
     const handleChangeInput = (event,index,fieldName)=>{
         const values = [...inputFields]
-        console.log(event.target.label,index)
+        console.log(event.target.value,index)
         values[index][fieldName] = event.target.value
+        values[index]['totalPrice'] = values[index]['quantity'] * values[index]['price']
         console.log(values[index])
         setInputFields(values) 
     }
@@ -83,19 +84,19 @@ const Income = () => {
                         <Divider />
 
                         <Stack spacing={2} direction="column">
-                            <TextField id="outlined-basic" label={inputLabels.productLabel} variant="outlined" size='small' value={inputFields.productName} onChange={(event)=>handleChangeInput(event,index,"productName")}/>
+                            <TextField id="outlined-basic" label={inputLabels.productLabel} variant="outlined" size='small' value={form.productName} onChange={(event)=>handleChangeInput(event,index,"productName")}/>
 
                             <Stack spacing={2} direction="row" >
                                 <TextField id="outlined-basic" type="number" label={inputLabels.priceLabel} variant="outlined" size='small' InputProps={{
                                     startAdornment: <InputAdornment position="start">#</InputAdornment>,
-                                }}value={inputFields.price} onChange={(event)=>handleChangeInput(event,index,"price")}/>
-                                <TextField id="outlined-basic" type="number" label={inputLabels.quantityLabel} variant="outlined" size='small'value={inputFields.quantity} onChange={(event)=>handleChangeInput(event,index,"quantity")}/>
+                                }}value={form.price} onChange={(event)=>handleChangeInput(event,index,"price")}/>
+                                <TextField id="outlined-basic" type="number" label={inputLabels.quantityLabel} variant="outlined" size='small'value={form.quantity} onChange={(event)=>handleChangeInput(event,index,"quantity")}/>
 
 
                             </Stack>
                                 <TextField id="outlined-basic" type="number" label={inputLabels.totalLabel} variant="outlined" size='small' InputProps={{
                                     startAdornment: <InputAdornment position="start">#</InputAdornment>,
-                                }} value={inputFields.totalPrice} onChange={(event)=>handleChangeInput(event,index,"totalPrice")}/ >
+                                }} value={form.totalPrice} onChange={(event)=>handleChangeInput(event,index,"totalPrice")}/ >
                         </Stack>
 
                     </Stack>
