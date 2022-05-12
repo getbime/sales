@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Income from '../SalesRecord/Income'
 import Expences from '../SalesRecord/Expences'
+import Palette from '../../ThemeProvider';
 
 
 function TabPanel(props) {
@@ -51,10 +52,13 @@ export default function BasicTabs({labels}) {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label={labels.itemOne} {...a11yProps(0)} sx={{width:'50%'}}/>
-          <Tab label={labels.itemTwo} {...a11yProps(1)} sx={{width:'50%'}}/>
-        </Tabs>
+          <Palette>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+
+              <Tab label={labels.itemOne} {...a11yProps(0)} sx={{width:'50%'}}/>
+              <Tab label={labels.itemTwo} {...a11yProps(1)} sx={{width:'50%'}}/>
+            </Tabs>
+          </Palette>
       </Box>
       <Box sx={{width: '100%', backgroundColor: 'white'}}>
         <TabPanel value={value} index={0}>
