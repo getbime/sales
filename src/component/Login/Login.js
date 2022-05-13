@@ -2,8 +2,6 @@ import * as React from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -12,6 +10,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Palette from '../../ThemeProvider';
+
 
 // import FormHelperText from '@mui/material/FormHelperText';
 
@@ -99,11 +99,12 @@ const Login = () => {
                             padding: '2rem'
                         }}>
 
-                            <TextField id="outlined-basic" label="Enter your mail" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="Enter your mail" variant="outlined" />
 
                             <FormControl sx={{ m: 1 }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <InputLabel size='small' htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
+                                size='small'
                                 id="outlined-adornment-password"
                                 type={values.showPassword ? 'text' : 'password'}
                                 value={values.password}
@@ -125,8 +126,9 @@ const Login = () => {
                             </FormControl>
 
                               
-
-                            <Button variant="contained">Log in</Button>
+                            <Palette>
+                                <Button variant="contained">Log in</Button>
+                            </Palette>
                             
                             <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
                                 <Typography sx={{
@@ -136,16 +138,21 @@ const Login = () => {
                                       },
                                 }}
                                 > Need an account?</Typography>
-                                <Button variant="text" sx={{
-                                    '@media (max-width: 600px)': {
-                                        fontSize: 13
-                        
-                                      },
-                                }}
-                                >Sign Up</Button>
+                                <Palette>
+
+                                    <Button variant="text" sx={{
+                                        '@media (max-width: 600px)': {
+                                            fontSize: 13
+                            
+                                        },
+                                    }}
+                                    >Sign Up</Button>
+                                </Palette>
 
                             </Stack>
-                            <Button variant="text">Forget Password?</Button>
+                            <Palette>
+                                <Button variant="text">Forget Password?</Button>
+                            </Palette>
                         </Stack>
 
                 </Box>

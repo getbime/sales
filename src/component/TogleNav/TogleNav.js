@@ -2,18 +2,26 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Label from '../Label/Label'
+import HomeIcon from '@mui/icons-material/Home';
+import DetailsIcon from '@mui/icons-material/Details';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PasswordIcon from '@mui/icons-material/Password';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LoginIcon from '@mui/icons-material/Login';
+import ListItemButton from '@mui/material/ListItemButton';
+
+import { Outlet, Link } from "react-router-dom";
+
 
 export default function TemporaryDrawer({state,setState}) {
 //   const [state, setState] = React.useState({
 //     left: false,
 //   });
+const style = {textDecoration: 'none', color: 'black'}
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -32,25 +40,71 @@ export default function TemporaryDrawer({state,setState}) {
     >
       <Label />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <Link to='/'style={{...style}} >
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon   >
+                            <HomeIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/view-data' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <DetailsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Details" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/sales-record' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <InventoryIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Invoice" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+            
+            <Link to='/forget-password' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <PasswordIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Password" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/register' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <AppRegistrationIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Register" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/login' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <LoginIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Login" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
       </List>
     </Box>
   );

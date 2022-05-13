@@ -4,11 +4,13 @@ import TableCell from '@mui/material/TableCell';
 const Income = () => {
     return (
         <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Customer Name</TableCell>
+            <TableCell align="right">Product Name</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Total Price</TableCell>
+            <TableCell align="right">Date</TableCell>
+
         </TableRow>
     );
 }

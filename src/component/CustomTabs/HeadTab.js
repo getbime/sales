@@ -1,5 +1,3 @@
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 
 import Palette from '../../ThemeProvider';
 

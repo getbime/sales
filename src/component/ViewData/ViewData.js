@@ -109,6 +109,7 @@ const ViewData = () => {
                                             <TableCell align="right">{row.fat}</TableCell>
                                             <TableCell align="right">{row.carbs}</TableCell>
                                             <TableCell align="right">{row.protein}</TableCell>
+                                            <TableCell align="right">{row.protein}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -134,7 +135,6 @@ const ViewData = () => {
                                             <TableCell align="right">{row.calories}</TableCell>
                                             <TableCell align="right">{row.fat}</TableCell>
                                             <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>

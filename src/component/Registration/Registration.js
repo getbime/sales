@@ -7,6 +7,8 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Palette from '../../ThemeProvider';
+
 
 // import FormHelperText from '@mui/material/FormHelperText';
 
@@ -67,11 +69,11 @@ const Registration = () => {
                             padding: '2rem'
                         }}>
 
-                            <TextField id="outlined-basic" label="Business Name | Oganization" variant="outlined" />
-                            <TextField id="outlined-basic" label="First Name" variant="outlined" />
-                            <TextField id="outlined-basic" label="Last Name" variant="outlined" />
-                            <TextField id="outlined-basic" label="Mail" variant="outlined" />
-                            <TextField id="outlined-basic" label="Phone" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="Business Name | Oganization" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="First Name" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="Last Name" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="Mail" variant="outlined" />
+                            <TextField id="outlined-basic" size='small' label="Phone" variant="outlined" />
 
                             <FormControl>
                                 <InputLabel id="demo-simple-select-label">Role</InputLabel>
@@ -81,6 +83,7 @@ const Registration = () => {
                                     value={'age'}
                                     label="Age"
                                     onChange={()=>{}}
+                                    size='small'
                                     >
                                     <MenuItem value={10}>Ten</MenuItem>
                                     <MenuItem value={20}>Twenty</MenuItem>
@@ -88,7 +91,9 @@ const Registration = () => {
                                 </Select>
                             </FormControl>    
 
-                            <Button variant="contained">Sign Up</Button>
+                            <Palette>
+                                <Button variant="contained">Sign Up</Button>
+                            </Palette>
                             
                             <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
                                 <Typography sx={{
@@ -98,16 +103,21 @@ const Registration = () => {
                                       },
                                 }}
                                 > Need an account?</Typography>
-                                <Button variant="text" sx={{
-                                    '@media (max-width: 600px)': {
-                                        fontSize: 14
-                        
-                                      },
-                                }}
-                                >Login</Button>
+                                <Palette>
+
+                                    <Button variant="text" sx={{
+                                        '@media (max-width: 600px)': {
+                                            fontSize: 14
+                            
+                                        },
+                                    }}
+                                    >Login</Button>
+                                </Palette>
 
                             </Stack>
-                            <Button variant="text">Forget Password?</Button>
+                            <Palette>
+                                <Button variant="text">Forget Password?</Button>
+                            </Palette>
                         </Stack>
 
                 </Box>

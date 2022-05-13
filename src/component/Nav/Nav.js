@@ -5,83 +5,89 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
+import HomeIcon from '@mui/icons-material/Home';
+import DetailsIcon from '@mui/icons-material/Details';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PasswordIcon from '@mui/icons-material/Password';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
+import { Outlet, Link } from "react-router-dom";
 
 const Nav = () => {
+    const style = {textDecoration: 'none', color: 'black'}
+    const hoverStyle = {'&:hover': { backgroundColor: 'white',boxShadow:'1px 2px 5px #dfdbdb' }}
     return (
         <div className="nav">
             <Label />
-            <Box sx={{backgroundColor:'white', boxShadow:'1px 2px 5px #dfdbdb'}}>
+            <Box >
             <nav aria-label="main mailbox folders">
                     <List>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <InboxIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Inbox" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <DraftsIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Drafts" />
-                            </ListItemButton>
-                        </ListItem>
+                        <Link to='/' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon   >
+                                        <HomeIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Home" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/view-data' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <DetailsIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Details" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/sales-record' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <InventoryIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Invoice" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                         
-                        
+                        <Link to='/forget-password' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <PasswordIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Password" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/register' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AppRegistrationIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Register" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/login' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <LoginIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Login" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                     </List>
                    
             </nav>

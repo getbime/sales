@@ -11,6 +11,7 @@ import Login from './component/Login/Login'
 import ForgetPassword from './component/ForgetPassword/ForgetPassword'
 import SalesRecord from './component/SalesRecord/SalesRecord'
 import Viewdata from './component/ViewData/ViewData'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 
@@ -22,26 +23,35 @@ function App() {
 
   
   return (
+    <BrowserRouter>
       <div className="App">
-          <TogleNav setState={setState} state={state}/>        
-          <Nav className="nav"/>
+            <TogleNav setState={setState} state={state}/>        
+            <Nav className="nav"/>
 
-          <div className="right-con">
-            <Header setState={setState} state={state}/>
+            <div className="right-con">
+              <Header setState={setState} state={state}/>
 
-            {/* <MainBody />
-            <StatSec/> */}
+              <Routes>
+                <Route path='/'  element={<div>
+                    <MainBody />
+                    <StatSec/>
+                  </div>} />
 
-            {/* <Registration /> */}
-            {/* <Login /> */}
-            {/* <ForgetPassword /> */}
-            {/* <SalesRecord /> */}
-            <Viewdata />
-            <Footer />
-          </div>
+                <Route path='/register' element={<Registration />}/>
+                <Route path='/login' element={<Login /> }/>
+                <Route path='/forget-password' element={<ForgetPassword /> }/>
+                <Route path='/sales-record' element={<SalesRecord />  }/>
+                <Route path='/view-data' element={<Viewdata />  }/>
 
-        
-    </div>
+              </Routes>
+              
+              <Footer />
+            </div>
+
+          
+      </div>
+
+    </BrowserRouter> 
     
   );
 }

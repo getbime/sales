@@ -1,11 +1,11 @@
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Palette from '../../ThemeProvider';
+
 
 // import FormHelperText from '@mui/material/FormHelperText';
 
@@ -66,9 +66,10 @@ const ForgetPassword = () => {
                             padding: '2rem'
                         }}>
 
-                            <TextField id="outlined-basic" label="Enter your mail" variant="outlined" />
-                            
-                            <Button variant="contained">send</Button>
+                            <TextField id="outlined-basic" size='small' label="Enter your mail" variant="outlined" />
+                            <Palette>
+                                <Button variant="contained">send</Button>
+                            </Palette>
                             
                             
                         </Stack>
