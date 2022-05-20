@@ -6,6 +6,8 @@
 
 .right-con {
   width: 80%;
+  position:absolute;
+  margin-left: 18rem;
 }
 
 .App-logo {

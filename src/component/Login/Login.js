@@ -48,9 +48,8 @@ const Login = () => {
         
 
         <Box sx={{
-            width: '97%',
+            width: '100%',
             backgroundColor: 'white',
-            marginTop: '2rem',
             paddingTop: '2rem',
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
@@ -61,7 +60,7 @@ const Login = () => {
         }}>
             <Box sx={{
             width: '90%',
-            backgroundColor: '#f7faff',
+            // backgroundColor: '#f7faff',
             margin: 'auto',
             paddingTop: '2rem',
             paddingBottom: '2rem',
@@ -74,88 +73,104 @@ const Login = () => {
 
 
         }}>
-                <Box sx={{
-                    border: '1px solid #D0D5DA',
-                    borderRadius: 1,
-                    width: '50%',
-                    margin: 'auto',
-                    backgroundColor: 'white',
+                <Stack direction="row" sx={{
                     '@media (max-width: 600px)': {
-                        width: '90%'
-                      },
+                        flexDirection: 'column'
+                    },
                 }}>
-                    <Typography sx={{
-                        paddingTop: '1.2rem',
-                        paddingLeft: '1.9rem',
-                        textAlign: 'left',
-                        height: '4rem',
-                        backgroundColor: '#f7faff',
-                        fontSize: 22
-                        
-                    }}>Log in</Typography>
-                    
-                    
-                        <Stack spacing={2} direction="column" sx={{
-                            padding: '2rem'
-                        }}>
 
-                            <TextField id="outlined-basic" size='small' label="Enter your mail" variant="outlined" />
+                    <Box sx={{
+                            borderRight: '1px solid black',
+                            width: '60%',
+                            '@media (max-width: 600px)': {
+                                border: 'none',
+                                width: '90%',
 
-                            <FormControl sx={{ m: 1 }} variant="outlined">
-                            <InputLabel size='small' htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                size='small'
-                                id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                    >
-                                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                            </FormControl>
-
-                              
-                            <Palette>
-                                <Button variant="contained">Log in</Button>
-                            </Palette>
+                            },
+                        }}>hell0</Box>
+                    <Box sx={{
+                        border: '1px solid #D0D5DA',
+                        borderRadius: 1,
+                        width: '30%',
+                        margin: 'auto',
+                        backgroundColor: 'white',
+                        '@media (max-width: 600px)': {
+                            width: '90%'
+                        },
+                    }}>
+                        <Typography sx={{
+                            paddingTop: '1.2rem',
+                            paddingLeft: '1.9rem',
+                            textAlign: 'left',
+                            height: '4rem',
+                            backgroundColor: '#f7faff',
+                            fontSize: 22
                             
-                            <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
-                                <Typography sx={{
-                                    '@media (max-width: 600px)': {
-                                        fontSize: 13
+                        }}>Log in</Typography>
                         
-                                      },
-                                }}
-                                > Need an account?</Typography>
-                                <Palette>
+                        
+                            <Stack spacing={2} direction="column" sx={{
+                                padding: '2rem'
+                            }}>
 
-                                    <Button variant="text" sx={{
+                                <TextField id="outlined-basic" size='small' label="Enter your mail" variant="outlined" />
+
+                                <FormControl sx={{ m: 1 }} variant="outlined">
+                                <InputLabel size='small' htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+                                    size='small'
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        >
+                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                    label="Password"
+                                />
+                                </FormControl>
+
+                                
+                                <Palette>
+                                    <Button variant="contained">Log in</Button>
+                                </Palette>
+                                
+                                <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
+                                    <Typography sx={{
                                         '@media (max-width: 600px)': {
                                             fontSize: 13
                             
                                         },
                                     }}
-                                    >Sign Up</Button>
+                                    > Need an account?</Typography>
+                                    <Palette>
+
+                                        <Button variant="text" sx={{
+                                            '@media (max-width: 600px)': {
+                                                fontSize: 13
+                                
+                                            },
+                                        }}
+                                        >Sign Up</Button>
+                                    </Palette>
+
+                                </Stack>
+                                <Palette>
+                                    <Button variant="text">Forget Password?</Button>
                                 </Palette>
-
                             </Stack>
-                            <Palette>
-                                <Button variant="text">Forget Password?</Button>
-                            </Palette>
-                        </Stack>
 
-                </Box>
+                    </Box>
+                </Stack>
             </Box>
         </Box>
        

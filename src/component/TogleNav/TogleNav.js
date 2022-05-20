@@ -40,7 +40,7 @@ const style = {textDecoration: 'none', color: 'black'}
     >
       <Label />
       <List>
-        <Link to='/'style={{...style}} >
+        <Link to='/dashboard'style={{...style}} >
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon   >
@@ -51,7 +51,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/view-data' style={{...style}}>
+            <Link to='/dashboard/view-data' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -62,7 +62,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/sales-record' style={{...style}}>
+            <Link to='/dashboard/sales-record' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -73,7 +73,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
             
-            <Link to='/forget-password' style={{...style}}>
+            <Link to='/dashboard/forget-password' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -84,7 +84,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/register' style={{...style}}>
+            <Link to='/dashboard/register' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -95,7 +95,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/login' style={{...style}}>
+            <Link to='/dashboard/login' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>

@@ -23,7 +23,7 @@ const Nav = () => {
             <Box >
             <nav aria-label="main mailbox folders">
                     <List>
-                        <Link to='/' style={{...style}}>
+                        <Link to='/dashboard' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon   >
@@ -34,7 +34,7 @@ const Nav = () => {
                             </ListItem>
                         </Link>
 
-                        <Link to='/view-data' style={{...style}}>
+                        <Link to='/dashboard/view-data' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -45,7 +45,7 @@ const Nav = () => {
                             </ListItem>
                         </Link>
 
-                        <Link to='/sales-record' style={{...style}}>
+                        <Link to='/dashboard/sales-record' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -56,7 +56,7 @@ const Nav = () => {
                             </ListItem>
                         </Link>
                         
-                        <Link to='/forget-password' style={{...style}}>
+                        <Link to='/dashboard/forget-password' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -67,7 +67,7 @@ const Nav = () => {
                             </ListItem>
                         </Link>
 
-                        <Link to='/register' style={{...style}}>
+                        <Link to='/dashboard/register' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -78,7 +78,7 @@ const Nav = () => {
                             </ListItem>
                         </Link>
 
-                        <Link to='/login' style={{...style}}>
+                        <Link to='/dashboard/login' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>

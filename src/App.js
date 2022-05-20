@@ -24,7 +24,12 @@ function App() {
   
   return (
     <BrowserRouter>
+    
       <div className="App">
+        <Routes>
+          <Route index element={<Registration />}/>
+          <Route path='login' element={<Login /> }/>
+          <Route path='dashboard/*' element={(<div>
             <TogleNav setState={setState} state={state}/>        
             <Nav className="nav"/>
 
@@ -32,21 +37,24 @@ function App() {
               <Header setState={setState} state={state}/>
 
               <Routes>
-                <Route path='/'  element={<div>
+                <Route index  element={<div>
                     <MainBody />
                     <StatSec/>
                   </div>} />
 
-                <Route path='/register' element={<Registration />}/>
-                <Route path='/login' element={<Login /> }/>
-                <Route path='/forget-password' element={<ForgetPassword /> }/>
-                <Route path='/sales-record' element={<SalesRecord />  }/>
-                <Route path='/view-data' element={<Viewdata />  }/>
+                <Route path='register' element={<Registration />}/>
+                <Route path='login' element={<Login /> }/>
+                <Route path='forget-password' element={<ForgetPassword /> }/>
+                <Route path='sales-record' element={<SalesRecord />  }/>
+                <Route path='view-data' element={<Viewdata />  }/>
 
               </Routes>
               
               <Footer />
             </div>
+
+          </div>)}/>
+        </Routes>
 
           
       </div>
@@ -55,5 +63,6 @@ function App() {
     
   );
 }
+
 
 export default App;
