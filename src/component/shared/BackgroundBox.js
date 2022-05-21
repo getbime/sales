@@ -14,7 +14,7 @@ const BackgroundBox = ({children}) => {
             '@media (max-width: 600px)': {
                 border: 'none',
                 width: '100%',
-                height: '100vh'
+                height: '80vh'
 
             },
         }}>{children}</Box>
