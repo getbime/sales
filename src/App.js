@@ -11,24 +11,31 @@ import Login from './component/Login/Login'
 import ForgetPassword from './component/ForgetPassword/ForgetPassword'
 import SalesRecord from './component/SalesRecord/SalesRecord'
 import Viewdata from './component/ViewData/ViewData'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
 
 
 function App() {
+  // const navigate = useNavigate()
   const [state, setState] = React.useState({
     left: false,
   });
 
   
+  
   return (
     <BrowserRouter>
     
       <div className="App">
+
+     
+
         <Routes>
           <Route index element={<Registration />}/>
+
           <Route path='login' element={<Login /> }/>
+
           <Route path='dashboard/*' element={(<div>
             <TogleNav setState={setState} state={state}/>        
             <Nav className="nav"/>

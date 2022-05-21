@@ -11,13 +11,23 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Palette from '../../ThemeProvider';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useNavigate } from 'react-router-dom'
+import BackgroundBox from '../shared/BackgroundBox';
+import FormContainer from '../shared/FormContainer';
 
-
-// import FormHelperText from '@mui/material/FormHelperText';
 
 import Box from '@mui/material/Box';
 
 const Login = () => {
+    
+    const navigate = useNavigate()
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const LOGIN_STAFF = process.env.REACT_APP_LOGIN_STAFF
+    const LOGIN_COMPANY = process.env.REACT_APP_LOGIN_COMPANY
+
 
     const [values, setValues] = React.useState({
         amount: '',
@@ -42,6 +52,109 @@ const Login = () => {
         event.preventDefault();
       };
 
+    const [username, setUsername] = React.useState('')  
+    const data = {
+        username,
+        password: values.password
+    }
+
+
+    const [isPending, setIsPending] = React.useState(false)
+    const [showError, setShowError] = React.useState(false)
+    const [showSuccess, setShowSuccess] = React.useState(false)
+    const [errorMsg, setErrorMsg] = React.useState('')
+    const loginFailedMsg = 'Login failed please try again!!'
+    const userNotFoundMsg = 'ID or Password is incorrect'
+  
+    const handleLogin = () => {
+        setIsPending(true)
+        setErrorMsg('')
+        if(data.username == '' || data.password == ''){
+            setIsPending(false)
+            setShowError(true)
+            setErrorMsg('Your are required to fill all field')
+        }else{
+            if(data.username.split('/').includes('STAFF')){
+               
+                try {
+            
+                    fetch(`${BASE_URL}${LOGIN_STAFF}`,{
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if(response.ok == false) {
+                            setIsPending(false)
+                            throw Error(loginFailedMsg)
+                        }
+                        else return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        setIsPending(false)
+            
+                        if(data.success) setShowSuccess(true)
+                        else {
+                            setIsPending(false)
+                            setErrorMsg(userNotFoundMsg)
+                            setShowError(true)
+                        }
+            
+                        }).catch(error => {
+                            setErrorMsg(loginFailedMsg)
+                            setShowError(true)
+                            console.error('Error:', error);
+                        })
+                } catch(error) {
+                    setErrorMsg(loginFailedMsg)
+                    setShowError(true)
+                    setIsPending(false)
+
+                }
+            }else{
+                try {
+            
+                    fetch(`${BASE_URL}${LOGIN_COMPANY}`,{
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if(response.ok == false) {
+                            setIsPending(false)
+                            throw Error(loginFailedMsg)
+                        }
+                        else return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        setIsPending(false)
+            
+                        if(data.success) setShowSuccess(true)
+                        else {
+                            setIsPending(false)
+                            setErrorMsg(userNotFoundMsg)
+                            setShowError(true)
+                        }
+            
+                        }).catch(error => {
+                            setErrorMsg(loginFailedMsg)
+                            setShowError(true)
+                            console.error('Error:', error);
+                        })
+                } catch(error) {
+                    setErrorMsg(loginFailedMsg)
+                    setShowError(true)
+                    setIsPending(false)
+
+                }
+            }
+        
+        }
+    }
+
+
 
     return (
 
@@ -54,10 +167,49 @@ const Login = () => {
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
                 marginTop: 0,
-                width: '100%'
+                width: '100%',
+                paddingTop: 0
               },
 
         }}>
+            {showError && <Alert severity="error" sx={{
+                position: 'fixed',
+                marginLeft: '55rem',
+                marginTop: '2rem',
+                width: '30%',
+                '@media (max-width: 600px)': {
+                    marginTop: 0,
+                    width: '73%',
+                    margin: 'auto',
+                    marginLeft: '2.27rem',
+
+
+                  },
+            }} onClose={() => {setShowError(false)}}>
+            <AlertTitle>Error</AlertTitle>
+                <Typography>{errorMsg}</Typography>
+            </Alert> }
+
+            {showSuccess &&
+
+            <Alert severity="success" sx={{
+                position: 'fixed',
+                marginLeft: '55rem',
+                marginTop: '2rem',
+                width: '30%',
+                '@media (max-width: 600px)': {
+                    marginTop: 0,
+                    width: '73%',
+                    margin: 'auto',
+                    marginLeft: '2.27rem',
+
+
+                  },
+            }} onClose={() => {setShowSuccess(false)}}>
+                <AlertTitle>Success</AlertTitle>
+                Login Successfull
+            </Alert>
+            }
             <Box sx={{
             width: '90%',
             // backgroundColor: '#f7faff',
@@ -65,7 +217,7 @@ const Login = () => {
             paddingTop: '2rem',
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
-                paddingTop: '1rem',
+                paddingTop: 0,
                 borderRadius: 2,
                 paddingBottom: '1rem',
 
@@ -79,97 +231,74 @@ const Login = () => {
                     },
                 }}>
 
-                    <Box sx={{
-                            borderRight: '1px solid black',
-                            width: '60%',
-                            '@media (max-width: 600px)': {
-                                border: 'none',
-                                width: '90%',
+                    <BackgroundBox>Login</BackgroundBox>
+                    <FormContainer>
+                        <p>Log In</p>
+                        <Stack spacing={2} direction="column" sx={{
+                            padding: '2rem'
+                        }}>
 
-                            },
-                        }}>hell0</Box>
-                    <Box sx={{
-                        border: '1px solid #D0D5DA',
-                        borderRadius: 1,
-                        width: '30%',
-                        margin: 'auto',
-                        backgroundColor: 'white',
-                        '@media (max-width: 600px)': {
-                            width: '90%'
-                        },
-                    }}>
-                        <Typography sx={{
-                            paddingTop: '1.2rem',
-                            paddingLeft: '1.9rem',
-                            textAlign: 'left',
-                            height: '4rem',
-                            backgroundColor: '#f7faff',
-                            fontSize: 22
+                            <TextField id="outlined-basic" size='small' label="Enter your company ID | Staff ID" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
+
+                            <FormControl sx={{ m: 1 }} variant="outlined">
+                            <InputLabel size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
+                            <OutlinedInput
+                                size='small'
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={values.password}
+                                onChange={handleChange('password')}
+                                required={true}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                            </FormControl>
+
                             
-                        }}>Log in</Typography>
+                            <Palette>
+                                {!isPending && <Button variant="contained" onClick={handleLogin}>Log in</Button> }
+                                {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
+
+                            </Palette>
+                            
+                            <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
+                                <Typography sx={{
+                                    '@media (max-width: 600px)': {
+                                        fontSize: 13
                         
-                        
-                            <Stack spacing={2} direction="column" sx={{
-                                padding: '2rem'
-                            }}>
-
-                                <TextField id="outlined-basic" size='small' label="Enter your mail" variant="outlined" />
-
-                                <FormControl sx={{ m: 1 }} variant="outlined">
-                                <InputLabel size='small' htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    size='small'
-                                    id="outlined-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                        >
-                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
-                                    label="Password"
-                                />
-                                </FormControl>
-
-                                
+                                    },
+                                }}
+                                > Need an account?</Typography>
                                 <Palette>
-                                    <Button variant="contained">Log in</Button>
-                                </Palette>
-                                
-                                <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
-                                    <Typography sx={{
+
+                                    <Button variant="text" sx={{
                                         '@media (max-width: 600px)': {
                                             fontSize: 13
                             
                                         },
                                     }}
-                                    > Need an account?</Typography>
-                                    <Palette>
-
-                                        <Button variant="text" sx={{
-                                            '@media (max-width: 600px)': {
-                                                fontSize: 13
-                                
-                                            },
-                                        }}
-                                        >Sign Up</Button>
-                                    </Palette>
-
-                                </Stack>
-                                <Palette>
-                                    <Button variant="text">Forget Password?</Button>
+                                    onClick={()=>   navigate("/",)}
+                                    >Sign Up</Button>
                                 </Palette>
-                            </Stack>
 
-                    </Box>
+                            </Stack>
+                            <Palette>
+                                <Button variant="text">Forget Password?</Button>
+                            </Palette>
+                        </Stack>
+                    </FormContainer>
+
                 </Stack>
             </Box>
         </Box>

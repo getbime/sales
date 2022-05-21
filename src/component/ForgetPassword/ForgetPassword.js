@@ -1,13 +1,9 @@
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Palette from '../../ThemeProvider';
-
-
-// import FormHelperText from '@mui/material/FormHelperText';
+import BackgroundBox from '../shared/BackgroundBox';
+import FormContainer from '../shared/FormContainer';
 
 import Box from '@mui/material/Box';
 
@@ -22,7 +18,8 @@ const ForgetPassword = () => {
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
                 marginTop: 0,
-                width: '100%'
+                width: '100%',
+                paddingTop: 0
               },
 
         }}>
@@ -33,7 +30,7 @@ const ForgetPassword = () => {
             paddingTop: '2rem',
             paddingBottom: '2rem',
             '@media (max-width: 600px)': {
-                paddingTop: '1rem',
+                paddingTop: 0,
                 borderRadius: 2,
                 paddingBottom: '1rem',
 
@@ -41,27 +38,14 @@ const ForgetPassword = () => {
 
 
         }}>
-                <Box sx={{
-                    border: '1px solid #D0D5DA',
-                    borderRadius: 1,
-                    width: '50%',
-                    margin: 'auto',
-                    backgroundColor: 'white',
+             <Stack direction="row" sx={{
                     '@media (max-width: 600px)': {
-                        width: '90%'
-                      },
+                        flexDirection: 'column'
+                    },
                 }}>
-                    <Typography sx={{
-                        paddingTop: '1.2rem',
-                        paddingLeft: '1.9rem',
-                        textAlign: 'left',
-                        height: '4rem',
-                        backgroundColor: '#f7faff',
-                        fontSize: 22
-                        
-                    }}>Forget Password</Typography>
-                    
-                    
+                    <BackgroundBox>Hello</BackgroundBox>
+                    <FormContainer>
+                        <p>Forget Password</p>
                         <Stack spacing={2} direction="column" sx={{
                             padding: '2rem'
                         }}>
@@ -74,7 +58,8 @@ const ForgetPassword = () => {
                             
                         </Stack>
 
-                </Box>
+                    </FormContainer>
+                </Stack>
             </Box>
         </Box>
        
