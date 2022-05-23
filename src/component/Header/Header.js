@@ -3,6 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
 
 
 function stringToColor(string) {
@@ -36,19 +38,45 @@ function stringAvatar(name) {
     };
   }
 
-const Header = ({setState,state,loggedUser,isLoading}) => {
+const Header = ({setState,state,loggedUser,isLoading,userType}) => {
     const handleClick = (anchor, open) =>{
       setState({ ...state, [anchor]: open });
     }
+    const style = {}
+    if(userType === 'company') {
+      style. justifyContent = 'flex-end'
+    }
     return (
-            <div className="header">
+            <Box sx={{
+              width: '94%',
+              marginTop: '2rem',
+              paddingTop: '0.8rem',
+              paddingBottom: '0.8rem',
+              paddingRight: '2rem',
+
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+              borderRadius: '2px',
+              boxShadow: '1px 2px 5px #dfdbdb',
+              ...style,
+              '@media (max-width: 600px)': {
+                marginTop: 0,
+                boxShadow: 'none',
+                width: '88%',
+                justifyContent: 'space-between',
+                paddingLeft: '0.4rem',
+                
+              },
+            }}>
               <div className="toggle">
                 <ToggleButton value="list" aria-label="list" sx={{border: 'none'}} onClick={()=>handleClick('left',true)}>
                   <ViewListIcon />
                 </ToggleButton>
               </div>
-              
-              {!isLoading && <Typography sx={{
+
+              {userType === 'staff' && !isLoading && <Typography sx={{
                 marginLeft:'30rem',
                 fontSize:20,
                 '@media (max-width: 600px)': {
@@ -56,9 +84,10 @@ const Header = ({setState,state,loggedUser,isLoading}) => {
                   fontSize:18,
                   
                 },
-                }}>{loggedUser.staffName}</Typography> }
+                }}>{loggedUser.staffName}</Typography> } 
+                
               {!isLoading && <Avatar {...stringAvatar(loggedUser.companyName)} /> }
-            </div>
+            </Box>
 
     );
 }

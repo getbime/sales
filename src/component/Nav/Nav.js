@@ -14,7 +14,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import { Outlet, Link } from "react-router-dom";
 
-const Nav = ({loggedUser,isLoading}) => {
+const Nav = ({loggedUser,isLoading,userType}) => {
     const style = {textDecoration: 'none', color: 'black'}
     const hoverStyle = {'&:hover': { backgroundColor: 'white',boxShadow:'1px 2px 5px #dfdbdb' }}
     return (
@@ -23,7 +23,7 @@ const Nav = ({loggedUser,isLoading}) => {
             <Box >
             <nav aria-label="main mailbox folders">
                     <List>
-                        <Link to='/dashboard' style={{...style}}>
+                        {userType === 'company' && <Link to='/dashboard' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon   >
@@ -32,7 +32,7 @@ const Nav = ({loggedUser,isLoading}) => {
                                     <ListItemText primary="Home" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </Link> }
 
                         <Link to='/dashboard/view-data' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>

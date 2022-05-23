@@ -90,19 +90,22 @@ const Dashboard = () => {
                 <Loader></Loader>
           </Modal>
             
-            <TogleNav setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading}/> 
-            <Nav className="nav" loggedUser={loggedUser} isLoading={isLoading}/> 
+            <TogleNav setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/> 
+            <Nav className="nav" loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/> 
 
             { <div className="right-con">
-              <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading}/>
+              <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/>
 
               <Routes>
-                <Route index  element={<Home />} />
+                {user.userType === 'company' && <Route index  element={<Home />} /> }
 
                 <Route path='register' element={<Registration />}/>
                 <Route path='login' element={<Login /> }/>
                 <Route path='forget-password' element={<ForgetPassword /> }/>
-                <Route path='sales-record' element={<SalesRecord />  }/>
+                {user.userType === 'staff'?
+                <Route index path='sales-record' element={<SalesRecord />  }/>
+                :<Route path='sales-record' element={<SalesRecord />  }/>}
+
                 <Route path='view-data' element={<ViewData />  }/>
 
               </Routes>

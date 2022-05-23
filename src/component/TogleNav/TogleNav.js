@@ -17,7 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { Outlet, Link } from "react-router-dom";
 
 
-export default function TemporaryDrawer({state,setState,loggedUser,isLoading}) {
+export default function TemporaryDrawer({state,setState,loggedUser,isLoading,userType}) {
 //   const [state, setState] = React.useState({
 //     left: false,
 //   });
@@ -40,7 +40,7 @@ const style = {textDecoration: 'none', color: 'black'}
     >
       <Label loggedUser={loggedUser} isLoading={isLoading}/>
       <List>
-        <Link to='/dashboard'style={{...style}} >
+        {userType === 'company' && <Link to='/dashboard'style={{...style}} >
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon   >
@@ -49,7 +49,7 @@ const style = {textDecoration: 'none', color: 'black'}
                         <ListItemText primary="Home" />
                     </ListItemButton>
                 </ListItem>
-            </Link>
+            </Link> }
 
             <Link to='/dashboard/view-data' style={{...style}}>
                 <ListItem disablePadding>
