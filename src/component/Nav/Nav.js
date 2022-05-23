@@ -14,12 +14,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import { Outlet, Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({loggedUser,isLoading}) => {
     const style = {textDecoration: 'none', color: 'black'}
     const hoverStyle = {'&:hover': { backgroundColor: 'white',boxShadow:'1px 2px 5px #dfdbdb' }}
     return (
         <div className="nav">
-            <Label />
+            <Label loggedUser={loggedUser} isLoading={isLoading}/>
             <Box >
             <nav aria-label="main mailbox folders">
                     <List>

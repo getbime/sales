@@ -8,8 +8,8 @@
 
     background-color: white;
     display: flex;
-    justify-content: flex-end;
-
+    justify-content: space-between;
+    align-items: flex-end;
     border-radius: 2px;
     box-shadow: 1px 2px 5px #dfdbdb;
 }

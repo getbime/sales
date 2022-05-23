@@ -57,7 +57,16 @@ const Login = () => {
         username,
         password: values.password
     }
+    const staffData = {
+        staffId: username,
+        password: values.password
+    }
 
+    const saveUserIdentityToLocalStorage = (id,token,user) => {
+        window.localStorage.setItem('userId', id);
+        window.localStorage.setItem('userToken', token);
+        window.localStorage.setItem('userType', user);
+    }
 
     const [isPending, setIsPending] = React.useState(false)
     const [showError, setShowError] = React.useState(false)
@@ -81,7 +90,7 @@ const Login = () => {
                     fetch(`${BASE_URL}${LOGIN_STAFF}`,{
                     method: 'POST',
                     headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(staffData)
                     })
                     .then(response => {
                         if(response.ok == false) {
@@ -94,7 +103,12 @@ const Login = () => {
                         console.log(data);
                         setIsPending(false)
             
-                        if(data.success) setShowSuccess(true)
+                        if(data.success){
+                            const user = 'staff'
+                            saveUserIdentityToLocalStorage(data.newUser.staffId, data.newUser.token, user)
+                            // setShowSuccess(true)
+                            navigate('/dashboard')
+                        } 
                         else {
                             setIsPending(false)
                             setErrorMsg(userNotFoundMsg)
@@ -131,7 +145,12 @@ const Login = () => {
                         console.log(data);
                         setIsPending(false)
             
-                        if(data.success) setShowSuccess(true)
+                        if(data.success) {
+                            const user = 'company'
+                            saveUserIdentityToLocalStorage(data.newUser.username, data.newUser.token, user)
+                            // setShowSuccess(true)
+                            navigate('/dashboard')
+                        }
                         else {
                             setIsPending(false)
                             setErrorMsg(userNotFoundMsg)

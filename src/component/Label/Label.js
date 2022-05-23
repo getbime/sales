@@ -1,9 +1,9 @@
 import './Label.css'
 
-const Label = () => {
+const Label = ({loggedUser,isLoading}) => {
     return (
         <div className="label">
-            <h2>NutCoders</h2>
+            {!isLoading && <h2>{loggedUser.companyName.toUpperCase()}</h2> }
         </div>
     );
 }

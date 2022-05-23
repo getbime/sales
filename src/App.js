@@ -1,9 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import Header from './component/Header/Header';
-import MainBody from './component/MainBody/MainBody';
 import Nav from './component/Nav/Nav'
-import StatSec from './component/StatSection/StatSec';
 import TogleNav from './component/TogleNav/TogleNav'
 import Footer from './component/Footer/Footer'
 import Registration from './component/Registration/Registration'
@@ -12,15 +10,15 @@ import ForgetPassword from './component/ForgetPassword/ForgetPassword'
 import SalesRecord from './component/SalesRecord/SalesRecord'
 import Viewdata from './component/ViewData/ViewData'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import Home from './component/Home/Home'
+import Dashboard from './component/Dashboard/Dashboard';
 
 
 
 
 function App() {
   // const navigate = useNavigate()
-  const [state, setState] = React.useState({
-    left: false,
-  });
+ 
 
   
   
@@ -36,31 +34,7 @@ function App() {
 
           <Route path='login' element={<Login /> }/>
 
-          <Route path='dashboard/*' element={(<div>
-            <TogleNav setState={setState} state={state}/>        
-            <Nav className="nav"/>
-
-            <div className="right-con">
-              <Header setState={setState} state={state}/>
-
-              <Routes>
-                <Route index  element={<div>
-                    <MainBody />
-                    <StatSec/>
-                  </div>} />
-
-                <Route path='register' element={<Registration />}/>
-                <Route path='login' element={<Login /> }/>
-                <Route path='forget-password' element={<ForgetPassword /> }/>
-                <Route path='sales-record' element={<SalesRecord />  }/>
-                <Route path='view-data' element={<Viewdata />  }/>
-
-              </Routes>
-              
-              <Footer />
-            </div>
-
-          </div>)}/>
+          <Route path='dashboard/*' element={<Dashboard />}/>
         </Routes>
 
           

@@ -2,6 +2,8 @@ import './Header.css'
 import Avatar from '@mui/material/Avatar';
 import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
+import Typography from '@mui/material/Typography';
+
 
 function stringToColor(string) {
     let hash = 0;
@@ -30,12 +32,11 @@ function stringAvatar(name) {
         width: 50,
         height: 50 
       },
-      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+      children: `${name.split('')[0][0].toUpperCase()}${name.split('')[1][0].toUpperCase()}`,
     };
   }
 
-const Header = ({setState,state}) => {
-
+const Header = ({setState,state,loggedUser,isLoading}) => {
     const handleClick = (anchor, open) =>{
       setState({ ...state, [anchor]: open });
     }
@@ -47,7 +48,16 @@ const Header = ({setState,state}) => {
                 </ToggleButton>
               </div>
               
-              <Avatar {...stringAvatar('Kent Dodds')} />
+              {!isLoading && <Typography sx={{
+                marginLeft:'30rem',
+                fontSize:20,
+                '@media (max-width: 600px)': {
+                  margin: 0,
+                  fontSize:18,
+                  
+                },
+                }}>{loggedUser.staffName}</Typography> }
+              {!isLoading && <Avatar {...stringAvatar(loggedUser.companyName)} /> }
             </div>
 
     );

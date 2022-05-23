@@ -17,7 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { Outlet, Link } from "react-router-dom";
 
 
-export default function TemporaryDrawer({state,setState}) {
+export default function TemporaryDrawer({state,setState,loggedUser,isLoading}) {
 //   const [state, setState] = React.useState({
 //     left: false,
 //   });
@@ -38,7 +38,7 @@ const style = {textDecoration: 'none', color: 'black'}
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Label />
+      <Label loggedUser={loggedUser} isLoading={isLoading}/>
       <List>
         <Link to='/dashboard'style={{...style}} >
                 <ListItem disablePadding>

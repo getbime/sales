@@ -8,6 +8,7 @@
   width: 80%;
   position:absolute;
   margin-left: 18rem;
+  /* margin-right: -2rem; */
 }
 
 .App-logo {
@@ -53,7 +54,7 @@
   }
   .right-con {
     margin-left: 0;
-    width: 100%;
+    width: 100vw;
   }
   .App{
     gap: 0;
