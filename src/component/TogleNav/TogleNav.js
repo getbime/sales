@@ -62,7 +62,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/dashboard/sales-record' style={{...style}}>
+            {userType === 'staff'? <Link to='/dashboard' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -72,6 +72,17 @@ const style = {textDecoration: 'none', color: 'black'}
                     </ListItemButton>
                 </ListItem>
             </Link>
+            : <Link to='/dashboard/sales-record' style={{...style}}>
+            <ListItem disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <InventoryIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Invoice" />
+                </ListItemButton>
+            </ListItem>
+        </Link>
+             }
             
             <Link to='/dashboard/forget-password' style={{...style}}>
                 <ListItem disablePadding>

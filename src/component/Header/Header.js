@@ -67,6 +67,7 @@ const Header = ({setState,state,loggedUser,isLoading,userType}) => {
                 width: '88%',
                 justifyContent: 'space-between',
                 paddingLeft: '0.4rem',
+                // alignItems: 'flex-end'
                 
               },
             }}>
@@ -78,10 +79,17 @@ const Header = ({setState,state,loggedUser,isLoading,userType}) => {
 
               {userType === 'staff' && !isLoading && <Typography sx={{
                 marginLeft:'30rem',
-                fontSize:20,
+                fontSize:16,
+                border: '0.5px solid #6683ed',
+                color: '#6683ed',
+                borderRadius: 0.5,
+                padding: '1px 8px',
+                alignSelf: 'center',
                 '@media (max-width: 600px)': {
                   margin: 0,
-                  fontSize:18,
+                  fontSize:14,
+                  marginTop: 1.2
+
                   
                 },
                 }}>{loggedUser.staffName}</Typography> } 

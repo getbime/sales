@@ -2,11 +2,11 @@ import MainBody from '../MainBody/MainBody'
 import StatSec from '../StatSection/StatSec'
 
 
-const Home = () => {
+const Home = ({loggedUser, isLoading}) => {
     return (
         <div>
-            <MainBody />
-            <StatSec/>
+            {!isLoading && <MainBody loggedUser={loggedUser}/>}
+            {!isLoading && <StatSec loggedUser={loggedUser}/>}
         </div>
     );
 }

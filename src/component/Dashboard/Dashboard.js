@@ -9,7 +9,7 @@ import SalesRecord from '../SalesRecord/SalesRecord'
 import ViewData from '../ViewData/ViewData'
 import Footer from '../Footer/Footer'
 import Nav from '../Nav/Nav'
-import Box from '@mui/material/Box'
+// import Box from '@mui/material/Box'
 import Loader from '../shared/Loader'
 import Modal from '@mui/material/Modal';
 
@@ -37,6 +37,7 @@ const Dashboard = () => {
         userToken,
         userType
     })  
+    console.log(user)
     const [isLoading, setIsLoading] = useState(true)
     const [loggedUser, setLoggedUser] = useState(null)
 
@@ -54,7 +55,10 @@ const Dashboard = () => {
               setIsLoading(false)
               setLoggedUser(data.message)
             }
-          })
+          }).catch(error => {
+            setIsLoading(false)
+            console.error('Error:', error);
+        })
       }else if (user.userType === 'staff'){
         fetch(`${BASE_URL}${SINGLE_STAFF}?staffId=${user.userId}`)
           .then(res => res.json())
@@ -64,7 +68,10 @@ const Dashboard = () => {
               setIsLoading(false)
               setLoggedUser(data.message)
             }
-          })
+          }).catch(error => {
+            setIsLoading(false)
+            console.error('Error:', error);
+        })
       }
     },[])
 
@@ -97,13 +104,13 @@ const Dashboard = () => {
               <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/>
 
               <Routes>
-                {user.userType === 'company' && <Route index  element={<Home />} /> }
+                {user.userType === 'company' && <Route index  element={<Home isLoading={isLoading} loggedUser={loggedUser}/>} /> }
 
                 <Route path='register' element={<Registration />}/>
                 <Route path='login' element={<Login /> }/>
                 <Route path='forget-password' element={<ForgetPassword /> }/>
                 {user.userType === 'staff'?
-                <Route index path='sales-record' element={<SalesRecord />  }/>
+                <Route index  element={<SalesRecord />  }/>
                 :<Route path='sales-record' element={<SalesRecord />  }/>}
 
                 <Route path='view-data' element={<ViewData />  }/>

@@ -45,7 +45,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                             </ListItem>
                         </Link>
 
-                        <Link to='/dashboard/sales-record' style={{...style}}>
+                        {userType === 'staff'? <Link to='/dashboard' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -54,7 +54,18 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Invoice" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </Link> 
+                        : <Link to='/dashboard/sales-record' style={{...style}}>
+                        <ListItem disablePadding sx={{...hoverStyle}}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <InventoryIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Invoice" />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                         }
                         
                         <Link to='/dashboard/forget-password' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
