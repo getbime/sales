@@ -7,6 +7,7 @@ const Expenses = () => {
             <TableCell>Collectors Name</TableCell>
             <TableCell align="right">Purpose</TableCell>
             <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Reciept</TableCell>
             <TableCell align="right">Date</TableCell>
         </TableRow>
     );
