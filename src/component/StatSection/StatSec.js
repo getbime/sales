@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {useState, useEffect} from 'react';
 
 
-const StatSection = ({loggedUser}) => {
+const StatSection = ({companyId}) => {
     const [statIsLoading, setStatIsLoading] = useState(true)
     const [statis, setStatis] = useState(null)
 
@@ -43,7 +43,7 @@ const StatSection = ({loggedUser}) => {
     useEffect(()=>{
   
   
-          fetch(`${BASE_URL}${CHAT_STATISTICS}?companyId=${loggedUser.username}`)
+          fetch(`${BASE_URL}${CHAT_STATISTICS}?companyId=${companyId}`)
             .then(res => res.json())
             .then(data => {
                 if(data.success === true){
@@ -54,7 +54,7 @@ const StatSection = ({loggedUser}) => {
                     setStatis(data)
                 }
                 
-                // console.log(rearrange(statis.monthly,'month'))
+                console.log(rearrange(statis.monthly,'month'))
             }).catch(error => {
                 setStatIsLoading(false)
                 console.error('Error:', error);

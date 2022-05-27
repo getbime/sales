@@ -1,4 +1,4 @@
-import * as React from 'react'
+import {useState} from 'react'
 import CustomTable from '../CustomTable/CustomTable'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -10,16 +10,26 @@ import Tabs from '@mui/material/Tabs';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { TextField } from '@mui/material'
+import { TextField, Typography } from '@mui/material'
 import Income from './Income'
 import Expenses from './Expenses'
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import useFetch from './useFetch'
+import CircularProgress from '@mui/material/CircularProgress';
 
 
-const ViewData = () => {
-    const [date, setDate] = React.useState(null);
+const ViewData = ({companyId}) => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const DAILY_INVOICE = process.env.REACT_APP_DAILY_INVOICE;
+    const DAILY_EXPENSES = process.env.REACT_APP_DAILY_EXPENSES;
+
+    const formatDate = (date) => {
+        return date.toString().split(' ').splice(0,4).join(' ')
+    }
+       
+    const [date, setDate] = useState(formatDate(new Date()));
     function a11yProps(index) {
         return {
           id: `simple-tab-${index}`,
@@ -32,7 +42,7 @@ const ViewData = () => {
         itemTwo: "Expenses"
     }
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -49,6 +59,9 @@ const ViewData = () => {
         createData('Cupcake', 305, 3.7, 67, 4.3),
         createData('Gingerbread', 356, 16.0, 49, 3.9),
       ];
+      
+      const {isLoading: loadingExpenses, data: expenses} = useFetch(`${BASE_URL}${DAILY_EXPENSES}?companyId=${companyId}&date=Mon May 23 2022`)
+      const {isLoading: loadingInvoice, data: invoice} = useFetch(`${BASE_URL}${DAILY_INVOICE}?companyId=${companyId}&date=${date}`)
     return (
         <Stack spacing={2} direction='column' sx={{
             width: '97.5%',
@@ -57,9 +70,10 @@ const ViewData = () => {
                 marginTop: 0,
               },
         }}>
+                {console.log(date)}
+                {/* {!loadingExpenses && console.log(expenses)} */}
            
                 <CustomTabs >
-
                     <HeadTab labels={labels} value={value} handleChange={handleChange}>
                         <Stack direction='row' spacing={2} justifyContent='space-between' sx={{
                             backgroundColor: 'white',
@@ -81,7 +95,7 @@ const ViewData = () => {
                                     label="Basic example"
                                     value={date==null ? new Date() : date}
                                     onChange={(newValue) => {
-                                    setDate(newValue);
+                                    setDate(formatDate(newValue));
                                     }}
                                     renderInput={(params) => <TextField sx={{width: '50%','@media (max-width: 600px)':{width: '90%'}}} size="small"{...params} />}
                                 />
@@ -94,26 +108,56 @@ const ViewData = () => {
                             <Box sx={{
                                 padding: '1rem 2rem 2rem 2rem'
                             }}>
+                                    
                                 <CustomTable>
                                     <Income />
-                                    <TableBody>
-                                        {rows.map((row) => (
+                                    {!loadingInvoice && <TableBody>
+
+                                        {invoice.result.length > 0 && invoice.result.map(inv => (
                                             <TableRow
-                                            key={row.name}
+                                            key={inv.invoice.receiptNumber}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             >
-                                            <TableCell component="th" scope="row">
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
+                                                 <TableCell component="th" scope="row">
+                                                    {inv.invoice.customerName}
+                                                </TableCell>
+
+                                                <TableCell align="right">{
+                                                inv.invoice.product.length > 1 ? `${inv.invoice.product[0].productName} ...`
+                                                : inv.invoice.product[0].productName
+                                                }</TableCell>
+
+                                                 <TableCell align="right">{
+                                                inv.invoice.product.length > 1 ? `${inv.invoice.product[0].quantity} ...`
+                                                : inv.invoice.product[0].quantity
+                                                }</TableCell>
+
+                                                 <TableCell align="right">{
+                                                inv.invoice.product.length > 1 ? `${inv.invoice.product[0].price} ...`
+                                                : inv.invoice.product[0].price
+                                                }</TableCell>
+
+                                                <TableCell align="right">{inv.invoice.grandTotal}</TableCell>
+                                                <TableCell align="right">{inv.invoice.receiptNumber}</TableCell>
+                                                <TableCell align="right">{inv.invoice.date}</TableCell>    
+
                                             </TableRow>
                                         ))}
-                                    </TableBody>
+                                    </TableBody>}
+
                                 </CustomTable>
+                                {loadingInvoice && <Box sx={{
+                                    margin: 'auto',
+                                    marginTop: '3rem',
+
+                                }}><CircularProgress /></Box>  }
+                                {!loadingInvoice && invoice.result.length == 0 && <Typography sx={{
+                                    width: '50%',
+                                    margin: 'auto',
+                                    marginTop: '3rem',
+                                    color: 'gray'
+
+                                }}>NO INVIOCES INSERTED ON THIS DATE</Typography>}
                             </Box>
                         </TabPanel>
 

@@ -65,7 +65,8 @@ const BasicCard = ({bg,invoice,expenses,day}) => {
             </Card>)
 }
 
-const MainBody = ({loggedUser}) => {
+const MainBody = ({companyId}) => {
+    console.log(companyId)
 
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     const STATISTICS = process.env.REACT_APP_STATISTICS ;
@@ -78,7 +79,7 @@ const MainBody = ({loggedUser}) => {
     useEffect(()=>{
   
   
-          fetch(`${BASE_URL}${STATISTICS}?companyId=${loggedUser.username}`)
+          fetch(`${BASE_URL}${STATISTICS}?companyId=${companyId}`)
             .then(res => res.json())
             .then(data => {
                 if(data.success === true){

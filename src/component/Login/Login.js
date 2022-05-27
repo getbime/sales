@@ -118,6 +118,7 @@ const Login = () => {
                         }).catch(error => {
                             setErrorMsg(loginFailedMsg)
                             setShowError(true)
+                            setIsPending(false)
                             console.error('Error:', error);
                         })
                 } catch(error) {
@@ -158,6 +159,7 @@ const Login = () => {
                         }
             
                         }).catch(error => {
+                            setIsPending(false)
                             setErrorMsg(loginFailedMsg)
                             setShowError(true)
                             console.error('Error:', error);

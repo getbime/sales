@@ -37,12 +37,11 @@ const Dashboard = () => {
         userToken,
         userType
     })  
-    console.log(user)
     const [isLoading, setIsLoading] = useState(true)
     const [loggedUser, setLoggedUser] = useState(null)
+    const [companyId, setCompanyId] = useState(null)
 
     useEffect(()=>{
-      console.log(userId)
       if(user.userId === null || user.userToken === null || user.userType === null) navigate('/login')
 
       if(user.userType === 'company'){
@@ -50,10 +49,10 @@ const Dashboard = () => {
         fetch(`${BASE_URL}${SINGLE_COMPANY}?username=${user.userId}`)
           .then(res => res.json())
           .then(data => {
-            console.log(data)
             if(data.success === true){
               setIsLoading(false)
               setLoggedUser(data.message)
+              setCompanyId(data.message.username)
             }
           }).catch(error => {
             setIsLoading(false)
@@ -63,11 +62,12 @@ const Dashboard = () => {
         fetch(`${BASE_URL}${SINGLE_STAFF}?staffId=${user.userId}`)
           .then(res => res.json())
           .then(data => {
-            console.log(data)
             if(data.success === true){
+              setCompanyId(data.message.staff.username)
+              setLoggedUser(data.message['staff'])
               setIsLoading(false)
-              setLoggedUser(data.message)
             }
+            
           }).catch(error => {
             setIsLoading(false)
             console.error('Error:', error);
@@ -96,7 +96,6 @@ const Dashboard = () => {
             >
                 <Loader></Loader>
           </Modal>
-            
             <TogleNav setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/> 
             <Nav className="nav" loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/> 
 
@@ -104,7 +103,7 @@ const Dashboard = () => {
               <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/>
 
               <Routes>
-                {user.userType === 'company' && <Route index  element={<Home isLoading={isLoading} loggedUser={loggedUser}/>} /> }
+                {user.userType === 'company' && <Route index  element={<Home isLoading={isLoading} companyId={companyId}/>} /> }
 
                 <Route path='register' element={<Registration />}/>
                 <Route path='login' element={<Login /> }/>
@@ -113,7 +112,7 @@ const Dashboard = () => {
                 <Route index  element={<SalesRecord />  }/>
                 :<Route path='sales-record' element={<SalesRecord />  }/>}
 
-                <Route path='view-data' element={<ViewData />  }/>
+                <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
 
               </Routes>
               

@@ -9,6 +9,7 @@ const Income = () => {
             <TableCell align="right">Quantity</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="right">Total Price</TableCell>
+            <TableCell align="right">Reciept Number</TableCell>
             <TableCell align="right">Date</TableCell>
 
         </TableRow>
