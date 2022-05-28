@@ -34,17 +34,6 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                             </ListItem>
                         </Link> }
 
-                        <Link to='/dashboard/view-data' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <DetailsIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Details" />
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
-
                         {userType === 'staff'? <Link to='/dashboard' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
@@ -66,7 +55,18 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                         </ListItem>
                     </Link>
                          }
-                        
+                        <Link to='/dashboard/view-data' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <DetailsIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Details" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+{/*                         
                         <Link to='/dashboard/forget-password' style={{...style}}>
                             <ListItem disablePadding sx={{...hoverStyle}}>
                                 <ListItemButton>
@@ -98,7 +98,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Login" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </Link> */}
                     </List>
                    
             </nav>

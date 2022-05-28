@@ -51,17 +51,6 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link> }
 
-            <Link to='/dashboard/view-data' style={{...style}}>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <DetailsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Details" />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
-
             {userType === 'staff'? <Link to='/dashboard' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
@@ -83,8 +72,19 @@ const style = {textDecoration: 'none', color: 'black'}
             </ListItem>
         </Link>
              }
+            <Link to='/dashboard/view-data' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <DetailsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Details" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
             
-            <Link to='/dashboard/forget-password' style={{...style}}>
+            {/* <Link to='/dashboard/forget-password' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -115,7 +115,7 @@ const style = {textDecoration: 'none', color: 'black'}
                         <ListItemText primary="Login" />
                     </ListItemButton>
                 </ListItem>
-            </Link>
+            </Link> */}
       </List>
     </Box>
   );

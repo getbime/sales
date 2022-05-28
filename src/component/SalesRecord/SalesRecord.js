@@ -20,10 +20,12 @@ const SalesRecord = ({companyId,loggedUser}) => {
     const [showError, setShowError] = React.useState(false)
     const [showSuccess, setShowSuccess] = React.useState(false)
     const [result, setResult] = React.useState(null)
+    const [receiptType, setReceiptType] = React.useState('')
 
 
-    const postReq = (url,data) => {
+    const postReq = (url,data,type) => {
         setIsPending(true)
+        setReceiptType(type)
         if(data){
             data.companyId = companyId
             try {
@@ -91,14 +93,13 @@ const SalesRecord = ({companyId,loggedUser}) => {
     };
 
     const HandleFormSubmitInvoice = (data)=>{
-        postReq(`${BASE_URL}${CREATE_INVOICE}ss`,data)
+        postReq(`${BASE_URL}${CREATE_INVOICE}`,data,'invoice')
         
          
 
     }
     const HandleFormSubmitExpenses = (data) => {
-        console.log(data)
-        postReq(`${BASE_URL}${CREATE_EXPENSES}`,data)
+        postReq(`${BASE_URL}${CREATE_EXPENSES}`,data, 'expenses')
 
     }
 
@@ -127,6 +128,7 @@ const SalesRecord = ({companyId,loggedUser}) => {
                 result={result}
                 setShowError={setShowError}
                 setShowSuccess={setShowSuccess}
+                receiptType={receiptType}
             />
             {!isPending && console.log(isPending,msg,showError,result)}
             <Box sx={{
