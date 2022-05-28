@@ -12,9 +12,11 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Palette from '../../ThemeProvider';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 
-const Income = () => {
+
+const Income = ({HandleFormSubmitInvoice,isPending}) => {
     const inputLabels = {
         productLabel: "Product Name",
         priceLabel: "price",
@@ -22,7 +24,13 @@ const Income = () => {
         totalLabel: "total price"
 
     }
-    const [date, setDate] = React.useState(null);
+    const formatDate = (date) => {
+        return date.toString().split(' ').splice(0,4).join(' ')
+    }
+       
+    const [date, setDate] = React.useState(formatDate(new Date()));
+    const [customerName, setCustomerName] = React.useState('')
+    const [data, setData] = React.useState('')
     const [inputFields, setInputFields] = React.useState([
         {
             productName: "",
@@ -39,26 +47,72 @@ const Income = () => {
             quantity: 1,
             totalPrice: 0,
         },])
+
+        setData({
+            customerName,
+            date:date,
+            grandTotal:[...inputFields, {
+                productName: "",
+                price: 0,
+                quantity: 1,
+                totalPrice: 0,
+            },].reduce((a,b)=>a + b.totalPrice,0),
+            product : inputFields
+        })
+
+       
     }
     const handleRemoveNewForm = ()=>{
         const values = [...inputFields]
         values.length>1 && values.pop()
         setInputFields(values)
+
+        setData({
+            customerName,
+            date,
+            grandTotal: values.reduce((a,b)=>a + b.totalPrice,0),
+            product : values
+        })
+       
     }
 
     const handleChangeInput = (event,index,fieldName)=>{
         const values = [...inputFields]
-        console.log(event.target.value,index)
+        // console.log(event.target.value,index)
         values[index][fieldName] = event.target.value
         values[index]['totalPrice'] = values[index]['quantity'] * values[index]['price']
-        console.log(values[index])
+        // console.log(values[index])
         setInputFields(values) 
+
+        setData({
+            customerName,
+            date,
+            grandTotal: values.reduce((a,b)=>a + b.totalPrice,0),
+            product : values
+        })
+                
     }
 
-    const handleFormSubmit = ()=>{
-       console.log(inputFields)
+    const handleChangeDate = (newValue) => {
+        setData({
+            customerName,
+            date:formatDate(newValue),
+            grandTotal:[...inputFields].reduce((a,b)=>a + b.totalPrice,0),
+            product : inputFields
+        })
+        setDate(formatDate(newValue))
     }
-
+    
+    const handleChangeName = (e) => {
+        setData({
+            customerName: e.target.value,
+            date,
+            grandTotal:[...inputFields].reduce((a,b)=>a + b.totalPrice,0),
+            product : inputFields
+        })
+        setCustomerName(e.target.value)
+    }
+    
 
     return (
 
@@ -66,14 +120,16 @@ const Income = () => {
             <Stack spacing={3} direction="column" sx={{
                 padding: '2rem'
             }}>
-
-                <TextField id="outlined-basic" label="Customer Name" variant="outlined" size='small'/>
+                <TextField id="outlined-basic" label="Customer Name" variant="outlined" size='small'
+                onChange={(e)=>handleChangeName(e)}
+                value={customerName}
+                />
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
-                        label="Basic example"
+                        label="Change date"
                         value={date==null ? new Date() : date}
                         onChange={(newValue) => {
-                        setDate(newValue);
+                        handleChangeDate(newValue);
                         }}
                         renderInput={(params) => <TextField size="small"{...params} />}
                     />
@@ -103,7 +159,9 @@ const Income = () => {
                 ))}
 
                 <Palette>
-                    <Button variant="contained" onClick={handleFormSubmit}><Typography>Submit</Typography></Button>
+                    {!isPending && <Button variant="contained" onClick={()=> HandleFormSubmitInvoice(data)}><Typography>Submit</Typography></Button> }
+                    {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
+                
                 </Palette>
                 
             </Stack>
@@ -112,7 +170,7 @@ const Income = () => {
                 position: 'absolute',
                 alignSelf: 'flex-end',
                 justifySelf: 'flex-end',
-                marginLeft: '30.5%',
+                marginLeft: '40.9%',
                 marginBottom: '2rem',
                 '@media (max-width: 600px)': {
                     marginLeft: '75.5%',
@@ -123,7 +181,7 @@ const Income = () => {
                     borderRight: '1px solid #ABB5C5',
                     backgroundColor: 'white',
                     boxShadow: 'none',
-                }} onClick={handleAddNewForm}>
+                }}  onClick={handleAddNewForm}>
                     <Palette>
 
                         <AddIcon color="secondary"/>

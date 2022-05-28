@@ -110,7 +110,7 @@ const Dashboard = () => {
                 <Route path='forget-password' element={<ForgetPassword /> }/>
                 {user.userType === 'staff'?
                 <Route index  element={<SalesRecord />  }/>
-                :<Route path='sales-record' element={<SalesRecord />  }/>}
+                :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
 

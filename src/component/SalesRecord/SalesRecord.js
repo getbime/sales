@@ -6,11 +6,72 @@ import Expences from './Expences';
 import HeadTab from '../CustomTabs/HeadTab'
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-
+// import postReq from './usePost'
 import Box from '@mui/material/Box';
+import MessageModal from './MessageModal'
 
-const SalesRecord = () => {
-    
+const SalesRecord = ({companyId,loggedUser}) => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const CREATE_INVOICE = process.env.REACT_APP_CREATE_INVOICE 
+    const CREATE_EXPENSES = process.env.REACT_APP_CREATE_EXPENSES 
+
+    const [isPending, setIsPending] = React.useState(false)
+    const [msg, setMsg] = React.useState('')
+    const [showError, setShowError] = React.useState(false)
+    const [showSuccess, setShowSuccess] = React.useState(false)
+    const [result, setResult] = React.useState(null)
+
+
+    const postReq = (url,data) => {
+        setIsPending(true)
+        if(data){
+            data.companyId = companyId
+            try {
+        
+                fetch(url, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (response.ok == false) {
+                            setIsPending(false)
+                            throw Error('connection error retry again pls')
+                        }
+                        else return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        setResult(data)
+                        if (data.success) {
+                            setIsPending(false)
+                            setShowSuccess(true)
+                        }
+                        else {
+                            setIsPending(false)
+                            setMsg('something went wrong retry again')
+                            setShowError(true)
+                        }
+        
+                    }).catch(error => {
+                        setIsPending(false)
+                        setMsg('connection error retry again pls')
+                        setShowError(true)
+                        console.error('Error:', error);
+                    })
+            } catch (error) {
+                setMsg('something went wrong retry again')
+                setShowError(true)
+                setIsPending(false)
+        
+            }
+        }else{
+            setMsg('You can send an empty invoice')
+            setShowError(true)
+            setIsPending(false)
+        }
+    }
+
     function a11yProps(index) {
         return {
           id: `simple-tab-${index}`,
@@ -28,7 +89,20 @@ const SalesRecord = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-   
+
+    const HandleFormSubmitInvoice = (data)=>{
+        postReq(`${BASE_URL}${CREATE_INVOICE}ss`,data)
+        
+         
+
+    }
+    const HandleFormSubmitExpenses = (data) => {
+        console.log(data)
+        postReq(`${BASE_URL}${CREATE_EXPENSES}`,data)
+
+    }
+
+       
     return (
 
         <Box sx={{
@@ -45,6 +119,16 @@ const SalesRecord = () => {
               },
 
         }}>
+            <MessageModal
+                loggedUser={loggedUser}
+                msg={msg}
+                showError={showError}
+                showSuccess={showSuccess}
+                result={result}
+                setShowError={setShowError}
+                setShowSuccess={setShowSuccess}
+            />
+            {!isPending && console.log(isPending,msg,showError,result)}
             <Box sx={{
             width: '90%',
             backgroundColor: '#f7faff',
@@ -89,11 +173,11 @@ const SalesRecord = () => {
                             </HeadTab>
                             <Box>
                                 <TabPanel value={value} index={0}>
-                                    <Income />
+                                    <Income HandleFormSubmitInvoice={HandleFormSubmitInvoice} isPending={isPending}/>
                                 </TabPanel>
 
                                 <TabPanel value={value} index={1}>
-                                    <Expences />
+                                    <Expences HandleFormSubmitExpenses={HandleFormSubmitExpenses} isPending={isPending}/>
                                 </TabPanel>
                             </Box>
                              

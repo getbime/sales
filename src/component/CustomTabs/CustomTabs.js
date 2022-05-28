@@ -14,7 +14,7 @@ TabPanel.propTypes = {
 
 export default function BasicTabs({labels,children,value,handleChange}) {
   
-console.log(children)
+// console.log(children)
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>

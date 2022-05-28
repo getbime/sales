@@ -20,7 +20,6 @@ import useFetch from './useFetch'
 import CircularProgress from '@mui/material/CircularProgress';
 import Search from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
-import { toBeEmpty } from '@testing-library/jest-dom/dist/matchers'
 
 
 const ViewData = ({companyId}) => {
@@ -62,17 +61,7 @@ const ViewData = ({companyId}) => {
         return { name, calories, fat, carbs, protein };
       }
       
-      const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-      ];
-    //   const handleSearch = (value) =>{
-    //     console.log(value)
-    
-    // }
+      
     const {isLoading: loadingExpenses, data: expenses} = useFetch(`${BASE_URL}${DAILY_EXPENSES}?companyId=${companyId}&date=${date}`)
     const {isLoading: loadingInvoice, data: invoice} = useFetch(`${BASE_URL}${DAILY_INVOICE}?companyId=${companyId}&date=${date}`)
     const {isLoading: loadingExpensesSearch, data: expensesSearch} = useFetch(`${BASE_URL}${SEARCH_EXPENSES}?companyId=${companyId}&search=${searchValue}`)
@@ -87,7 +76,7 @@ const ViewData = ({companyId}) => {
         }}>
             {/* {console.log(searchValue)} */}
                 {/* {!loadingInvoiceSearch && console.log(searchValue)} */}
-                {!loadingExpenses && console.log(expenses)}
+                {/* {!loadingExpenses && console.log(expenses)} */}
            
                 <CustomTabs >
                     <HeadTab labels={labels} value={value} handleChange={handleChange}>

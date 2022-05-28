@@ -3,7 +3,6 @@ import { DualAxes } from '@ant-design/plots';
 import Box from '@mui/material/Box'
 
 const DualAxesChart = ({data, values}) => {
-  console.log(data)
   
   // const data = [
   //   {
