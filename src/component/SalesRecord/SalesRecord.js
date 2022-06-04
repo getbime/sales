@@ -130,7 +130,6 @@ const SalesRecord = ({companyId,loggedUser}) => {
                 setShowSuccess={setShowSuccess}
                 receiptType={receiptType}
             />
-            {!isPending && console.log(isPending,msg,showError,result)}
             <Box sx={{
             width: '90%',
             backgroundColor: '#f7faff',

@@ -13,8 +13,9 @@ import PasswordIcon from '@mui/icons-material/Password';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LoginIcon from '@mui/icons-material/Login';
 import ListItemButton from '@mui/material/ListItemButton';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function TemporaryDrawer({state,setState,loggedUser,isLoading,userType}) {
@@ -79,6 +80,17 @@ const style = {textDecoration: 'none', color: 'black'}
                             <DetailsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Details" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/dashboard/profile' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <ManageAccountsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Profile" />
                     </ListItemButton>
                 </ListItem>
             </Link>

@@ -20,6 +20,7 @@ import useFetch from './useFetch'
 import CircularProgress from '@mui/material/CircularProgress';
 import Search from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
+import DetailsModal from './DetailsModal'
 
 
 const ViewData = ({companyId}) => {
@@ -38,6 +39,8 @@ const ViewData = ({companyId}) => {
     const [searchValue, setSearchValue] = useState('')
     const [byDate, setByDate] = useState(true)
     const [byText, setByText] = useState(false)
+    const [openDetailModal, setOpenDetailModal] = useState(false)
+    const [detailValue, setDetailValue] = useState('')
 
     function a11yProps(index) {
         return {
@@ -61,6 +64,10 @@ const ViewData = ({companyId}) => {
         return { name, calories, fat, carbs, protein };
       }
       
+    function handleDisplayDetail (value){
+        setOpenDetailModal(true)
+        setDetailValue(value)
+    }  
       
     const {isLoading: loadingExpenses, data: expenses} = useFetch(`${BASE_URL}${DAILY_EXPENSES}?companyId=${companyId}&date=${date}`)
     const {isLoading: loadingInvoice, data: invoice} = useFetch(`${BASE_URL}${DAILY_INVOICE}?companyId=${companyId}&date=${date}`)
@@ -74,6 +81,7 @@ const ViewData = ({companyId}) => {
                 marginTop: 0,
               },
         }}>
+            <DetailsModal />
             {/* {console.log(searchValue)} */}
                 {/* {!loadingInvoiceSearch && console.log(searchValue)} */}
                 {/* {!loadingExpenses && console.log(expenses)} */}
@@ -144,7 +152,14 @@ const ViewData = ({companyId}) => {
                                         {byDate && invoice.result.length > 0 && invoice.result.map(inv => (
                                             <TableRow
                                             key={inv.invoice.receiptNumber}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ 
+                                                '&:last-child td, &:last-child th': { border: 0 }, 
+                                                cursor: 'pointer',
+                                                ':hover': {
+                                                    backgroundColor: 'whitesmoke'
+                                                }
+                                              }}
+                                              onClick = {()=> handleDisplayDetail(inv.invoice)}
                                             >
                                                  <TableCell component="th" scope="row">
                                                     {inv.invoice.customerName}

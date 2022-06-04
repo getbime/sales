@@ -12,7 +12,9 @@ import PasswordIcon from '@mui/icons-material/Password';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 
 const Nav = ({loggedUser,isLoading,userType}) => {
     const style = {textDecoration: 'none', color: 'black'}
@@ -62,6 +64,17 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                         <DetailsIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Details" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/dashboard/profile' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <ManageAccountsIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Profile" />
                                 </ListItemButton>
                             </ListItem>
                         </Link>

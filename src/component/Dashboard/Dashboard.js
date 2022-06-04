@@ -9,12 +9,12 @@ import SalesRecord from '../SalesRecord/SalesRecord'
 import ViewData from '../ViewData/ViewData'
 import Footer from '../Footer/Footer'
 import Nav from '../Nav/Nav'
-// import Box from '@mui/material/Box'
 import Loader from '../shared/Loader'
 import Modal from '@mui/material/Modal';
+import Profile from '../Profile/Profile';
 
 
-import { BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom'
+import {Routes, Route, useNavigate} from 'react-router-dom'
 
 
 const Dashboard = () => {
@@ -113,6 +113,7 @@ const Dashboard = () => {
                 :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
+                <Route path='profile' element={<Profile />}/>
 
               </Routes>
               
