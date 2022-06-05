@@ -60,11 +60,10 @@ const ViewData = ({companyId}) => {
         setValue(newValue);
     };
 
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-      }
+    
       
     function handleDisplayDetail (value){
+        // console.log(value)
         setOpenDetailModal(true)
         setDetailValue(value)
     }  
@@ -81,7 +80,11 @@ const ViewData = ({companyId}) => {
                 marginTop: 0,
               },
         }}>
-            <DetailsModal />
+            {openDetailModal && <DetailsModal 
+                openDetailModal={openDetailModal} 
+                detailValue={detailValue} 
+                setOpenDetailModal={setOpenDetailModal}
+            />}
             {/* {console.log(searchValue)} */}
                 {/* {!loadingInvoiceSearch && console.log(searchValue)} */}
                 {/* {!loadingExpenses && console.log(expenses)} */}
@@ -222,7 +225,8 @@ const ViewData = ({companyId}) => {
                                   
 
                                 </CustomTable>
-                                {loadingInvoice && <Box sx={{
+                                {console.log(loadingInvoice,loadingInvoiceSearch)}
+                                {loadingInvoice  && <Box sx={{
                                     margin: 'auto',
                                     marginTop: '3rem',
 
@@ -283,7 +287,7 @@ const ViewData = ({companyId}) => {
                                         ))}
                                     </TableBody>}
                                 </CustomTable>
-                                {loadingExpenses && <Box sx={{
+                                {(loadingExpenses || !byDate) && <Box sx={{
                                     margin: 'auto',
                                     marginTop: '3rem',
 

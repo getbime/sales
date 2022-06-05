@@ -12,6 +12,8 @@ import Nav from '../Nav/Nav'
 import Loader from '../shared/Loader'
 import Modal from '@mui/material/Modal';
 import Profile from '../Profile/Profile';
+import Summary from '../Summary/Summary';
+
 
 
 import {Routes, Route, useNavigate} from 'react-router-dom'
@@ -114,6 +116,7 @@ const Dashboard = () => {
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
                 <Route path='profile' element={<Profile />}/>
+                <Route path='summary' element={<Summary />}/>
 
               </Routes>
               
