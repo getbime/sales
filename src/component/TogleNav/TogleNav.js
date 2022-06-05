@@ -14,6 +14,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LoginIcon from '@mui/icons-material/Login';
 import ListItemButton from '@mui/material/ListItemButton';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 import { Link } from "react-router-dom";
 
@@ -91,6 +92,17 @@ const style = {textDecoration: 'none', color: 'black'}
                             <ManageAccountsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Profile" />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
+
+            <Link to='/dashboard/summary' style={{...style}}>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <LeaderboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Summary" />
                     </ListItemButton>
                 </ListItem>
             </Link>

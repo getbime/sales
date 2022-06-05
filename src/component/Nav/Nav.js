@@ -14,6 +14,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 
 const Nav = ({loggedUser,isLoading,userType}) => {
@@ -75,6 +76,17 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                         <ManageAccountsIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Profile" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+
+                        <Link to='/dashboard/summary' style={{...style}}>
+                            <ListItem disablePadding sx={{...hoverStyle}}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <LeaderboardIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Summary" />
                                 </ListItemButton>
                             </ListItem>
                         </Link>
