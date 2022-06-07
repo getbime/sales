@@ -54,7 +54,7 @@ const StatSection = ({companyId}) => {
                     setStatis(data)
                 }
                 
-                console.log(rearrange(statis.monthly,'month'))
+                console.log(data)
             }).catch(error => {
                 setStatIsLoading(false)
                 console.error('Error:', error);

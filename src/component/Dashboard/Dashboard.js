@@ -65,8 +65,8 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(data => {
             if(data.success === true){
-              setCompanyId(data.message.staff.username)
-              setLoggedUser(data.message['staff'])
+              setCompanyId(data.message.username)
+              setLoggedUser(data.message)
               setIsLoading(false)
             }
             
@@ -115,7 +115,7 @@ const Dashboard = () => {
                 :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
-                <Route path='profile' element={<Profile />}/>
+                <Route path='profile' element={<Profile user={user}/>}/>
                 <Route path='summary' element={<Summary companyId={companyId}/>}/>
 
               </Routes>
