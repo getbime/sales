@@ -60,6 +60,10 @@ const Profile = ({user}) => {
 
     const [isLoading, setIsLoading] = useState(true)
     const [isLoadingEdit, setIsLoadingEdit] = useState(true)
+    const [isLoadingDeleteStaff, setIsLoadingDeleteStaff] = useState(false)
+    const [DeleteStaffId, setDeleteStaffId] = useState('')
+
+
 
     const [isLoadingGetStaff, setIsLoadingGetStaff] = useState(true)
 
@@ -73,7 +77,7 @@ const Profile = ({user}) => {
     const [createStaffName,setCreateStaffName] = useState('')
     const [createStaffEmail,setCreateStaffEmail] = useState('')
     const [createStaffPhone,setCreateStaffPhone] = useState('')
-    const {showError: imageShowError,errorMsg: imageError,setProfilePic,updateProfileRequest,createStaff} = useCrud()
+    const {showError: imageShowError,errorMsg: imageError,setProfilePic,updateProfileRequest,createStaff,deleteStaff} = useCrud()
 
 
     const [swt, setSwt] = useState(true);
@@ -113,8 +117,7 @@ const Profile = ({user}) => {
                 if(data.success === true){
                     setIsLoadingGetStaff(false)
                     setStaffList(data.message)
-                   
-                   
+                    console.log(data.message)
                 }
                 
             }).catch(error => {
@@ -196,6 +199,14 @@ const Profile = ({user}) => {
         }
         console.log(staffData)
         createStaff(`${BASE_URL}${CREATE_STAFF}`,staffData,setStaffList,setIsLoadingGetStaff)
+    }
+
+    const handleDeleteStaff = (staffId) => {
+        setIsLoadingDeleteStaff(true)
+        setDeleteStaffId(staffId)
+        console.log(staffId)
+        deleteStaff(`${BASE_URL}${DELETE_STAFF}?staffId=${staffId}&companyId=${user.userId}`,setStaffList,setIsLoadingDeleteStaff)
+
     }
 
     return (
@@ -370,9 +381,29 @@ const Profile = ({user}) => {
                                                 name="suspend"
                                                 color="primary"
                                             />
-                                            <IconButton edge="end" aria-label="delete">
-                                                <DeleteIcon />
+                                            <IconButton edge="end" aria-label="delete"
+                                             disabled={isLoadingDeleteStaff && DeleteStaffId === stf.staffId}
+                                             onClick={()=>handleDeleteStaff(stf.staffId)}
+                                             >
+                                                <DeleteIcon  />
                                             </IconButton>
+                                            {(isLoadingDeleteStaff && DeleteStaffId === stf.staffId) && <CircularProgress
+                                                size={35}
+                                                sx={{
+                                                color: green[500],
+                                                position: 'absolute',
+                                                top: '0.2rem',
+                                                left: '3.7rem',
+                                                zIndex: 1,
+                                                '@media (max-width: 600px)': {
+                                                left: '3.8rem',
+                                                top: '5.1rem',
+
+                                                
+                                                    
+                                                },
+                                                }}
+                                            /> }
                                         </Box>
                                         
                                     }

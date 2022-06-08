@@ -137,9 +137,48 @@ const useCrud = () => {
             })
       
     }
+
+    const deleteStaff = (url,setStaffList,setIsLoadingDeleteStaff) => {
+
+
+        fetch(url,{
+        method: 'PUT',
+        headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            if(response.ok == false) {
+                setIsLoadingDeleteStaff(false)
+                throw Error(msgImage)
+            }
+            else return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            setIsLoadingDeleteStaff(false)
+
+
+            if(data.success){
+             setStaffList(data.message)
+            } 
+            else {
+                setErrorMsg(msgImage)
+                setShowError(true)
+                setIsLoadingDeleteStaff(false)
+
+            }
+
+            }).catch(error => {
+                setErrorMsg(msgImage)
+                setShowError(true)
+                setIsLoadingDeleteStaff(false)
+
+                console.error('Error:', error);
+            })
+      
+    }
  
 
-    return {showError,errorMsg,setProfilePic,updateProfileRequest,createStaff}
+    return {showError,errorMsg,setProfilePic,updateProfileRequest,createStaff,deleteStaff}
 }  
 
   
