@@ -7,7 +7,7 @@ const useCrud = () => {
     
     const setProfilePic = (url,pic,setData,setIsLoading) => {
 
-        console.log(pic)
+        // console.log(pic)
         const file = new FormData()
         file.append('profile_pic', pic)
         setIsLoading(true)
@@ -26,7 +26,7 @@ const useCrud = () => {
             else return response.json()
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setIsLoading(false)
 
 
@@ -52,7 +52,7 @@ const useCrud = () => {
 
     const updateProfileRequest = (url,profileData,setData,setIsLoadingEdit) => {
 
-        console.log(profileData)
+        // console.log(profileData)
        
         setIsLoadingEdit(true)
    
@@ -70,7 +70,7 @@ const useCrud = () => {
             else return response.json()
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setIsLoadingEdit(false)
 
 
@@ -96,7 +96,7 @@ const useCrud = () => {
 
     const createStaff = (url,staffData,setStaffList,setIsLoadingGetStaff) => {
 
-        console.log(staffData)
+        // console.log(staffData)
        
         setIsLoadingGetStaff(true)
    
@@ -114,12 +114,12 @@ const useCrud = () => {
             else return response.json()
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setIsLoadingGetStaff(false)
 
 
             if(data.success){
-             setStaffList(data.message.staff)
+             setStaffList(data.message)
             } 
             else {
                 setErrorMsg(msgImage)
@@ -153,7 +153,7 @@ const useCrud = () => {
             else return response.json()
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setIsLoadingDeleteStaff(false)
 
 
@@ -176,9 +176,50 @@ const useCrud = () => {
             })
       
     }
+
+    const suspendStaff = (url,staffData,setStaffList,setIsLoadingSuspendStaff) => {
+
+        console.log(staffData)
+        fetch(url,{
+        method: 'PUT',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(staffData)
+        })
+        .then(response => {
+            if(response.ok == false) {
+                setIsLoadingSuspendStaff(false)
+                throw Error(msgImage)
+            }
+            else return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            setIsLoadingSuspendStaff(false)
+
+
+            if(data.success){
+             setStaffList(data.message)
+            } 
+            else {
+                setErrorMsg(msgImage)
+                setShowError(true)
+                setIsLoadingSuspendStaff(false)
+
+            }
+
+            }).catch(error => {
+                setErrorMsg(msgImage)
+                setShowError(true)
+                setIsLoadingSuspendStaff(false)
+
+                console.error('Error:', error);
+            })
+      
+    }
+
  
 
-    return {showError,errorMsg,setProfilePic,updateProfileRequest,createStaff,deleteStaff}
+    return {showError,errorMsg,setProfilePic,updateProfileRequest,createStaff,deleteStaff,suspendStaff}
 }  
 
   

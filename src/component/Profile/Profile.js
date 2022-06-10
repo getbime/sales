@@ -22,6 +22,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
+import Confirmation from './Confirmation'
 
 
 
@@ -49,6 +50,7 @@ const Profile = ({user}) => {
     const EDIT_COMPANY = process.env.REACT_APP_EDIT_COMPANY;
     const EDIT_STAFF = process.env.REACT_APP_EDIT_STAFF;
     const CREATE_STAFF = process.env.REACT_APP_CREATE_STAFF;
+    const SUSPEND_STAFF = process.env.REACT_APP_SUSPEND_STAFF
 
 
 
@@ -61,9 +63,11 @@ const Profile = ({user}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [isLoadingEdit, setIsLoadingEdit] = useState(true)
     const [isLoadingDeleteStaff, setIsLoadingDeleteStaff] = useState(false)
+    const [isLoadingSuspendStaff, setIsLoadingSuspendStaff] = useState(false)
     const [DeleteStaffId, setDeleteStaffId] = useState('')
-
-
+    const [suspendStaffId, setSuspendStaffId] = useState('')
+    const [openConfirmation, setOpenConfirmation] = useState(false)
+    const [confirmData, setConfirmData] = useState('')
 
     const [isLoadingGetStaff, setIsLoadingGetStaff] = useState(true)
 
@@ -77,18 +81,13 @@ const Profile = ({user}) => {
     const [createStaffName,setCreateStaffName] = useState('')
     const [createStaffEmail,setCreateStaffEmail] = useState('')
     const [createStaffPhone,setCreateStaffPhone] = useState('')
-    const {showError: imageShowError,errorMsg: imageError,setProfilePic,updateProfileRequest,createStaff,deleteStaff} = useCrud()
-
-
-    const [swt, setSwt] = useState(true);
-    
+    const {showError: imageShowError,errorMsg: imageError,setProfilePic,updateProfileRequest,createStaff,deleteStaff,suspendStaff} = useCrud()
 
 
 
 
     useEffect(()=>{
         if (user.userType === 'company'){
-            console.log('hello')
 
             fetch(`${BASE_URL}${SINGLE_COMPANY}?username=${user.userId}`)
             .then(res => res.json())
@@ -97,7 +96,7 @@ const Profile = ({user}) => {
                     setIsLoading(false)
                     setIsLoadingEdit(false)
                     setData({...data.message})
-                    console.log(data)
+                    // console.log(data)
                     setCompanyName(data.message.companyName)
                     setPhone(data.message.phone)
                     setAddress(data.message.address)
@@ -202,11 +201,33 @@ const Profile = ({user}) => {
     }
 
     const handleDeleteStaff = (staffId) => {
-        setIsLoadingDeleteStaff(true)
+        setConfirmData({
+            header: 'Staff',
+            content: staffId,
+            status: 'Delete',
+            url: ()=>{
+                setIsLoadingDeleteStaff(true)
+                deleteStaff(`${BASE_URL}${DELETE_STAFF}?staffId=${staffId}&companyId=${user.userId}`,setStaffList,setIsLoadingDeleteStaff)
+            }
+        })
+        setOpenConfirmation(true)
         setDeleteStaffId(staffId)
-        console.log(staffId)
-        deleteStaff(`${BASE_URL}${DELETE_STAFF}?staffId=${staffId}&companyId=${user.userId}`,setStaffList,setIsLoadingDeleteStaff)
 
+    }
+
+    const handleSuspendStaff = (staffId,state) => {
+        setConfirmData({
+            header: 'Staff',
+            content: staffId,
+            status: 'Suspend',
+            url: ()=>{
+                setIsLoadingSuspendStaff(true)
+                suspendStaff(`${BASE_URL}${SUSPEND_STAFF}`,{staffId,susspend:!state},setStaffList,setIsLoadingSuspendStaff)},
+            
+        })
+        setOpenConfirmation(true)
+        setSuspendStaffId(staffId)
+       
     }
 
     return (
@@ -224,6 +245,11 @@ const Profile = ({user}) => {
         }}>
             {/* {!isPendingImage && console.log(imageData,data)} */}
             {/* {!isLoadingGetStaff && console.log(staffList)} */}
+            <Confirmation 
+                openConfirmation={openConfirmation} 
+                setOpenConfirmation={setOpenConfirmation}
+                confirmData={confirmData}
+            />
 
             <Stack flexDirection='column' spacing={8} >
                 <Stack flexDirection='row' spacing={2} justifyContent='space-between' sx={{
@@ -364,7 +390,7 @@ const Profile = ({user}) => {
 
                         },
                     }}>
-                        {!isLoadingGetStaff && staffList.map(stf => (
+                        {(!isLoadingGetStaff && staffList.length > 0) && staffList.map(stf => (
                             <>
                                 <ListItem alignItems="flex-start" sx={{padding:0}}
                                     secondaryAction={
@@ -375,12 +401,33 @@ const Profile = ({user}) => {
 
                                             },
                                             }}>
+                                            {(isLoadingSuspendStaff && suspendStaffId === stf.staffId) ? <CircularProgress
+                                                size={30}
+                                                sx={{
+                                                color: green[500],
+                                                position: 'absolute',
+                                                top: '0.2rem',
+                                                left: '-3rem',
+                                                zIndex: 1,
+                                                '@media (max-width: 600px)': {
+                                                left: '-3rem',
+                                                top: '5.1rem',
+
+                                                
+                                                    
+                                                },
+                                                }}
+                                            />  :
                                             <Switch
-                                                checked={swt}
-                                                onChange={() => setSwt(!swt)}
+                                                checked={stf.susspend}
+                                                onChange={() => handleSuspendStaff(stf.staffId, stf.susspend)}
                                                 name="suspend"
                                                 color="primary"
                                             />
+                                            } 
+                                            
+
+
                                             <IconButton edge="end" aria-label="delete"
                                              disabled={isLoadingDeleteStaff && DeleteStaffId === stf.staffId}
                                              onClick={()=>handleDeleteStaff(stf.staffId)}
@@ -432,6 +479,16 @@ const Profile = ({user}) => {
                             </>
                             
                         ))}
+
+                            {(!isLoadingGetStaff && staffList.length === 0) && <Typography sx={{
+                                width: '50%',
+                                color: 'gray',
+                                '@media (max-width: 600px)':{
+                                    width: '100%',
+
+                                }
+
+                            }}>YOU HAVENT CREATE ANY STAFF YET</Typography>}
                         
                         </List>    
                 </Stack>}
