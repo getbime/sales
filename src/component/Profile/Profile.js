@@ -23,6 +23,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
 import Confirmation from './Confirmation'
+import { useNavigate } from 'react-router-dom'
+
 
 
 
@@ -51,7 +53,10 @@ const Profile = ({user}) => {
     const EDIT_STAFF = process.env.REACT_APP_EDIT_STAFF;
     const CREATE_STAFF = process.env.REACT_APP_CREATE_STAFF;
     const SUSPEND_STAFF = process.env.REACT_APP_SUSPEND_STAFF
+    const CHANGE_PASSWORD = process.env.REACT_APP_CHANGE_PASSWORD
 
+
+    const navigate = useNavigate()
 
 
 
@@ -64,12 +69,19 @@ const Profile = ({user}) => {
     const [isLoadingEdit, setIsLoadingEdit] = useState(true)
     const [isLoadingDeleteStaff, setIsLoadingDeleteStaff] = useState(false)
     const [isLoadingSuspendStaff, setIsLoadingSuspendStaff] = useState(false)
+    const [isLoadingChangePassword, setIsLoadingChangePassword] = useState(false)
+    const [isLoadingDeleteAccount, setIsLoadingDeleteAccount] = useState(false)
     const [DeleteStaffId, setDeleteStaffId] = useState('')
     const [suspendStaffId, setSuspendStaffId] = useState('')
     const [openConfirmation, setOpenConfirmation] = useState(false)
     const [confirmData, setConfirmData] = useState('')
 
     const [isLoadingGetStaff, setIsLoadingGetStaff] = useState(true)
+
+    const [oldpassword, setOldpassword] = useState('')
+    const [newpassword, setNewpassword] = useState('')
+    const [confirmNewpassword, setConfirmNewpassword] = useState('')
+
 
     const [companyName,setCompanyName] = useState('')
     const [staffName,setStaffName] = useState('')
@@ -81,7 +93,17 @@ const Profile = ({user}) => {
     const [createStaffName,setCreateStaffName] = useState('')
     const [createStaffEmail,setCreateStaffEmail] = useState('')
     const [createStaffPhone,setCreateStaffPhone] = useState('')
-    const {showError: imageShowError,errorMsg: imageError,setProfilePic,updateProfileRequest,createStaff,deleteStaff,suspendStaff} = useCrud()
+    const {
+        showError: imageShowError,
+        errorMsg: imageError,
+        setProfilePic,
+        updateProfileRequest,
+        createStaff,
+        deleteStaff,
+        suspendStaff,
+        changePassword,
+        deleteAccount
+    } = useCrud()
 
 
 
@@ -116,7 +138,7 @@ const Profile = ({user}) => {
                 if(data.success === true){
                     setIsLoadingGetStaff(false)
                     setStaffList(data.message)
-                    console.log(data.message)
+                    // console.log(data.message)
                 }
                 
             }).catch(error => {
@@ -132,7 +154,7 @@ const Profile = ({user}) => {
                     setIsLoading(false)
                     setIsLoadingEdit(false)
                     setData({...data.message})
-                    console.log(data)
+                    // console.log(data)
                     setStaffName(data.message.staffName)
                     setPhone(data.message.phone)
                     setAddress(data.message.address)
@@ -227,6 +249,34 @@ const Profile = ({user}) => {
         })
         setOpenConfirmation(true)
         setSuspendStaffId(staffId)
+       
+    }
+
+    const handleChangePassword = () => {
+        if(newpassword === confirmNewpassword){
+            setIsLoadingChangePassword(true)
+            console.log({oldpassword,newpassword,confirmNewpassword})
+            changePassword(`${BASE_URL}${CHANGE_PASSWORD}?username=${user.userId}`,{oldpassword,newpassword},setIsLoadingChangePassword)
+            setOldpassword('')
+            setNewpassword('')
+            setConfirmNewpassword('')
+        }else{
+            console.log('password mismatch')
+
+        }
+    }
+
+    const handleDeleteAccount = () => {
+        setConfirmData({
+            header: 'Account',
+            content: user.userId,
+            status: 'Delete',
+            url: ()=>{
+                setIsLoadingDeleteAccount(true)
+                deleteAccount(`${BASE_URL}${DELETE_COMPANY}?companyId=${user.userId}`,setIsLoadingDeleteAccount,navigate)},
+            
+        })
+        setOpenConfirmation(true)
        
     }
 
@@ -514,9 +564,30 @@ const Profile = ({user}) => {
                             height: '10rem'
                            },
                         }}>
-                        <TextField id="outlined-basic" size='small' label='Old Password' variant="outlined"  />
-                        <TextField id="outlined-basic" size='small' label='New Password' variant="outlined"  />
-                        <TextField id="outlined-basic" size='small' label='Confirm New Password' variant="outlined"  />
+                        <TextField
+                            id="outlined-basic" size='small' 
+                            label='Old Password' 
+                            variant="outlined"
+                            value={oldpassword}
+                            onChange = {(e)=>setOldpassword(e.target.value)}
+                        />
+
+                        <TextField 
+                            id="outlined-basic" size='small' 
+                            label='New Password' 
+                            variant="outlined" 
+                            value={newpassword}
+                            onChange = {(e)=>setNewpassword(e.target.value)} 
+                        />
+
+                        <TextField 
+                            id="outlined-basic" 
+                            size='small' 
+                            label='Confirm New Password' 
+                            variant="outlined" 
+                            value={confirmNewpassword}
+                            onChange = {(e)=>setConfirmNewpassword(e.target.value)} 
+                        />
                         <Palette>
                             <Fab aria-label="add" size="medium" color="primary"sx={{
                                 boxShadow: 'none',
@@ -527,9 +598,13 @@ const Profile = ({user}) => {
                                     position: 'absolute'
                                     
                                    },
-                                 }}  >
+                                 }}  
+                                 onClick = {handleChangePassword}
+                                 disabled={isLoadingChangePassword}
+                                 >
 
-                                    <ChangeCircleIcon />
+                                    {!isLoadingChangePassword && <ChangeCircleIcon />}
+                                    {isLoadingChangePassword && <CircularProgress size={35} sx={{color: green[500],}} /> }
                             </Fab>
                         </Palette>
                     </Stack>     
@@ -562,7 +637,9 @@ const Profile = ({user}) => {
                             <Typography fontSize='0.9rem' align="left" sx={{color:'gray', }}>Clicking the button all history of your Account is lost</Typography>
                         
                         </Stack>    
-                        <Button variant="outlined" color='error'>Delete</Button>
+                        {!isLoadingDeleteAccount && <Button variant="outlined" color='error' onClick={handleDeleteAccount}>Delete</Button> }
+                        {isLoadingDeleteAccount && <LoadingButton variant="outlined" color='error' loading >...deleting</LoadingButton>}
+                    
                     </Stack>     
                 </Stack>}
 
