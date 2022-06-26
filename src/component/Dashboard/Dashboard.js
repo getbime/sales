@@ -42,7 +42,22 @@ const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [loggedUser, setLoggedUser] = useState(null)
     const [companyId, setCompanyId] = useState(null)
+    const [alertState, setAlertState] = useState(false)
+    const [alertMsg, setAlertMsg] = useState('')
+    const [alertVariant, setAlertVariant] = useState('success')
 
+
+
+    // toggle alert
+    const toggleAlert = (toggle,msg,variant) => {
+      setAlertState(toggle)
+      setAlertMsg(msg)
+      setAlertVariant(variant)
+      console.log(toggle,msg,variant)
+    }
+
+
+    // fetching logged user
     useEffect(()=>{
       if(user.userId === null || user.userToken === null || user.userType === null) navigate('/login')
 
@@ -76,11 +91,12 @@ const Dashboard = () => {
         })
       }
     },[])
+    // end of fetching logged user
 
     return (
         <div>
 
-             
+           
              <Modal
               open={isLoading}
               onClose={!isLoading}
@@ -102,7 +118,7 @@ const Dashboard = () => {
             <Nav className="nav" loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/> 
 
             { <div className="right-con">
-              <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType}/>
+              <Header setState={setState} state={state} loggedUser={loggedUser} isLoading={isLoading} userType={user.userType} alert={{alertState,setAlertState,alertMsg,alertVariant}} />
 
               <Routes>
                 {user.userType === 'company' && <Route index  element={<Home isLoading={isLoading} companyId={companyId}/>} /> }
@@ -115,7 +131,7 @@ const Dashboard = () => {
                 :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
-                <Route path='profile' element={<Profile user={user}/>}/>
+                <Route path='profile' element={<Profile user={user} toggleAlert={toggleAlert}/>}/>
                 <Route path='summary' element={<Summary companyId={companyId}/>}/>
 
               </Routes>

@@ -26,9 +26,6 @@ import Confirmation from './Confirmation'
 import { useNavigate } from 'react-router-dom'
 
 
-
-
-
 const CustomField = ({labelName, fieldValue, setFieldValue, disable}) => {
     // console.log(fieldValue)
     return (
@@ -41,7 +38,7 @@ const CustomField = ({labelName, fieldValue, setFieldValue, disable}) => {
 }
  
 
-const Profile = ({user}) => {
+const Profile = ({user,toggleAlert}) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     const SINGLE_STAFF = process.env.REACT_APP_SINGLE_STAFF;
     const SINGLE_COMPANY = process.env.REACT_APP_SINGLE_COMPANY;
@@ -57,10 +54,6 @@ const Profile = ({user}) => {
 
 
     const navigate = useNavigate()
-
-
-
-
 
     const [data,setData] = useState('')
     const [staffList,setStaffList] = useState('')
@@ -93,9 +86,25 @@ const Profile = ({user}) => {
     const [createStaffName,setCreateStaffName] = useState('')
     const [createStaffEmail,setCreateStaffEmail] = useState('')
     const [createStaffPhone,setCreateStaffPhone] = useState('')
+
+    // use state errors
+    const [picError, setPicError] = useState('')
+    const [profileError, setProfileError] = useState('')
+    const [addStaffError, setAddStaffError] = useState('')
+    const [deleteStaffError, setDeleteStaffError] = useState('')
+    const [changePasswordError, setChangePasswordError] = useState('')
+    // end state errors
+
+     // use state errors flag
+     const [picErrorFlag, setPicErrorFlag] = useState({err:false,succ:false})
+     const [profileErrorFlag, setProfileErrorFlag] = useState({err:false,succ:false})
+     const [addStaffErrorFlag, setAddStaffErrorFlag] = useState({err:false,succ:false})
+     const [deleteStaffErrorFlag, setDeleteStaffErrorFlag] = useState({err:false,succ:false})
+     const [changePasswordErrorFlag, setChangePasswordErrorFlag] = useState({err:false,succ:false})
+     // end state errors flag
+
+// calling functions from crud file
     const {
-        showError: imageShowError,
-        errorMsg: imageError,
         setProfilePic,
         updateProfileRequest,
         createStaff,
@@ -104,11 +113,13 @@ const Profile = ({user}) => {
         changePassword,
         deleteAccount
     } = useCrud()
+// end calling functions from crud file
 
 
 
 
     useEffect(()=>{
+        // this code fetch in the login user or company
         if (user.userType === 'company'){
 
             fetch(`${BASE_URL}${SINGLE_COMPANY}?username=${user.userId}`)
@@ -171,19 +182,28 @@ const Profile = ({user}) => {
 
       
     },[])  
-    const uploadPic = (pic) =>{
+    // the end of fetching a logged in user or company
+
+    // uploading profile pic
+    const uploadPic = async (pic) =>{
         if (user.userType === 'company'){
-            setProfilePic(`${BASE_URL}${SET_PROFILE_PIC}?companyId=${user.userId}&eventName=company`,
-            pic,setData,setIsLoading)
+            //set profile pic is function from useCrude file
+            await setProfilePic(`${BASE_URL}${SET_PROFILE_PIC}?companyId=${user.userId}&eventName=company`,
+            pic,setData,setIsLoading,setPicErrorFlag,setPicError)
+            !isLoading && toggleAlert(picErrorFlag.err,picError,'error')
            
         }
         else {
-            setProfilePic(`${BASE_URL}${SET_PROFILE_PIC}?staffId=${user.userId}&eventName=staff`,pic,setData,setIsLoading)
-            // console.log(isPendingImage,imageData,imageShowError,imageError)
+            //set profile pic is function from useCrude file
+            await setProfilePic(`${BASE_URL}${SET_PROFILE_PIC}?staffId=${user.userId}&eventName=staff`,pic,setData,setIsLoading,setPicErrorFlag,setPicError)
+            !isLoading && toggleAlert(picErrorFlag.err,picError,'error')
+
         }
     }
+    // end of pro   file pic
 
-    const updateProfile = () => {
+    // update profile detail
+    const updateProfile = async () => {
         if (user.userType === 'company'){
 
             const data = {
@@ -192,8 +212,10 @@ const Profile = ({user}) => {
                  phone,
                  email
              }
-             updateProfileRequest(`${BASE_URL}${EDIT_COMPANY}?username=${user.userId}`,data,setData,setIsLoadingEdit)
-            console.log(data)
+            await updateProfileRequest(`${BASE_URL}${EDIT_COMPANY}?username=${user.userId}`,data,setData,setIsLoadingEdit,setProfileErrorFlag,setProfileError)
+            if(!isLoadingEdit && profileErrorFlag.err)  toggleAlert(profileErrorFlag.err,profileError,'error')
+            else if(!isLoadingEdit && profileErrorFlag.succ)  toggleAlert(profileErrorFlag.succ,profileError,'success')
+
 
         }else{
 
@@ -203,14 +225,16 @@ const Profile = ({user}) => {
             phone,
             email
             }
-            updateProfileRequest(`${BASE_URL}${EDIT_STAFF}?staffId=${user.userId}`,data,setData,setIsLoadingEdit)
-
-            console.log(data)
+            await updateProfileRequest(`${BASE_URL}${EDIT_STAFF}?staffId=${user.userId}`,data,setData,setIsLoadingEdit,setProfileErrorFlag,setProfileError)
+            if(!isLoadingEdit && profileErrorFlag.err) toggleAlert(profileErrorFlag.err,profileError,'error')
+            else if(!isLoadingEdit && profileErrorFlag.succ) toggleAlert(profileErrorFlag.succ,profileError,'success')
         }
 
     }
+    //end of updating profile
 
-    const handleCreateStaff = () => {
+    // creating staff
+    const handleCreateStaff = async() => {
         const staffData = {
             companyName: data.companyName,
             companyId: user.userId,
@@ -219,23 +243,36 @@ const Profile = ({user}) => {
             phone: createStaffPhone
         }
         console.log(staffData)
-        createStaff(`${BASE_URL}${CREATE_STAFF}`,staffData,setStaffList,setIsLoadingGetStaff)
+        await createStaff(`${BASE_URL}${CREATE_STAFF}`,staffData,setStaffList,setIsLoadingGetStaff,setAddStaffErrorFlag,setAddStaffError)
+        if(!isLoadingGetStaff && addStaffErrorFlag.err) toggleAlert(addStaffErrorFlag.err,addStaffError,'error')
+        else if(!isLoadingGetStaff && addStaffErrorFlag.succ) toggleAlert(addStaffErrorFlag.succ,addStaffError,'success')
+    
+        //reset field data
+        setStaffName('')
+        setEmail('')
+        setPhone('')
     }
+    // end of creating staff
 
+
+    // delete company staff
     const handleDeleteStaff = (staffId) => {
         setConfirmData({
             header: 'Staff',
             content: staffId,
             status: 'Delete',
-            url: ()=>{
+            url: async ()=>{
                 setIsLoadingDeleteStaff(true)
-                deleteStaff(`${BASE_URL}${DELETE_STAFF}?staffId=${staffId}&companyId=${user.userId}`,setStaffList,setIsLoadingDeleteStaff)
+                await deleteStaff(`${BASE_URL}${DELETE_STAFF}?staffId=${staffId}&companyId=${user.userId}`,setStaffList,setIsLoadingDeleteStaff,setDeleteStaffErrorFlag,setDeleteStaffError)
+                if(!isLoadingDeleteStaff && deleteStaffErrorFlag.err) toggleAlert(deleteStaffErrorFlag.err,deleteStaffError,'error')
+                else if(!isLoadingDeleteStaff && deleteStaffErrorFlag.succ) toggleAlert(deleteStaffErrorFlag.succ,deleteStaffError,'success')
             }
         })
         setOpenConfirmation(true)
         setDeleteStaffId(staffId)
 
     }
+    // end of delete company staff
 
     const handleSuspendStaff = (staffId,state) => {
         setConfirmData({
@@ -252,11 +289,18 @@ const Profile = ({user}) => {
        
     }
 
-    const handleChangePassword = () => {
+    // change staff password
+    const handleChangePassword = async () => {
         if(newpassword === confirmNewpassword){
             setIsLoadingChangePassword(true)
             console.log({oldpassword,newpassword,confirmNewpassword})
-            changePassword(`${BASE_URL}${CHANGE_PASSWORD}?username=${user.userId}`,{oldpassword,newpassword},setIsLoadingChangePassword)
+            await changePassword(`${BASE_URL}${CHANGE_PASSWORD}?username=${user.userId}`,{oldpassword,newpassword},setIsLoadingChangePassword,setChangePasswordErrorFlag,setChangePasswordError)
+            
+            if(!isLoadingChangePassword && changePasswordErrorFlag.err) toggleAlert(changePasswordErrorFlag.err,changePasswordError,'error')
+            else if(!isLoadingChangePassword && changePasswordErrorFlag.succ) toggleAlert(changePasswordErrorFlag.succ,changePasswordError,'success')
+
+
+            // clear field
             setOldpassword('')
             setNewpassword('')
             setConfirmNewpassword('')
@@ -265,6 +309,7 @@ const Profile = ({user}) => {
 
         }
     }
+    // end of change password
 
     const handleDeleteAccount = () => {
         setConfirmData({
@@ -295,11 +340,17 @@ const Profile = ({user}) => {
         }}>
             {/* {!isPendingImage && console.log(imageData,data)} */}
             {/* {!isLoadingGetStaff && console.log(staffList)} */}
+
+            {/* confirmation propmt box */}
             <Confirmation 
                 openConfirmation={openConfirmation} 
                 setOpenConfirmation={setOpenConfirmation}
                 confirmData={confirmData}
             />
+            {/* end of prompt confirmation box */}
+
+            
+
 
             <Stack flexDirection='column' spacing={8} >
                 <Stack flexDirection='row' spacing={2} justifyContent='space-between' sx={{

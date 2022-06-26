@@ -3,57 +3,64 @@ import {useState, useEffect} from 'react'
 const useCrud = () => {
     const [errorMsg ,setErrorMsg] = useState('')
     const [showError ,setShowError] = useState(false)
-    const msgImage ='image upload error'
+    const msgImage ='Something went wrong try again'
     
-    const setProfilePic = (url,pic,setData,setIsLoading) => {
-
+    // setting profile pic in profile.js file
+    const setProfilePic = (url,pic,setData,setIsLoading,setPicErrorFlag,setPicError) => {
         // console.log(pic)
         const file = new FormData()
         file.append('profile_pic', pic)
         setIsLoading(true)
-   
-
-        fetch(url,{
-        method: 'PUT',
-        // headers: {"Content-Type": "application/json"},
-        body: file
-        })
-        .then(response => {
-            if(response.ok == false) {
-                setIsLoading(false)
-                throw Error(msgImage)
-            }
-            else return response.json()
-        })
-        .then(data => {
-            // console.log(data);
-            setIsLoading(false)
-
-
-            if(data.success){
-             setData({...data.message})
-            } 
-            else {
-                setErrorMsg(msgImage)
-                setShowError(true)
-                setIsLoading(false)
-
-            }
-
-            }).catch(error => {
-                setErrorMsg(msgImage)
-                setShowError(true)
-                setIsLoading(false)
-
-                console.error('Error:', error);
+            
+            fetch(url,{
+            method: 'PUT',
+            // headers: {"Content-Type": "application/json"},
+            body: file
             })
+            .then(response => {
+                console.log(response)
+                if(response.ok === false) {
+                    setIsLoading(false)
+                    setPicError(msgImage)
+                    setPicErrorFlag({err:true, succ:false})
+                    throw Error(msgImage)
+                }
+                else return response.json()
+            })
+            .then(data => {
+                // console.log(data);
+                setIsLoading(false)
+    
+    
+                if(data.success){
+                 setData({...data.message})
+                 
+                } 
+                else {
+                    setErrorMsg(msgImage)
+                    setIsLoading(false)
+                    setPicError('Please your image size should not be more than 10mb')
+                    setPicErrorFlag({err:true, succ:false})
+
+                }
+    
+                }).catch(error => {
+                    setPicError(msgImage)
+                    setPicErrorFlag({err:true, succ:false})
+                    setShowError(true)
+                    setIsLoading(false)
+    
+                    console.error('Error:', error);
+                })
+       
       
     }
+    // end of setting profile pic
 
-    const updateProfileRequest = (url,profileData,setData,setIsLoadingEdit) => {
 
-        // console.log(profileData)
-       
+    // update user profile
+    const updateProfileRequest = (url,profileData,setData,setIsLoadingEdit,setProfileErrorFlag,setProfileError) => {
+
         setIsLoadingEdit(true)
    
 
@@ -63,8 +70,10 @@ const useCrud = () => {
         body: JSON.stringify(profileData)
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingEdit(false)
+                setProfileError(msgImage)
+                setProfileErrorFlag({err:true,succ:false})
                 throw Error(msgImage)
             }
             else return response.json()
@@ -75,18 +84,20 @@ const useCrud = () => {
 
 
             if(data.success){
-             setData({...data.message})
+                setData({...data.message})
+                setProfileError('Profile updated')
+                setProfileErrorFlag({err:false,succ:true})
             } 
             else {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setProfileError(msgImage)
+                setProfileErrorFlag({err:true,succ:false})
                 setIsLoadingEdit(false)
 
             }
 
             }).catch(error => {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setProfileError(msgImage)
+                setProfileErrorFlag({err:true,succ:false})
                 setIsLoadingEdit(false)
 
                 console.error('Error:', error);
@@ -94,7 +105,7 @@ const useCrud = () => {
       
     }
 
-    const createStaff = (url,staffData,setStaffList,setIsLoadingGetStaff) => {
+    const createStaff = (url,staffData,setStaffList,setIsLoadingGetStaff,setAddStaffErrorFlag,setAddStaffError) => {
 
         // console.log(staffData)
        
@@ -107,8 +118,10 @@ const useCrud = () => {
         body: JSON.stringify(staffData)
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingGetStaff(false)
+                setAddStaffError(msgImage)
+                setAddStaffErrorFlag({err:true,succ:false})
                 throw Error(msgImage)
             }
             else return response.json()
@@ -120,17 +133,19 @@ const useCrud = () => {
 
             if(data.success){
              setStaffList(data.message)
+             setAddStaffError('Staff created')
+             setAddStaffErrorFlag({err:false,succ:true})
             } 
             else {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setAddStaffError(msgImage)
+                setAddStaffErrorFlag({err:true,succ:false})
                 setIsLoadingGetStaff(false)
 
             }
 
             }).catch(error => {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setAddStaffError(msgImage)
+                setAddStaffErrorFlag({err:true,succ:false})
                 setIsLoadingGetStaff(false)
 
                 console.error('Error:', error);
@@ -138,7 +153,7 @@ const useCrud = () => {
       
     }
 
-    const deleteStaff = (url,setStaffList,setIsLoadingDeleteStaff) => {
+    const deleteStaff = (url,setStaffList,setIsLoadingDeleteStaff,setDeleteStaffErrorFlag,setDeleteStaffError) => {
 
 
         fetch(url,{
@@ -146,8 +161,10 @@ const useCrud = () => {
         headers: {"Content-Type": "application/json"},
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingDeleteStaff(false)
+                setDeleteStaffError(msgImage)
+                setDeleteStaffErrorFlag({err:true,succ:false})
                 throw Error(msgImage)
             }
             else return response.json()
@@ -159,17 +176,19 @@ const useCrud = () => {
 
             if(data.success){
              setStaffList(data.message)
+             setDeleteStaffError('Staff deleted')
+             setDeleteStaffErrorFlag({err:false,succ:true})
             } 
             else {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setDeleteStaffError(msgImage)
+                setDeleteStaffErrorFlag({err:true,succ:false})
                 setIsLoadingDeleteStaff(false)
 
             }
 
             }).catch(error => {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setDeleteStaffError(msgImage)
+                setDeleteStaffErrorFlag({err:true,succ:false})
                 setIsLoadingDeleteStaff(false)
 
                 console.error('Error:', error);
@@ -218,7 +237,7 @@ const useCrud = () => {
     }
 
 
-    const changePassword = (url,staffData,setIsLoadingChangePassword) => {
+    const changePassword = (url,staffData,setIsLoadingChangePassword,setChangePasswordErrorFlag,setChangePasswordError) => {
 
         // console.log(staffData)
         fetch(url,{
@@ -227,8 +246,10 @@ const useCrud = () => {
         body: JSON.stringify(staffData)
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingChangePassword(false)
+                setChangePasswordError(msgImage)
+                setChangePasswordErrorFlag({err:true,succ:false})
                 throw Error(msgImage)
             }
             else return response.json()
@@ -239,18 +260,20 @@ const useCrud = () => {
 
 
             if(data.success){
-             console.log(data.message)
+                console.log(data.message)
+                setChangePasswordError("Password Changed")
+                setChangePasswordErrorFlag({err:false,succ:true})
             } 
             else {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setChangePasswordError(msgImage)
+                setChangePasswordErrorFlag({err:true,succ:false})
                 setIsLoadingChangePassword(false)
 
             }
 
             }).catch(error => {
-                setErrorMsg(msgImage)
-                setShowError(true)
+                setChangePasswordError(msgImage)
+                setChangePasswordErrorFlag({err:true,succ:false})
                 setIsLoadingChangePassword(false)
 
                 console.error('Error:', error);
@@ -266,14 +289,14 @@ const useCrud = () => {
         headers: {"Content-Type": "application/json"},
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingDeleteAccount(false)
                 throw Error(msgImage)
             }
             else return response.json()
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             setIsLoadingDeleteAccount(false)
 
 

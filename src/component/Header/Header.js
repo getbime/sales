@@ -4,6 +4,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Notifier from '../shared/notifier';
 
 
 
@@ -38,7 +39,7 @@ function stringAvatar(name) {
     };
   }
 
-const Header = ({setState,state,loggedUser,isLoading,userType}) => {
+const Header = ({setState,state,loggedUser,isLoading,userType,alert}) => {
     const handleClick = (anchor, open) =>{
       setState({ ...state, [anchor]: open });
     }
@@ -47,6 +48,10 @@ const Header = ({setState,state,loggedUser,isLoading,userType}) => {
       style. justifyContent = 'flex-end'
     }
     return (
+      <>
+            {/* Alert or Notifier box */}
+            <Notifier msg={"hello"} alert={alert}/>
+            {/* end Alert or Notifier box */}
             <Box sx={{
               width: '94%',
               marginTop: '2rem',
@@ -71,6 +76,7 @@ const Header = ({setState,state,loggedUser,isLoading,userType}) => {
                 
               },
             }}>
+             
               <div className="toggle">
                 <ToggleButton value="list" aria-label="list" sx={{border: 'none'}} onClick={()=>handleClick('left',true)}>
                   <ViewListIcon />
@@ -96,6 +102,7 @@ const Header = ({setState,state,loggedUser,isLoading,userType}) => {
                 
               {!isLoading && <Avatar {...stringAvatar(loggedUser.companyName)} /> }
             </Box>
+      </>
 
     );
 }
