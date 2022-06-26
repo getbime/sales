@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 const FormContainer = ({children}) => {
     return (
         <Box sx={{
-            border: '1px solid #D0D5DA',
-            borderRadius: 1,
+            border: '1px solid #8CA1F0',
+            borderRadius: 2,
             width: '30%',
             margin: 'auto',
+            paddingTop: 0.3,
             backgroundColor: 'white',
             '@media (max-width: 600px)': {
                 width: '90%',

@@ -15,8 +15,10 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useNavigate } from 'react-router-dom'
-import BackgroundBox from '../shared/BackgroundBox';
 import FormContainer from '../shared/FormContainer';
+import Image2 from '../../images/bimelogo-removebg-preview.png'
+import Footer from '../Footer/Footer';
+import Divider from '@mui/material/Divider';
 
 
 import Box from '@mui/material/Box';
@@ -74,6 +76,8 @@ const Login = () => {
     const [errorMsg, setErrorMsg] = React.useState('')
     const loginFailedMsg = 'Login failed please try again!!'
     const userNotFoundMsg = 'ID or Password is incorrect'
+
+         
   
     const handleLogin = () => {
         setIsPending(true)
@@ -231,30 +235,36 @@ const Login = () => {
                 Login Successfull
             </Alert>
             }
-            <Box sx={{
-            width: '90%',
-            // backgroundColor: '#f7faff',
-            margin: 'auto',
-            paddingTop: '2rem',
-            paddingBottom: '2rem',
-            '@media (max-width: 600px)': {
-                paddingTop: 0,
-                borderRadius: 2,
-                paddingBottom: '1rem',
-
-              },
-
-
-        }}>
-                <Stack direction="row" sx={{
+            
+                <Stack direction="column" alignItems='center' gap={3} sx={{
                     '@media (max-width: 600px)': {
-                        flexDirection: 'column'
+                        gap: 5
                     },
                 }}>
 
-                    <BackgroundBox>Login</BackgroundBox>
+                    <Box sx={{
+                                width: '10%',
+                                height: '20vh',
+                                backgroundSize: '100% 100%',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundImage: `url(${Image2})`,
+                                // marginTop: '7rem',
+                                '@media (max-width: 600px)': {
+                                    width: '30%',
+                                    marginTop: '2rem'
+
+
+
+                                },
+                                
+                            }}>
+                        </Box>
+
                     <FormContainer>
-                        <p>Log In</p>
+                        <Typography color="#3456d1" variant="h6">
+                            Log In
+                        </Typography>
                         <Stack spacing={2} direction="column" sx={{
                             padding: '2rem'
                         }}>
@@ -319,9 +329,10 @@ const Login = () => {
                             </Palette>
                         </Stack>
                     </FormContainer>
-
+                   
+                    <Footer />
                 </Stack>
-            </Box>
+            
         </Box>
        
     );
