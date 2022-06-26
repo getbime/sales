@@ -19,7 +19,7 @@ const Notify = ({alert}) => {
                     marginLeft: '30rem',
                     marginTop: '2rem',
                     width: '30%',
-                    height: '3.9rem',
+                    minHeight: '3.9rem',
                     '@media (max-width: 600px)': {
                         width: '60%',
                         margin: 'auto',

@@ -305,8 +305,12 @@ const Profile = ({user,toggleAlert}) => {
             setNewpassword('')
             setConfirmNewpassword('')
         }else{
-            console.log('password mismatch')
-
+            toggleAlert(true,'New password and Confirm password mismatch','error')
+            
+            // clear field
+            setOldpassword('')
+            setNewpassword('')
+            setConfirmNewpassword('')
         }
     }
     // end of change password

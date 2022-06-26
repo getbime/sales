@@ -205,7 +205,7 @@ const useCrud = () => {
         body: JSON.stringify(staffData)
         })
         .then(response => {
-            if(response.ok == false) {
+            if(response.ok === false) {
                 setIsLoadingSuspendStaff(false)
                 throw Error(msgImage)
             }
@@ -265,7 +265,7 @@ const useCrud = () => {
                 setChangePasswordErrorFlag({err:false,succ:true})
             } 
             else {
-                setChangePasswordError(msgImage)
+                setChangePasswordError(data.message)
                 setChangePasswordErrorFlag({err:true,succ:false})
                 setIsLoadingChangePassword(false)
 
