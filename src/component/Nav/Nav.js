@@ -8,14 +8,11 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import DetailsIcon from '@mui/icons-material/Details';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import PasswordIcon from '@mui/icons-material/Password';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-
+import BimeNavLogo from '../shared/BimeNavLogo';
 
 const Nav = ({loggedUser,isLoading,userType}) => {
     const style = {textDecoration: 'none', color: 'black'}
@@ -91,43 +88,12 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                             </ListItem>
                         </Link>
 
-{/*                         
-                        <Link to='/dashboard/forget-password' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <PasswordIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Password" />
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
 
-                        <Link to='/dashboard/register' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <AppRegistrationIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Register" />
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
-
-                        <Link to='/dashboard/login' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <LoginIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Login" />
-                                </ListItemButton>
-                            </ListItem>
-                        </Link> */}
                     </List>
                    
             </nav>
             </Box>
+            <BimeNavLogo />
             
         </div>
     );

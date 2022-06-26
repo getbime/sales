@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Notify = ({alert}) => {
-    console.log(alert)
+    // console.log(alert)
     setTimeout(() => {
         alert.setAlertState(false)
     }, 10000);

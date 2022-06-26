@@ -9,12 +9,10 @@ import Label from '../Label/Label'
 import HomeIcon from '@mui/icons-material/Home';
 import DetailsIcon from '@mui/icons-material/Details';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import PasswordIcon from '@mui/icons-material/Password';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import LoginIcon from '@mui/icons-material/Login';
 import ListItemButton from '@mui/material/ListItemButton';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import BimeNavLogo from '../shared/BimeNavLogo';
 
 import { Link } from "react-router-dom";
 
@@ -108,39 +106,10 @@ const style = {textDecoration: 'none', color: 'black'}
             </Link>
 
             
-            {/* <Link to='/dashboard/forget-password' style={{...style}}>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <PasswordIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Password" />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
-
-            <Link to='/dashboard/register' style={{...style}}>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AppRegistrationIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Register" />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
-
-            <Link to='/dashboard/login' style={{...style}}>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <LoginIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Login" />
-                    </ListItemButton>
-                </ListItem>
-            </Link> */}
+            
       </List>
+
+      <BimeNavLogo />
     </Box>
   );
 

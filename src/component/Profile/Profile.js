@@ -248,9 +248,9 @@ const Profile = ({user,toggleAlert}) => {
         else if(!isLoadingGetStaff && addStaffErrorFlag.succ) toggleAlert(addStaffErrorFlag.succ,addStaffError,'success')
     
         //reset field data
-        setStaffName('')
-        setEmail('')
-        setPhone('')
+        setCreateStaffName('')
+        setCreateStaffEmail('')
+        setCreateStaffPhone('')
     }
     // end of creating staff
 
