@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom'
 import FormContainer from '../shared/FormContainer';
 import Image2 from '../../images/bimelogo-removebg-preview.png'
 import Footer from '../Footer/Footer';
-import Divider from '@mui/material/Divider';
 
 
 import Box from '@mui/material/Box';
@@ -243,7 +242,7 @@ const Login = () => {
                 }}>
 
                     <Box sx={{
-                                width: '10%',
+                                width: '12%',
                                 height: '20vh',
                                 backgroundSize: '100% 100%',
                                 backgroundPosition: 'center',

@@ -10,8 +10,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import BackgroundBox from '../shared/BackgroundBox';
 import FormContainer from '../shared/FormContainer';
+import Image2 from '../../images/bimelogo-removebg-preview.png'
+
 
 
 // import FormHelperText from '@mui/material/FormHelperText';
@@ -132,30 +133,46 @@ const Registration = () => {
                 Registration successfull please do login
             </Alert>
             }
-            <Box sx={{
-            width: '90%',
-            // backgroundColor: '#f7faff',
-            margin: 'auto',
-            paddingTop: '2rem',
-            paddingBottom: '2rem',
-            '@media (max-width: 600px)': {
-                paddingTop: 0,
-                borderRadius: 2,
-                paddingBottom: '1rem',
-
-              },
-
-
-        }}>     
-                <Stack direction="row" sx={{
+                
+                <Stack direction="column" alignItems='center' gap={5} sx={{
                     '@media (max-width: 600px)': {
                         flexDirection: 'column'
                     },
                 }}>
 
-                    <BackgroundBox>Hello</BackgroundBox>
+                    
+                    <Stack direction="row" justifyContent='space-between' alignItems='center' sx={{width: '60%',}}>
+                    <Box sx={{
+                                width: '14%',
+                                height: '16vh',
+                                backgroundSize: '100% 100%',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundImage: `url(${Image2})`,
+                                // marginTop: '7rem',
+                                '@media (max-width: 600px)': {
+                                    width: '30%',
+                                    marginTop: '2rem'
+
+
+
+                                },
+                                
+                            }}>
+                        </Box>
+
+                        <Stack direction="row" alignItems='center'gap={1}>
+                            <Typography>Have an Acount?</Typography>
+                            <Button variant="outlined">Log in</Button>
+                        </Stack>
+                    </Stack>
+
+                    <Typography color="#3456d1" sx={{fontSize:28, width: '35%'}}>
+                     Sign up for free and take your business higher
+                    </Typography>
+
                     <FormContainer>
-                        <p>Register</p>
+                        <Typography color="#3456d1">Register</Typography>
                         <Stack spacing={2} direction="column" sx={{
                             padding: '2rem'
                         }}>
@@ -198,11 +215,11 @@ const Registration = () => {
                             </Palette>
                         </Stack>
                     </FormContainer>
+                    
                         
                         
 
                 </Stack>
-            </Box>
         </Box>
        
     );
