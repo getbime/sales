@@ -178,7 +178,18 @@ const Login = () => {
         }
     }
 
+    // form styling
+    const styling = {
+            
+            width: '30%',
+            margin: 'auto',
+            paddingTop: 0.3,
+            backgroundColor: 'white',
+            '@media (max-width: 600px)': {
+                width: '90%',
 
+            },
+    }
 
     return (
 
@@ -260,7 +271,7 @@ const Login = () => {
                             }}>
                         </Box>
 
-                    <FormContainer>
+                    <FormContainer syle={styling}>
                         <Typography color="#3456d1" variant="h6">
                             Log In
                         </Typography>

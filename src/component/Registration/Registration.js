@@ -12,6 +12,15 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import FormContainer from '../shared/FormContainer';
 import Image2 from '../../images/bimelogo-removebg-preview.png'
+import business1 from '../../images/undraw_business1.svg'
+import imageFree from '../../images/free.svg'
+import imageTrack from '../../images/track.svg'
+import imageControl from '../../images/control.svg'
+import imageDecision from '../../images/decision.svg'
+
+
+import Divider from '@mui/material/Divider'
+import Footer from '../Footer/Footer';
 
 
 
@@ -81,6 +90,31 @@ const Registration = () => {
         }
     }
 
+     // form styling
+     const styling = {
+            
+        width: '26%',
+        position: 'absolute',
+        margin: 'auto',
+        marginLeft: '25rem',
+        paddingTop: 0.3,
+        backgroundColor: 'white',
+        borderRadius: 1,
+        border: 'none',
+        boxShadow: ' -1px 3px 15px #aaaaaa',
+        // mozBoxShadow: '0 0 3px #ccc',
+        // webkitBoxShadow: '0 0 3px #ccc',
+        // boxShadow: '0 0 3px #ccc',
+
+        '@media (max-width: 600px)': {
+            width: '100%',
+            position: 'relative',
+            margin: 0
+
+
+        },
+    }
+
     return (
 
         <Box sx={{
@@ -141,9 +175,16 @@ const Registration = () => {
                 }}>
 
                     
-                    <Stack direction="row" justifyContent='space-between' alignItems='center' sx={{width: '60%',}}>
+                    <Stack direction="row" justifyContent='space-between' alignItems='flex-end' sx={{
+                        width: '60%',
+                        '@media (max-width: 600px)': {
+                            width: '90%',
+                            alignItems: 'center',
+
+                        },
+                        }}>
                     <Box sx={{
-                                width: '14%',
+                                width: '16%',
                                 height: '16vh',
                                 backgroundSize: '100% 100%',
                                 backgroundPosition: 'center',
@@ -152,9 +193,7 @@ const Registration = () => {
                                 // marginTop: '7rem',
                                 '@media (max-width: 600px)': {
                                     width: '30%',
-                                    marginTop: '2rem'
-
-
+                                    // marginTop: '2rem'
 
                                 },
                                 
@@ -162,62 +201,123 @@ const Registration = () => {
                         </Box>
 
                         <Stack direction="row" alignItems='center'gap={1}>
-                            <Typography>Have an Acount?</Typography>
-                            <Button variant="outlined">Log in</Button>
+                            <Typography sx={{'@media (max-width:600px)':{display:'none'}}}>Have an Acount?</Typography>
+                            <Button variant="outlined" 
+                            sx={{'@media (max-width:600px)':{size:'small'}}}
+                            onClick={()=>{navigate("/login",)}}
+                            >
+                                 <Typography sx={{'@media (max-width:600px)':{fontSize:12}}}>Log in</Typography>
+                            </Button>
                         </Stack>
                     </Stack>
 
-                    <Typography color="#3456d1" sx={{fontSize:28, width: '35%'}}>
-                     Sign up for free and take your business higher
-                    </Typography>
+                    <Box sx={{
+                        width: '90%',
+                        padding: 4,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#160445',
+                        borderRadius: 1,
+                        '@media (max-width:600px)':{
+                            width: '100%',
+                            padding: 0,
+                            paddingTop: '2rem',
+                            paddingBottom: '2rem'
 
-                    <FormContainer>
-                        <Typography color="#3456d1">Register</Typography>
-                        <Stack spacing={2} direction="column" sx={{
-                            padding: '2rem'
-                        }}>
+                        }
+                    }}>
 
-                            <TextField id="outlined-basic" size='small' label="Business Name | Oganization" variant="outlined" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} />
-                            <TextField id="outlined-basic" size='small' label="First Name" variant="outlined" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
-                            <TextField id="outlined-basic" size='small' label="Mail" variant="outlined" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-                            <TextField id="outlined-basic" size='small' label="Phone" variant="outlined" value={phone} onChange={(e)=>{setPhone(e.target.value)}}/>
+                        <Typography color="white" sx={{fontSize:28, width: '35%','@media (max-width:600px)':{width:'85%'}}}>
+                        Sign up for free and take your business higher
+                        </Typography>
 
-                            <Palette>
+                        <Stack direction="row" gap={2} justifyContent='space-between'
+                            sx={{
+                                padding: 6,
+                                paddingTop: 2,
+                                width: '56.7%',
+                                borderRadius: 1,
+                                backgroundColor: 'white',
+                                marginTop: 3,
+                                '@media (max-width:600px)':{
+                                    flexDirection: 'column',
+                                    width: '80%',
+                                    padding: 2,
+                                    // paddingTop: 2,
 
-                                {!isPending && <Button variant="contained" onClick={()=>handleRegistration(data)}>Sign Up</Button>}
-                                {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
 
-                            </Palette>
-                            
-                            <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
-                                <Typography sx={{
-                                    '@media (max-width: 600px)': {
-                                        fontSize: 14
-                        
-                                    },
-                                }}
-                                > Have an account?</Typography>
-                                <Palette>
+                                }
 
-                                    <Button variant="text" sx={{
-                                        '@media (max-width: 600px)': {
-                                            fontSize: 14
-                            
-                                        },
-                                    }}
-                                    onClick={()=>   navigate("/login",)}
-                                    >Login</Button>
-                                </Palette>
+                            }}
+                        >
+                            <Box sx={{
+                                width: '50%',
+                                '@media (max-width:600px)':{
+                                    width: '100%',
+                                    
+                                }
 
-                            </Stack>
-                            <Palette>
-                                <Button variant="text">Forget Password?</Button>
-                            </Palette>
+                            }}>
+                                <Stack direction="column" alignItems='flex-start'>
+
+                                   <ImageAndText image={imageFree} textt={"Free account"}/>
+                                   <ImageAndText image={imageControl} textt={"Control your business"}/>
+                                   <ImageAndText image={imageDecision} textt={"Make decisions"}/>
+                                   <ImageAndText image={imageTrack} textt={"Track your progress"}/>
+
+                                    
+
+                                </Stack>
+                            </Box>
+                           
+                                <FormContainer style={styling}>
+                                    <Typography color="#3456d1" variant="h6">Register</Typography>
+                                    <Stack spacing={2} direction="column" sx={{
+                                        padding: '2rem'
+                                    }}>
+
+                                        <TextField id="outlined-basic" size='small' label="Business Name | Oganization" variant="outlined" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} />
+                                        <TextField id="outlined-basic" size='small' label="First Name" variant="outlined" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
+                                        <TextField id="outlined-basic" size='small' label="Mail" variant="outlined" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                                        <TextField id="outlined-basic" size='small' label="Phone" variant="outlined" value={phone} onChange={(e)=>{setPhone(e.target.value)}}/>
+
+                                        <Palette>
+
+                                            {!isPending && <Button variant="contained" onClick={()=>handleRegistration(data)}>Sign Up</Button>}
+                                            {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
+
+                                        </Palette>
+                                        
+                                        <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
+                                            <Typography sx={{
+                                                '@media (max-width: 600px)': {
+                                                    fontSize: 14
+                                    
+                                                },
+                                            }}
+                                            > Have an account?</Typography>
+                                            <Palette>
+
+                                                <Button variant="text" sx={{
+                                                    '@media (max-width: 600px)': {
+                                                        fontSize: 14
+                                        
+                                                    },
+                                                }}
+                                                onClick={()=>   navigate("/login",)}
+                                                >Login</Button>
+                                            </Palette>
+
+                                        </Stack>
+                                        <Palette>
+                                            <Button variant="text">Forget Password?</Button>
+                                        </Palette>
+                                    </Stack>
+                                </FormContainer>
                         </Stack>
-                    </FormContainer>
-                    
-                        
-                        
+                    </Box>
+                    <Footer />
 
                 </Stack>
         </Box>
@@ -226,3 +326,30 @@ const Registration = () => {
 }
  
 export default Registration;
+
+const ImageAndText = ({image,textt}) => {
+    console.log(textt)
+    return (
+        <Box sx={{
+            width: '60%',
+            height: '14rem',
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'fit',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(${image})`,
+            // marginTop: '7rem',
+            '@media (max-width: 600px)': {
+                width: '90%',
+                marginTop: '2rem'
+
+            },
+            
+        }}>
+        <Typography color='#79a7ed' align="start"
+         sx={{fontSize:24,'@media (max-width: 600px)':{width:'100%', marginTop: '-0.8rem'}}}>
+            {textt}
+        </Typography>
+        </Box>
+    );
+}
+ 
