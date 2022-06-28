@@ -261,11 +261,8 @@ const Login = () => {
                                 backgroundImage: `url(${Image2})`,
                                 // marginTop: '7rem',
                                 '@media (max-width: 600px)': {
-                                    width: '30%',
+                                    width: '35%',
                                     marginTop: '2rem'
-
-
-
                                 },
                                 
                             }}>

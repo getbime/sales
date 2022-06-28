@@ -253,6 +253,7 @@ const Registration = () => {
                         >
                             <Box sx={{
                                 width: '50%',
+                                marginTop: '3rem',
                                 '@media (max-width:600px)':{
                                     width: '100%',
                                     
@@ -331,7 +332,7 @@ const ImageAndText = ({image,textt}) => {
     console.log(textt)
     return (
         <Box sx={{
-            width: '60%',
+            width: '80%',
             height: '14rem',
             backgroundSize: '100% 100%',
             backgroundPosition: 'fit',
@@ -346,7 +347,11 @@ const ImageAndText = ({image,textt}) => {
             
         }}>
         <Typography color='#79a7ed' align="start"
-         sx={{fontSize:24,'@media (max-width: 600px)':{width:'100%', marginTop: '-0.8rem'}}}>
+         sx={{
+             fontSize:24,
+             marginTop: '-0.9rem',
+             '@media (max-width: 600px)':{width:'100%', marginTop: '-0.8rem'}
+             }}>
             {textt}
         </Typography>
         </Box>
