@@ -181,14 +181,24 @@ const Login = () => {
     // form styling
     const styling = {
             
-            width: '30%',
-            margin: 'auto',
-            paddingTop: 0.3,
-            backgroundColor: 'white',
-            '@media (max-width: 600px)': {
-                width: '90%',
+        width: '50%',
+        margin: 'auto',
+        paddingTop: 0.3,
+        backgroundColor: 'white',
+        borderRadius: 1,
+        border: 'none',
+        boxShadow: ' -1px 3px 15px #aaaaaa',
+        // mozBoxShadow: '0 0 3px #ccc',
+        // webkitBoxShadow: '0 0 3px #ccc',
+        // boxShadow: '0 0 3px #ccc',
 
-            },
+        '@media (max-width: 600px)': {
+            width: '100%',
+            position: 'relative',
+            margin: 0
+
+
+        },
     }
 
     return (
@@ -268,76 +278,115 @@ const Login = () => {
                             }}>
                         </Box>
 
-                    <FormContainer syle={styling}>
-                        <Typography color="#3456d1" variant="h6">
-                            Log In
-                        </Typography>
-                        <Stack spacing={2} direction="column" sx={{
-                            padding: '2rem'
-                        }}>
+                        <Box sx={{
+                            width: '30%',
+                            padding: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            backgroundColor: '#160445',
+                            borderRadius: 1,
+                            '@media (max-width:600px)':{
+                                width: '100%',
+                                padding: 0,
+                                paddingTop: '2rem',
+                                paddingBottom: '2rem'
 
-                            <TextField id="outlined-basic" size='small' label="Enter company ID or Staff ID" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
+                            }
+                         }}>
+                            <Box sx={{
+                                padding: 2,
+                                // paddingTop: 2,
+                                width: '90.7%',
+                                borderRadius: 1,
+                                backgroundColor: 'white',
+                                marginTop: 3,
+                                boxShadow: ' -1px 3px 5px #aaaaaa',
 
-                            <FormControl sx={{ m: 1 }} variant="outlined">
-                            <InputLabel size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
-                            <OutlinedInput
-                                size='small'
-                                id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                required={true}
-                                endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                    >
-                                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
+                                '@media (max-width:600px)':{
+                                    flexDirection: 'column',
+                                    width: '80%',
+                                    padding: 2,
+                                    // paddingTop: 2,
+
+
                                 }
-                                label="Password"
-                            />
-                            </FormControl>
 
-                            
-                            <Palette>
-                                {!isPending && <Button variant="contained" onClick={handleLogin}>Log in</Button> }
-                                {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
+                            }}>
 
-                            </Palette>
-                            
-                            <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
-                                <Typography sx={{
-                                    '@media (max-width: 600px)': {
-                                        fontSize: 13
-                        
-                                    },
-                                }}
-                                > Need an account?</Typography>
-                                <Palette>
+                                <FormContainer syle={styling}>
+                                    <Typography color="#3456d1" variant="h6">
+                                        Log In
+                                    </Typography>
+                                    <Stack spacing={2} direction="column" sx={{
+                                        padding: '2rem'
+                                    }}>
 
-                                    <Button variant="text" sx={{
-                                        '@media (max-width: 600px)': {
-                                            fontSize: 13
-                            
-                                        },
-                                    }}
-                                    onClick={()=>   navigate("/",)}
-                                    >Sign Up</Button>
-                                </Palette>
+                                        <TextField id="outlined-basic" size='small' label="Enter company ID or Staff ID" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
 
-                            </Stack>
-                            <Palette>
-                                <Button variant="text">Forget Password?</Button>
-                            </Palette>
-                        </Stack>
-                    </FormContainer>
-                   
-                    <Footer />
+                                        <FormControl sx={{ m: 1 }} variant="outlined">
+                                        <InputLabel size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
+                                        <OutlinedInput
+                                            size='small'
+                                            id="outlined-adornment-password"
+                                            type={values.showPassword ? 'text' : 'password'}
+                                            value={values.password}
+                                            onChange={handleChange('password')}
+                                            required={true}
+                                            endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                                >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                            }
+                                            label="Password"
+                                        />
+                                        </FormControl>
+
+                                        
+                                        <Palette>
+                                            {!isPending && <Button variant="contained" onClick={handleLogin}>Log in</Button> }
+                                            {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
+
+                                        </Palette>
+                                        
+                                        <Stack spacing={1} direction="row" alignItems='baseline' justifyContent='center'>
+                                            <Typography sx={{
+                                                '@media (max-width: 600px)': {
+                                                    fontSize: 13
+                                    
+                                                },
+                                            }}
+                                            > Need an account?</Typography>
+                                            <Palette>
+
+                                                <Button variant="text" sx={{
+                                                    '@media (max-width: 600px)': {
+                                                        fontSize: 13
+                                        
+                                                    },
+                                                }}
+                                                onClick={()=>   navigate("/",)}
+                                                >Sign Up</Button>
+                                            </Palette>
+
+                                        </Stack>
+                                        <Palette>
+                                            <Button variant="text">Forget Password?</Button>
+                                        </Palette>
+                                    </Stack>
+                                </FormContainer>
+                            </Box>
+                        </Box>
+
+                    
+                        <Footer />
                 </Stack>
             
         </Box>
@@ -345,4 +394,4 @@ const Login = () => {
     );
 }
  
-export default Login;
+export default Login
