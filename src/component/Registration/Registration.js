@@ -278,10 +278,10 @@ const Registration = () => {
                                         padding: '2rem'
                                     }}>
 
-                                        <TextField id="outlined-basic" size='small' label="Business Name | Oganization" variant="outlined" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} />
+                                        <TextField id="outlined-basic" size='small' label="Business or Oganization Name" variant="outlined" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} />
                                         <TextField id="outlined-basic" size='small' label="First Name" variant="outlined" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
-                                        <TextField id="outlined-basic" size='small' label="Mail" variant="outlined" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-                                        <TextField id="outlined-basic" size='small' label="Phone" variant="outlined" value={phone} onChange={(e)=>{setPhone(e.target.value)}}/>
+                                        <TextField id="outlined-basic" size='small' label="Email" variant="outlined" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                                        <TextField id="outlined-basic" size='small' label="Phone Number" variant="outlined" value={phone} onChange={(e)=>{setPhone(e.target.value)}}/>
 
                                         <Palette>
 
