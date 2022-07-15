@@ -46,7 +46,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemIcon>
                                         <InventoryIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary="Invoice" />
+                                    <ListItemText primary="New Record" />
                                 </ListItemButton>
                             </ListItem>
                         </NavLink> 
@@ -56,7 +56,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                 <ListItemIcon>
                                     <InventoryIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Invoice" />
+                                <ListItemText primary="New Record" />
                             </ListItemButton>
                         </ListItem>
                     </NavLink>
@@ -67,7 +67,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemIcon>
                                         <DetailsIcon />
                                     </ListItemIcon>
-                                    <ListItemText primary="Details" />
+                                    <ListItemText primary="Records" />
                                 </ListItemButton>
                             </ListItem>
                         </NavLink>

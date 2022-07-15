@@ -32,7 +32,7 @@ const Expences = ({HandleFormSubmitExpenses,isPending}) => {
         <Stack spacing={2} direction="column" sx={{
             padding: '2rem'
         }}>
-            <TextField id="outlined-basic" label="Colletors Name" variant="outlined" size='small'
+            <TextField id="outlined-basic" label="Collector Name" variant="outlined" size='small'
              onChange={(e)=>setCollectorsName(e.target.value)}
              value={collectorsName}
             />

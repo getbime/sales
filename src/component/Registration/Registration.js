@@ -164,7 +164,7 @@ const Registration = () => {
                   },
             }} onClose={() => {setShowSuccess(false)}}>
                 <AlertTitle>Success</AlertTitle>
-                Registration successfull please do login
+                Registration successfull check your email for your username and assword
             </Alert>
             }
                 
@@ -262,10 +262,10 @@ const Registration = () => {
                             }}>
                                 <Stack direction="column" alignItems='flex-start'>
 
-                                   <ImageAndText image={imageFree} textt={"Free account"}/>
+                                   <ImageAndText image={imageFree} textt={"Create a free account"}/>
                                    <ImageAndText image={imageControl} textt={"Control your business"}/>
-                                   <ImageAndText image={imageDecision} textt={"Make decisions"}/>
-                                   <ImageAndText image={imageTrack} textt={"Track your progress"}/>
+                                   {/* <ImageAndText image={imageDecision} textt={"Make decisions"}/> */}
+                                   {/* <ImageAndText image={imageTrack} textt={"Managing your business"}/> */}
 
                                     
 

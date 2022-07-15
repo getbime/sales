@@ -22,7 +22,9 @@ const style = {
     width: '70%'
   }
 };
-
+const stl = {
+  color: 'gray'
+}
 export default function BasicModal({openDetailModal, detailValue, setOpenDetailModal}) {
 
   return (
@@ -40,19 +42,19 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
           <IconButton onClick={()=>setOpenDetailModal(false)}><CloseIcon /></IconButton>
 
           <Stack flexDirection='column' spacing={1}>
-            <LabelAndText label={'Receipt Number'} text={detailValue.receiptNumber}/>
-            <LabelAndText label={'Customer Name'} text={detailValue.customerName}/>
-            <LabelAndText label={'Date Of Purchase'} text={detailValue.date}/>
-            <LabelAndText label={'Grand Total'} text={detailValue.grandTotal}/>
+          <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
+           <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Customer Name:</Typography> <Typography> {detailValue.customerName}</Typography></Stack>
+           <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Date Of Purchase:</Typography> <Typography> {detailValue.date}</Typography></Stack>  
+           <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Total Price:</Typography> <Typography> {detailValue.grandTotal}</Typography></Stack>  
           </Stack> 
 
           <Divider />
             {detailValue.product.map(prd => (
               <Stack flexDirection='column' spacing={1}>
-                <LabelAndText label={'Product Name'} text={prd.productName}/>
-                <LabelAndText label={'Price'} text={prd.price}/>
-                <LabelAndText label={'Quantity'} text={prd.quantity}/>
-                <LabelAndText label={'Total Price'} text={prd.totalPrice}/>
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Product Name:</Typography> <Typography> {prd.productName}</Typography></Stack>  
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price:</Typography> <Typography> {prd.price}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Quantity:</Typography> <Typography> {prd.quantity}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Total Price:</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
                 <Divider />
               </Stack> 
 

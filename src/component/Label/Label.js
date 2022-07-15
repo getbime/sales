@@ -3,7 +3,7 @@ import './Label.css'
 const Label = ({loggedUser,isLoading}) => {
     return (
         <div className="label">
-            {!isLoading && <h2>{loggedUser.companyName.toUpperCase()}</h2> }
+            {!isLoading && <h4>{loggedUser.companyName.toUpperCase()}</h4> }
         </div>
     );
 }

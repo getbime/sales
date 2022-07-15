@@ -59,19 +59,19 @@ function ChildModal({loggedUser,result, receiptType}) {
             {receiptType === 'invoice' && <p id="child-modal-description">
               <Stack flexDirection='column'>
 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.customerName}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>grand total:</Typography> <Typography> {result.data.grandTotal}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>time issued:</Typography> <Typography> {result.data.timeEntered}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.customerName}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Total:</Typography> <Typography> {result.data.grandTotal}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Time issued:</Typography> <Typography> {`${new Date(result.data.timeEntered).toLocaleString()}`}</Typography></Stack> 
 
                 {result.data.product.map(prd => {
                   return (<>
                     <Divider sx={{marginTop: '0.5rem'}}/>
-                    <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>product:</Typography> <Typography> {prd.productName}</Typography></Stack> 
-                    <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>price:</Typography> <Typography> {prd.price}</Typography></Stack> 
-                    <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>quantity:</Typography> <Typography> {prd.quantity}</Typography></Stack> 
-                    <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
+                    <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Product:</Typography> <Typography> {prd.productName}</Typography></Stack> 
+                    <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price:</Typography> <Typography> {prd.price}</Typography></Stack> 
+                    <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Quantity:</Typography> <Typography> {prd.quantity}</Typography></Stack> 
+                    <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
 
                   </>)
 
@@ -82,12 +82,12 @@ function ChildModal({loggedUser,result, receiptType}) {
             {receiptType === 'expenses' && <p id="child-modal-description">
               <Stack flexDirection='column'>
 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>name:</Typography> <Typography> {result.data.collectorsName}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>purpose:</Typography> <Typography> {result.data.purpose}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>amount:</Typography> <Typography> {result.data.amount}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} alignItems='flex-end'> <Typography sx={{...stl,marginRight: '0.5rem'}}>time issued:</Typography> <Typography> {result.data.timeEntered}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between' > <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.collectorsName}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Purpose:</Typography> <Typography> {result.data.purpose}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Amount:</Typography> <Typography> {result.data.amount}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Time issued:</Typography> <Typography> {`${new Date(result.data.timeEntered).toLocaleString()}`}</Typography></Stack> 
                 
               </Stack>            
             </p> }
