@@ -164,7 +164,7 @@ const Registration = () => {
                   },
             }} onClose={() => {setShowSuccess(false)}}>
                 <AlertTitle>Success</AlertTitle>
-                Registration successfull check your email for your username and assword
+                Registration successfull check your email for your username and password
             </Alert>
             }
                 
