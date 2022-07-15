@@ -192,7 +192,14 @@ const ViewData = ({companyId}) => {
                                         {byText && invoiceSearch.result.length > 0 && invoiceSearch.result.map(inv => (
                                             <TableRow
                                             key={inv.invoice.receiptNumber}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ 
+                                                '&:last-child td, &:last-child th': { border: 0 }, 
+                                                cursor: 'pointer',
+                                                ':hover': {
+                                                    backgroundColor: 'whitesmoke'
+                                                }
+                                              }}
+                                              onClick = {()=> handleDisplayDetail(inv.invoice)}
                                             >
                                                 <TableCell component="th" scope="row">
                                                     {inv.invoice.customerName}

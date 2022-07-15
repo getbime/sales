@@ -105,7 +105,15 @@ const useCrud = () => {
       
     }
 
-    const createStaff = (url,staffData,setStaffList,setIsLoadingGetStaff,setAddStaffErrorFlag,setAddStaffError) => {
+    const createStaff = (
+        url,
+        staffData,
+        setStaffList,
+        setIsLoadingGetStaff,
+        setAddStaffErrorFlag,
+        setAddStaffError,
+        setNewlyAddedStaffPassword,
+        setShowCreatedStaffPassword) => {
 
         // console.log(staffData)
        
@@ -135,6 +143,8 @@ const useCrud = () => {
              setStaffList(data.message)
              setAddStaffError('Staff created')
              setAddStaffErrorFlag({err:false,succ:true})
+             setNewlyAddedStaffPassword(data.password)
+             setShowCreatedStaffPassword(true)
             } 
             else {
                 setAddStaffError(msgImage)
@@ -153,7 +163,7 @@ const useCrud = () => {
       
     }
 
-    const deleteStaff = (url,setStaffList,setIsLoadingDeleteStaff,setDeleteStaffErrorFlag,setDeleteStaffError) => {
+    const deleteStaff = (url,setStaffList,setIsLoadingDeleteStaff,setAlertMsg,setAlertState,setAlertVariant) => {
 
 
         fetch(url,{
@@ -163,8 +173,9 @@ const useCrud = () => {
         .then(response => {
             if(response.ok === false) {
                 setIsLoadingDeleteStaff(false)
-                setDeleteStaffError(msgImage)
-                setDeleteStaffErrorFlag({err:true,succ:false})
+                setAlertMsg(msgImage)
+                setAlertState(true)
+                setAlertVariant('error')
                 throw Error(msgImage)
             }
             else return response.json()
@@ -176,20 +187,26 @@ const useCrud = () => {
 
             if(data.success){
              setStaffList(data.message)
-             setDeleteStaffError('Staff deleted')
-             setDeleteStaffErrorFlag({err:false,succ:true})
+             setAlertMsg('Staff deleted')
+             setAlertState(true)
+             setAlertVariant('success')
+
             } 
             else {
-                setDeleteStaffError(msgImage)
-                setDeleteStaffErrorFlag({err:true,succ:false})
+                setAlertMsg(msgImage)
+                setAlertState(true)
+                setAlertVariant('error')
                 setIsLoadingDeleteStaff(false)
+
 
             }
 
             }).catch(error => {
-                setDeleteStaffError(msgImage)
-                setDeleteStaffErrorFlag({err:true,succ:false})
+                setAlertMsg(msgImage)
+                setAlertState(true)
                 setIsLoadingDeleteStaff(false)
+                setAlertVariant('error')
+
 
                 console.error('Error:', error);
             })
@@ -237,7 +254,7 @@ const useCrud = () => {
     }
 
 
-    const changePassword = (url,staffData,setIsLoadingChangePassword,setChangePasswordErrorFlag,setChangePasswordError) => {
+    const changePassword = (url,staffData,setIsLoadingChangePassword,setAlertMsg,setAlertState,setAlertVariant) => {
 
         // console.log(staffData)
         fetch(url,{
@@ -248,8 +265,9 @@ const useCrud = () => {
         .then(response => {
             if(response.ok === false) {
                 setIsLoadingChangePassword(false)
-                setChangePasswordError(msgImage)
-                setChangePasswordErrorFlag({err:true,succ:false})
+                setAlertMsg(msgImage)
+                setAlertState(true)
+                setAlertVariant('error')
                 throw Error(msgImage)
             }
             else return response.json()
@@ -261,19 +279,22 @@ const useCrud = () => {
 
             if(data.success){
                 console.log(data.message)
-                setChangePasswordError("Password Changed")
-                setChangePasswordErrorFlag({err:false,succ:true})
+                setAlertMsg("Password Changed")
+                setAlertState(true)
+                setAlertVariant('success')
             } 
             else {
-                setChangePasswordError(data.message)
-                setChangePasswordErrorFlag({err:true,succ:false})
+                setAlertMsg(data.message)
+                setAlertState(true)
+                setAlertVariant('error')
                 setIsLoadingChangePassword(false)
 
             }
 
             }).catch(error => {
-                setChangePasswordError(msgImage)
-                setChangePasswordErrorFlag({err:true,succ:false})
+                setAlertMsg(msgImage)
+                setAlertState(true)
+                setAlertVariant('error')
                 setIsLoadingChangePassword(false)
 
                 console.error('Error:', error);

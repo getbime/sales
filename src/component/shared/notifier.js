@@ -16,8 +16,9 @@ const Notify = ({alert}) => {
             <Collapse in={alert.alertState}>
                 <Alert severity={alert.alertVariant} sx={{
                     position: 'fixed',
+                    top:0,
                     marginLeft: '30rem',
-                    marginTop: '2rem',
+                    // marginTop: '2rem',
                     width: '30%',
                     minHeight: '3.9rem',
                     '@media (max-width: 600px)': {

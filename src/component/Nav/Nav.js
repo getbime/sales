@@ -9,33 +9,39 @@ import HomeIcon from '@mui/icons-material/Home';
 import DetailsIcon from '@mui/icons-material/Details';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import Box from '@mui/material/Box';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import BimeNavLogo from '../shared/BimeNavLogo';
 
 const Nav = ({loggedUser,isLoading,userType}) => {
     const style = {textDecoration: 'none', color: 'black'}
-    const hoverStyle = {'&:hover': { backgroundColor: 'white',boxShadow:'1px 2px 5px #dfdbdb' }}
+    const styleActive = {textDecoration: 'none', color: 'black', fontWeight: 'bold', background: 'red',boxShadow:'1px 2px 5px #dfdbdb' }
+    
+    const navLinkStyles = ({isActive}) => {
+        console.log(isActive)
+        if (isActive) return {...styleActive}
+        else  return {...style}
+    }
     return (
         <div className="nav">
             <Label loggedUser={loggedUser} isLoading={isLoading}/>
             <Box >
             <nav aria-label="main mailbox folders">
                     <List>
-                        {userType === 'company' && <Link to='/dashboard' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
+                        {userType === 'company' && <NavLink to='/dashboard/' style={navLinkStyles}>
+                            <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon   >
-                                        <HomeIcon/>
+                                        <HomeIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Home" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link> }
+                        </NavLink> }
 
-                        {userType === 'staff'? <Link to='/dashboard' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
+                        {userType === 'staff'? <NavLink to='/dashboard' style={navLinkStyles}>
+                            <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <InventoryIcon />
@@ -43,9 +49,9 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Invoice" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link> 
-                        : <Link to='/dashboard/sales-record' style={{...style}}>
-                        <ListItem disablePadding sx={{...hoverStyle}}>
+                        </NavLink> 
+                        : <NavLink to='/dashboard/sales-record' style={navLinkStyles}>
+                        <ListItem disablePadding >
                             <ListItemButton>
                                 <ListItemIcon>
                                     <InventoryIcon />
@@ -53,10 +59,10 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                 <ListItemText primary="Invoice" />
                             </ListItemButton>
                         </ListItem>
-                    </Link>
+                    </NavLink>
                          }
-                        <Link to='/dashboard/view-data' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
+                        <NavLink to='/dashboard/view-data' style={navLinkStyles}>
+                            <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <DetailsIcon />
@@ -64,10 +70,10 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Details" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </NavLink>
 
-                        <Link to='/dashboard/profile' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
+                        <NavLink to='/dashboard/profile' style={navLinkStyles}>
+                            <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <ManageAccountsIcon />
@@ -75,10 +81,10 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Profile" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </NavLink>
 
-                        <Link to='/dashboard/summary' style={{...style}}>
-                            <ListItem disablePadding sx={{...hoverStyle}}>
+                        {userType === "staff" && <NavLink to='/dashboard/summary' style={navLinkStyles}>
+                            <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <LeaderboardIcon />
@@ -86,7 +92,7 @@ const Nav = ({loggedUser,isLoading,userType}) => {
                                     <ListItemText primary="Summary" />
                                 </ListItemButton>
                             </ListItem>
-                        </Link>
+                        </NavLink> }
 
 
                     </List>

@@ -5,7 +5,6 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Notifier from '../shared/notifier';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
@@ -113,7 +112,7 @@ function stringAvatar(name) {
     };
   }
 
-const Header = ({setState,state,loggedUser,isLoading,userType,alert}) => {
+const Header = ({setState,state,loggedUser,isLoading,userType}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClickMenu = (e) => {
@@ -129,9 +128,7 @@ const Header = ({setState,state,loggedUser,isLoading,userType,alert}) => {
     }
     return (
       <>
-            {/* Alert or Notifier box */}
-            <Notifier msg={"hello"} alert={alert}/>
-            {/* end Alert or Notifier box */}
+            
             <Box sx={{
               width: '94%',
               marginTop: '2rem',
