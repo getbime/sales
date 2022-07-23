@@ -37,25 +37,25 @@ const BasicCard = ({bg,invoice,expenses,day}) => {
                 <CardContent  >
                     <Stack direction='row' spacing={6} alignItems='center' justifyContent='space-between' sx={{'@media (max-width: 600px)': {gap: 0}}}>
                         <Box sx={{...style}}>
-                            <Typography className='basic-card-content-text' sx={{ fontSize: 16, '@media (max-width: 600px)': {fontSize: 14 }}} >
+                            <Typography className='basic-card-content-text' sx={{ fontSize: 16, '@media (max-width: 600px)': {fontSize: 10 }}} >
                             Total Income
                             </Typography>
                             <Typography className='basic-card-content-text' variant="h4" component="div" sx={{ fontWeight: "bold", '@media (max-width: 600px)': {fontSize: 20 } }}>
                                 {invoice === undefined ? 0 : invoice.total}
                             </Typography>
-                            <Typography className='basic-card-content-text' sx={{ fontSize: 14, '@media (max-width: 600px)': {fontSize: 12 }}} >
+                            <Typography className='basic-card-content-text' sx={{ fontSize: 12, '@media (max-width: 600px)': {fontSize: 8 }}} >
                                 No. of sales {invoice === undefined ? 0 : invoice.totalNumberOfInvoice}
                             </Typography>
                         </Box>
                         <Divider sx={{backgroundColor: '#FFFFFF'}} orientation="vertical" variant="middle" flexItem />
                         <Box sx={{...style}}>
-                            <Typography className='basic-card-content-text' sx={{ fontSize: 16,'@media (max-width: 600px)': {fontSize: 14 } }}  >
+                            <Typography className='basic-card-content-text' sx={{ fontSize: 16, '@media (max-width: 600px)': {fontSize: 10 }}}  >
                             Total Expenses
                             </Typography>
                             <Typography className='basic-card-content-text' variant="h4" component="div" sx={{ fontWeight: "bold",'@media (max-width: 600px)': {fontSize: 20 } }}>
                                 {expenses === undefined ? 0 : expenses.total}
                             </Typography>
-                            <Typography className='basic-card-content-text' sx={{ fontSize: 14, '@media (max-width: 600px)': {fontSize: 12 } }} >
+                            <Typography className='basic-card-content-text' sx={{ fontSize: 12, '@media (max-width: 600px)': {fontSize: 8 }}} >
                                 No. of voucher {expenses === undefined ? 0 : expenses.totalNumberOfExpenses}
                             </Typography>
                         </Box>
