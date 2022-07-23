@@ -42,7 +42,7 @@ export default function MessageModal({ showCreatedStaffPassword, msg, setShowCre
             <Stack alignItems='center' flexDirection='column' sx={{marginTop:'1rem'}}>
             <Typography id="parent-modal-title" color='#6683ed'>SUCCESS</Typography>
             <Typography sx={{textAlign: 'center'}} id="parent-modal-title" >
-              Please save/write down the password below,if you leave this page you wont see it again:  "{msg}"
+              Staff created with password {msg} make sure you save the password.
               </Typography>
   
                 
