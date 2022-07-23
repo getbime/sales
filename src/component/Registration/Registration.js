@@ -74,7 +74,7 @@ const Registration = () => {
     
                 if(data.success){
                     setShowSuccess(true) 
-                    setTimeout(()=>{setShowSuccess(false)},2000)
+                    setTimeout(()=>{setShowSuccess(false)},5000)
                     setCompanyName('')
                     setPhone('')
                     setEmail('')
