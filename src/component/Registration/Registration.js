@@ -72,7 +72,14 @@ const Registration = () => {
                 console.log(data);
                 setIsPending(false)
     
-                if(data.success) setShowSuccess(true)
+                if(data.success){
+                    setShowSuccess(true) 
+                    setTimeout(()=>{setShowSuccess(false)},2000)
+                    setCompanyName('')
+                    setPhone('')
+                    setEmail('')
+                    setAddress('')
+                }
                 else {
                     setIsPending(false)
                     throw Error('Registration failed try again please')
@@ -102,6 +109,7 @@ const Registration = () => {
         borderRadius: 1,
         border: 'none',
         boxShadow: ' -1px 3px 15px #aaaaaa',
+        zIndex:10,
         // mozBoxShadow: '0 0 3px #ccc',
         // webkitBoxShadow: '0 0 3px #ccc',
         // boxShadow: '0 0 3px #ccc',
@@ -154,6 +162,7 @@ const Registration = () => {
                 marginLeft: '55rem',
                 marginTop: '2rem',
                 width: '30%',
+                zIndex:200,
                 '@media (max-width: 600px)': {
                     marginTop: 0,
                     width: '73%',
@@ -279,9 +288,10 @@ const Registration = () => {
                                     }}>
 
                                         <TextField id="outlined-basic" size='small' label="Business or Oganization Name" variant="outlined" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} />
-                                        <TextField id="outlined-basic" size='small' label="First Name" variant="outlined" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
+                                        <TextField id="outlined-basic" size='small' label="Address" variant="outlined" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
                                         <TextField id="outlined-basic" size='small' label="Email" variant="outlined" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                                         <TextField id="outlined-basic" size='small' label="Phone Number" variant="outlined" value={phone} onChange={(e)=>{setPhone(e.target.value)}}/>
+                                       
 
                                         <Palette>
 

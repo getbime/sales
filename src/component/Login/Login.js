@@ -107,10 +107,17 @@ const Login = () => {
                         setIsPending(false)
             
                         if(data.success){
-                            const user = 'staff'
-                            saveUserIdentityToLocalStorage(data.newUser.staffId, data.newUser.token, user)
-                            // setShowSuccess(true)
-                            navigate('/dashboard')
+                            if(data.newUser.suspend){
+                                setErrorMsg("Your account have been suspended contact your company")
+                                setShowError(true)
+                            }else {
+
+                                // console.log(data)
+                                const user = 'staff'
+                                saveUserIdentityToLocalStorage(data.newUser.staffId, data.newUser.token, user)
+                                // setShowSuccess(true)
+                                navigate('/dashboard')
+                            }
                         } 
                         else {
                             setIsPending(false)
