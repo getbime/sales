@@ -159,7 +159,7 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                 ))}
 
                 <Palette>
-                    {!isPending && <Button variant="contained" onClick={()=> HandleFormSubmitInvoice(data)}><Typography>Submit</Typography></Button> }
+                    {!isPending && <LoadingButton disabled={!data.customerName || !data.date || !data.grandTotal || !data.product} variant="contained" onClick={()=> HandleFormSubmitInvoice(data)}><Typography>Submit</Typography></LoadingButton> }
                     {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
                 
                 </Palette>

@@ -26,6 +26,7 @@ const SalesRecord = ({companyId,loggedUser}) => {
     const postReq = (url,data,type) => {
         setIsPending(true)
         setReceiptType(type)
+        console.log(companyId)
         if(data){
             data.companyId = companyId
             try {
@@ -68,7 +69,7 @@ const SalesRecord = ({companyId,loggedUser}) => {
         
             }
         }else{
-            setMsg('You can send an empty invoice')
+            setMsg('Oops you can not create an empty record')
             setShowError(true)
             setIsPending(false)
         }

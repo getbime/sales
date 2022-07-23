@@ -67,9 +67,9 @@ const Expences = ({HandleFormSubmitExpenses,isPending}) => {
             </Stack>
                 <Palette>
 
-                {!isPending && <Button variant="contained"
+                {!isPending && <LoadingButton disabled={!data.amount || !data.collectorsName || !data.date || !data.purpose} variant="contained"
                     onClick={()=>HandleFormSubmitExpenses(data)}
-                    ><Typography>Submit</Typography></Button>}
+                    ><Typography>Submit</Typography></LoadingButton>}
                     
                     {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
                 </Palette>

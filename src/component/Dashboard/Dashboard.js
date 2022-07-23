@@ -55,9 +55,10 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(data => {
             if(data.success === true){
-              setIsLoading(false)
               setLoggedUser(data.message)
               setCompanyId(data.message.username)
+              setIsLoading(false)
+              
             }
           }).catch(error => {
             setIsLoading(false)
@@ -68,6 +69,9 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(data => {
             if(data.success === true){
+              console.log(">>>>>>",data)
+              // setLoggedUser(data.newUser)
+              // setCompanyId(data.comapany.username)
               setCompanyId(data.message.username)
               setLoggedUser(data.message)
               setIsLoading(false)
@@ -115,8 +119,8 @@ const Dashboard = () => {
                 <Route path='login' element={<Login /> }/>
                 <Route path='forget-password' element={<ForgetPassword /> }/>
                 {user.userType === 'staff'?
-                <Route index  element={<SalesRecord />  }/>
-                :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
+                <Route index  element={<SalesRecord companyId={companyId} loggedUser={loggedUser} />  }/>
+                :<Route index  element={<Home isLoading={isLoading} companyId={companyId}/>} /> }
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
                 <Route path='profile' element={<Profile user={user}/>}/>
