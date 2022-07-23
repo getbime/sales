@@ -5,7 +5,7 @@ import Image2 from '../../images/bimelogo-removebg-preview.png'
 const BimeNavLogo = () => {
     return ( 
         <Box sx={{
-            width: '90%',
+            width: '100%',
             height: '20%',
             backgroundSize: '60% 60%',
             backgroundPosition: 'center',

@@ -57,7 +57,7 @@ const style = {textDecoration: 'none', color: 'black'}
                         <ListItemIcon>
                             <InventoryIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Invoice" />
+                        <ListItemText primary="New Record" />
                     </ListItemButton>
                 </ListItem>
             </Link>
@@ -67,7 +67,7 @@ const style = {textDecoration: 'none', color: 'black'}
                     <ListItemIcon>
                         <InventoryIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Invoice" />
+                    <ListItemText primary="New Record" />
                 </ListItemButton>
             </ListItem>
         </Link>
@@ -78,7 +78,7 @@ const style = {textDecoration: 'none', color: 'black'}
                         <ListItemIcon>
                             <DetailsIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Details" />
+                        <ListItemText primary="Records" />
                     </ListItemButton>
                 </ListItem>
             </Link>

@@ -193,7 +193,7 @@ const Registration = () => {
                         },
                         }}>
                     <Box sx={{
-                                width: '16%',
+                                width: '20%',
                                 height: '16vh',
                                 backgroundSize: '100% 100%',
                                 backgroundPosition: 'center',
@@ -209,7 +209,7 @@ const Registration = () => {
                             }}>
                         </Box>
 
-                        <Stack direction="row" alignItems='center'gap={1}>
+                        <Stack direction="row" sx={{'@media (min-width:600px)':{marginBottom:'35px'}}} alignItems='center'gap={1}>
                             <Typography sx={{'@media (max-width:600px)':{display:'none'}}}>Have an Acount?</Typography>
                             <Button variant="outlined" 
                             sx={{'@media (max-width:600px)':{size:'small'}}}

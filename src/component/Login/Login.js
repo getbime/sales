@@ -270,7 +270,7 @@ const Login = () => {
                 }}>
 
                     <Box sx={{
-                                width: '12%',
+                                width: '18%',
                                 height: '20vh',
                                 backgroundSize: '100% 100%',
                                 backgroundPosition: 'center',
