@@ -63,7 +63,7 @@ const Summary = ({companyId}) => {
                 </div>
                 <div className = 'content'>
                     <h3>Total Income: {statis.dailyInvoice[0] === undefined ? 0 : statis.dailyInvoice[0].total}</h3>
-                    <p> No. Of Sales: {statis.dailyInvoice[0] === undefined ? 0 : statis.dailyInvoice[0].totalNumberOfInvoice}</p>
+                    <p>{statis.dailyInvoice[0] === undefined ? 0 : statis.dailyInvoice[0].totalNumberOfInvoice} Sales</p>
                 </div>
                 </div>}
             {statIsLoading && <CircularProgress /> }
@@ -75,8 +75,8 @@ const Summary = ({companyId}) => {
                     <img src ={Expenses}/>
                 </div>
                 <div className = 'content'>
-                    <h3>Total Expeneses: {statis.dailyExpenses[0] === undefined ? 0 : statis.dailyExpenses[0].total}</h3>
-                    <p>No. Of Voucher: {statis.dailyExpenses[0] === undefined ? 0 : statis.dailyExpenses[0].totalNumberOfExpenses}</p>
+                    <h3>Total Expenses: {statis.dailyExpenses[0] === undefined ? 0 : statis.dailyExpenses[0].total}</h3>
+                    <p>{statis.dailyExpenses[0] === undefined ? 0 : statis.dailyExpenses[0].totalNumberOfExpenses} Vouchers </p>
                 </div>
                 </div> }   
                 {statIsLoading && <CircularProgress /> }

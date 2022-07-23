@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 
@@ -39,7 +40,7 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
         
         <Stack flexDirection='column' spacing={1} sx={style}>
         
-          <IconButton onClick={()=>setOpenDetailModal(false)}><CloseIcon /></IconButton>
+          <IconButton onClick={()=>setOpenDetailModal(false)}><Button style={{width:'100%'}} variant="contained">Back</Button></IconButton>
 
           <Stack flexDirection='column' spacing={1}>
           <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
