@@ -69,9 +69,6 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(data => {
             if(data.success === true){
-              console.log(">>>>>>",data)
-              // setLoggedUser(data.newUser)
-              // setCompanyId(data.comapany.username)
               setCompanyId(data.message.username)
               setLoggedUser(data.message)
               setIsLoading(false)
@@ -118,9 +115,10 @@ const Dashboard = () => {
                 <Route path='register' element={<Registration />}/>
                 <Route path='login' element={<Login /> }/>
                 <Route path='forget-password' element={<ForgetPassword /> }/>
+                
                 {user.userType === 'staff'?
-                <Route index  element={<SalesRecord companyId={companyId} loggedUser={loggedUser} />  }/>
-                :<Route index  element={<Home isLoading={isLoading} companyId={companyId}/>} /> }
+                <Route index  element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/> }/>
+                :<Route path='sales-record' element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/>  }/>}
 
                 <Route path='view-data' element={<ViewData companyId={companyId}/>  }/>
                 <Route path='profile' element={<Profile user={user}/>}/>
