@@ -329,7 +329,7 @@ const Login = () => {
                                         padding: '2rem'
                                     }}>
 
-                                        <TextField id="outlined-basic" size='small' label="Enter company ID or Staff ID" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
+                                        <TextField id="outlined-basic" size='small' label="Enter Username" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
 
                                         <FormControl sx={{ m: 1 }} variant="outlined">
                                         <InputLabel size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
