@@ -89,11 +89,13 @@ const Registration = () => {
                     setErrorMsg('Registration failed try again please!!!')
                     setShowError(true)
                     console.error('Error:', error);
+                    setTimeout(()=>{setShowError(false)},5000)
                 })
         } catch(error) {
             setErrorMsg('Registration failed try again please!!!')
             setShowError(true)
             setIsPending(false)
+            setTimeout(()=>{setShowError(false)},5000)
         }
     }
 
@@ -137,11 +139,12 @@ const Registration = () => {
               },
 
         }}>
-             {showError && <Alert severity="error" sx={{
+             {showError && <Alert severity="error"sx={{
                 position: 'fixed',
                 marginLeft: '55rem',
                 marginTop: '2rem',
                 width: '30%',
+                zIndex:200,
                 '@media (max-width: 600px)': {
                     marginTop: 0,
                     width: '73%',
