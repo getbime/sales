@@ -332,7 +332,7 @@ const Login = () => {
                                         <TextField id="outlined-basic" size='small' label="Enter Username" variant="outlined" value={username} onChange={(e)=>setUsername(e.target.value)} required={true}/>
 
                                         <FormControl sx={{ m: 1 }} variant="outlined">
-                                        <InputLabel size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
+                                        <InputLabel required={true} size='small' htmlFor="outlined-adornment-password" >Password</InputLabel>
                                         <OutlinedInput
                                             size='small'
                                             id="outlined-adornment-password"
