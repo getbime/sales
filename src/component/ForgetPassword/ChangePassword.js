@@ -8,9 +8,9 @@ import { Button, Card, Container, Typography } from '@mui/material';
 
 
 import Box from '@mui/material/Box';
-import ForgetForm from './ForgetForm'
+import ForgetFormFinal from './ForgetFormFinal'
 
-const ForgetPassword = () => {
+const ChangePassword = () => {
     
     const ContentStyle = styled('div')(({ theme }) => ({
         maxWidth: 480,
@@ -125,9 +125,9 @@ const ForgetPassword = () => {
                                     backgroundColor:'#3456d1',
                                     marginBottom:'10%'
                             }} variant="contained"
-                                >Login</Button>
-                                    <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your username to reset your password.</Typography>
-                                <ForgetForm />
+                                >Login to your account</Button>
+                                    <Typography sx={{ color: 'text.secondary', mb: 5 }}>Change your password</Typography>
+                                <ForgetFormFinal />
                             
                             </Box>
                             </Box>
@@ -141,4 +141,4 @@ const ForgetPassword = () => {
     );
 }
  
-export default ForgetPassword
+export default ChangePassword

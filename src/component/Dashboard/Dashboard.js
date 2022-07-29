@@ -17,6 +17,7 @@ import Summary from '../Summary/Summary';
 
 
 import {Routes, Route, useNavigate} from 'react-router-dom'
+import ChangePassword from '../ForgetPassword/ChangePassword';
 
 
 const Dashboard = () => {
@@ -115,6 +116,7 @@ const Dashboard = () => {
                 <Route path='register' element={<Registration />}/>
                 <Route path='login' element={<Login /> }/>
                 <Route path='forget-password' element={<ForgetPassword /> }/>
+                <Route path='uy6hkPfpmHHWSaGUpr6X9UMN4WCQUx' element={<ChangePassword /> }/>
                 
                 {user.userType === 'staff'?
                 <Route index  element={<SalesRecord companyId={companyId} loggedUser={loggedUser}/> }/>

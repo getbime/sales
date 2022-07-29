@@ -74,14 +74,14 @@ const Login = () => {
     const [showSuccess, setShowSuccess] = React.useState(false)
     const [errorMsg, setErrorMsg] = React.useState('')
     const loginFailedMsg = 'Login failed please try again!!'
-    const userNotFoundMsg = 'ID or Password is incorrect'
+    const userNotFoundMsg = 'Username or Password is incorrect'
 
          
   
     const handleLogin = () => {
         setIsPending(true)
         setErrorMsg('')
-        if(data.username == '' || data.password == ''){
+        if(data.username === '' || data.password === ''){
             setIsPending(false)
             setShowError(true)
             setErrorMsg('Your are required to fill all field')
@@ -96,7 +96,7 @@ const Login = () => {
                     body: JSON.stringify(staffData)
                     })
                     .then(response => {
-                        if(response.ok == false) {
+                        if(response.ok === false) {
                             setIsPending(false)
                             throw Error(loginFailedMsg)
                         }
@@ -146,7 +146,7 @@ const Login = () => {
                     body: JSON.stringify(data)
                     })
                     .then(response => {
-                        if(response.ok == false) {
+                        if(response.ok === false) {
                             setIsPending(false)
                             throw Error(loginFailedMsg)
                         }
@@ -385,7 +385,7 @@ const Login = () => {
 
                                         </Stack>
                                         <Palette>
-                                            <Button variant="text">Forget Password?</Button>
+                                            <Button  onClick={()=> navigate("/forget-password")} variant="text">Forget Password?</Button>
                                         </Palette>
                                     </Stack>
                                 </FormContainer>

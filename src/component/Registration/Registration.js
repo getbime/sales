@@ -325,14 +325,13 @@ const Registration = () => {
 
                                         </Stack>
                                         <Palette>
-                                            <Button variant="text">Forget Password?</Button>
+                                            <Button onClick={()=> navigate("/forget-password")} variant="text">Forget Password?</Button>
                                         </Palette>
                                     </Stack>
                                 </FormContainer>
                         </Stack>
                     </Box>
                     <Footer />
-
                 </Stack>
         </Box>
        
