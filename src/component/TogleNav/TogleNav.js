@@ -94,7 +94,7 @@ const style = {textDecoration: 'none', color: 'black'}
                 </ListItem>
             </Link>
 
-            <Link to='/dashboard/summary' style={{...style}}>
+            {userType === "staff" &&<Link to='/dashboard/summary' style={{...style}}>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -103,7 +103,7 @@ const style = {textDecoration: 'none', color: 'black'}
                         <ListItemText primary="Summary" />
                     </ListItemButton>
                 </ListItem>
-            </Link>
+            </Link>}
 
             
             
