@@ -156,7 +156,8 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                         </Stack>
 
                     </Stack>
-                ))}
+                )
+                )}
 
                 <Palette>
                     {!isPending && <LoadingButton disabled={!data.customerName || !data.date || !data.grandTotal || !data.product} variant="contained" onClick={()=> HandleFormSubmitInvoice(data)}><Typography>Submit</Typography></LoadingButton> }

@@ -44,7 +44,7 @@ const SalesRecord = ({companyId,loggedUser}) => {
                         else return response.json()
                     })
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         setResult(data)
                         if (data.success) {
                             setIsPending(false)
