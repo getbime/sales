@@ -30,7 +30,6 @@ const ViewData = ({companyId}) => {
     const SEARCH_INVOICE = process.env.REACT_APP_SEARCH_INVOICES
     const SEARCH_EXPENSES = process.env.REACT_APP_SEARCH_EXPENSES 
 
-
     const formatDate = (date) => {
         return date.toString().split(' ').splice(0,4).join(' ')
     }
@@ -63,7 +62,7 @@ const ViewData = ({companyId}) => {
     
       
     function handleDisplayDetail (value){
-        // console.log(value)
+        console.log(value)
         setOpenDetailModal(true)
         setDetailValue(value)
     }  

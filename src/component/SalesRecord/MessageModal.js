@@ -72,7 +72,7 @@ function ChildModal({loggedUser,result, receiptType}) {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 300, border: 'none', overflow: 'auto'}}>
+        <Box sx={{ ...style, width: 300, height: '100vh', border: 'none', overflow: 'auto'}}>
           <Box ref={componentRef}>
 
             <Stack flexDirection="row" justifyContent='space-between' alignItems='center'>
@@ -134,9 +134,12 @@ function ChildModal({loggedUser,result, receiptType}) {
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between' > <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.collectorsName}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Purpose:</Typography> <Typography> {result.data.purpose}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Amount:</Typography> <Typography> {result.data.amount}</Typography></Stack> 
-                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Time issued:</Typography> <Typography> {`${new Date(result.data.timeEntered).toLocaleString()}`}</Typography></Stack> 
+                
+                <Divider sx={{marginTop: '1rem',marginBottom: '1rem'}}/>
+                
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Date:</Typography> <Typography> {result.data.date}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Amount:</Typography> <Typography> {result.data.amount}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Time issued:</Typography> <Typography> {`${moment().format("MMM Do YY, h:mm:ss a")}`}</Typography></Stack> 
                 
               </Stack>            
             </p> }

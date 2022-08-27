@@ -63,10 +63,11 @@ const Login = () => {
         password: values.password
     }
 
-    const saveUserIdentityToLocalStorage = (id,token,user) => {
+    const saveUserIdentityToLocalStorage = (id,token,user,companyName) => {
         window.localStorage.setItem('userId', id);
         window.localStorage.setItem('userToken', token);
         window.localStorage.setItem('userType', user);
+        window.localStorage.setItem('companyName',companyName)
     }
 
     const [isPending, setIsPending] = React.useState(false)
@@ -114,7 +115,7 @@ const Login = () => {
 
                                 // console.log(data)
                                 const user = 'staff'
-                                saveUserIdentityToLocalStorage(data.newUser.staffId, data.newUser.token, user)
+                                saveUserIdentityToLocalStorage(data.newUser.staffId, data.newUser.token, user, data.company.companyName)
                                 // setShowSuccess(true)
                                 navigate('/dashboard')
                             }
@@ -153,12 +154,12 @@ const Login = () => {
                         else return response.json()
                     })
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         setIsPending(false)
             
                         if(data.success) {
                             const user = 'company'
-                            saveUserIdentityToLocalStorage(data.newUser.username, data.newUser.token, user)
+                            saveUserIdentityToLocalStorage(data.newUser.username, data.newUser.token, user, data.newUser.companyName)
                             // setShowSuccess(true)
                             navigate('/dashboard')
                         }
