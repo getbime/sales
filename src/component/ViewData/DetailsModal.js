@@ -60,7 +60,7 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
 
   return (
     <div>
-      {console.log(detailValue)}
+      {/* {console.log(detailValue)} */}
       <Modal
         open={openDetailModal}
         onClose={()=>setOpenDetailModal(false)}

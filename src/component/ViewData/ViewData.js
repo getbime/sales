@@ -62,7 +62,7 @@ const ViewData = ({companyId}) => {
     
       
     function handleDisplayDetail (value){
-        console.log(value)
+        // console.log(value)
         setOpenDetailModal(true)
         setDetailValue(value)
     }  
