@@ -19,7 +19,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
   border: '2px solid #3456d1',
   boxShadow: 24,
@@ -70,7 +69,12 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
         
         
           
-          <Box sx={{ ...style, width: 300, height: '100vh', border: 'none', overflow: 'auto'}}>
+          <Box sx={{ ...style, width: 300, height: '100vh', border: 'none', overflow: 'auto',
+          '@media (max-width: 600px)':{
+            width: '80%',
+            height: '90vh'
+          }
+        }}>
             <Box ref={componentRef}>
 
               <Stack flexDirection="row" justifyContent='space-between' alignItems='center'>
