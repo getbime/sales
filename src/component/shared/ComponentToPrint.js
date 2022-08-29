@@ -95,7 +95,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
   
               {/*Reciept Number and Name  */}
               <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',}}>Receipt number:</Typography> <Typography> {props.detailValue.receiptNumber}</Typography></Stack> 
-              <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {props.detailValue.customerName}</Typography></Stack> 
+              <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Customer Name:</Typography> <Typography> {props.detailValue.customerName}</Typography></Stack> 
   
               {/*End Reciept Number and Name  */}
   
@@ -103,8 +103,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                {props.detailValue.product.map(prd => {
                 return (<>
                  <div className="divider"></div>
-                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Product Name:</Typography> <Typography> {prd.productName}</Typography></Stack> 
-                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price Total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
+                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>{prd.productName}</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
+                  {/* <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price Total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack>  */}
   
                 </>)
   
