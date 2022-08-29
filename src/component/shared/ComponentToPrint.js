@@ -82,6 +82,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                     height: "4rem",
                     width: "4rem",
                     border: "1px solid black",
+                    color: "black"
 
                 }}
             />
@@ -99,10 +100,10 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
   
               {/*End Reciept Number and Name  */}
   
+              <div className="divider margin-bottom"></div>
               {/* List of products */}
                {props.detailValue.product.map(prd => {
                 return (<>
-                 <div className="divider"></div>
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>{prd.productName}</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
                   {/* <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price Total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack>  */}
   
@@ -112,7 +113,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
               {/* End of List of products */}
   
               {/* Total and Date */}
-              <div className="divider"></div>
+              <div className="divider margin-top"></div>
 
               <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Total Amount:</Typography> <Typography> {props.detailValue.grandTotal}</Typography></Stack> 
               <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem', fontWeight: 900}}>Date Of Purchase:</Typography> <Typography> {props.detailValue.date}</Typography></Stack> 
