@@ -82,7 +82,6 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                     height: "4rem",
                     width: "4rem",
                     border: "1px solid black",
-                    backgroundColor: "yellow"
 
                 }}
             />
