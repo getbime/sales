@@ -9,8 +9,11 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
-import { useReactToPrint } from 'react-to-print';
+import ReactToPrint,{useReactToPrint} from 'react-to-print';
 import moment from 'moment';
+import { ComponentToPrint } from '../shared/ComponentToPrint';
+import Avatar from "@mui/material/Avatar";
+
 
 const style = {
   position: 'absolute',
@@ -34,32 +37,58 @@ function ChildModal({loggedUser,result, receiptType}) {
     setOpen(false);
   };
 
+  const componentRef = React.useRef();
+    
   // company name first three letters
-    const companyThreeLetters = loggedUser.companyName.trim().split(' ').map((wrd)=>{
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        width: 50,
+        height: 50 
+      },
+      children: `${name.trim().split(' ').map((wrd)=>{
 
-        if (loggedUser.companyName.trim().split(' ').length > 1 ){
+        if (name.trim().split(' ').length > 1 ){
           return (wrd.substr(0,1).toUpperCase())
   
         }else {
           return (wrd.substr(0,3).toUpperCase())
   
         }
-    })
-
-    // console.log(companyThreeLetters)
-  //end company name first three letters
-
-
+      })}`,
+    };
+  }
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
   const stl = {
     color: 'black'
   }
 
-  // recipt printing
-  const componentRef = React.useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-  //end recipt printing
+  // printing for expenses
+  
+
+  // console.log(companyThreeLetters)
+  //end company name first three letters
+
 
   return (
     <React.Fragment>
@@ -77,12 +106,17 @@ function ChildModal({loggedUser,result, receiptType}) {
           height: '90vh'
         }
       }}>
-          <Box ref={componentRef}>
+          <Box >
 
             <Stack flexDirection="row" justifyContent='space-between' alignItems='center'>
-              <Typography sx={{backgroundColor:"black", color:"white", padding: '0.5rem', height: '50%' }}>
-                {companyThreeLetters.join('')}
-              </Typography>
+            <Avatar
+                     {...stringAvatar(loggedUser.companyName)}
+                    // src={''}
+                    sx={{
+                      height: "4rem",
+                      width: "4rem",
+                    }}
+                  />
               <h2 id="child-modal-title">{loggedUser.companyName.toUpperCase()}</h2>
             </Stack>
 
@@ -127,9 +161,10 @@ function ChildModal({loggedUser,result, receiptType}) {
                    <Typography> {`${moment().format("MMM Do YY, h:mm:ss a").split(',')[1]}`}
                    </Typography>
                 </Stack> 
+
+
                 {/* End of Time Issued */}
-
-
+               
               </Stack>            
             </p> }
             {receiptType === 'expenses' && <p id="child-modal-description">
@@ -145,14 +180,24 @@ function ChildModal({loggedUser,result, receiptType}) {
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Amount:</Typography> <Typography> {result.data.amount}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Time issued:</Typography> <Typography> {`${moment().format("MMM Do YY, h:mm:ss a")}`}</Typography></Stack> 
                 
-              </Stack>            
+              </Stack>   
+              {/* <Button onClick={handlePrint}>Print</Button>     */}
+                   
             </p> }
 
           </Box>
           <IconButton onClick={handleClose}><CloseIcon /></IconButton>
-          <Button onClick={handlePrint}>Print</Button>
+          <ReactToPrint
+                  trigger={() => <Button>Print</Button>}
+                  content={() => componentRef.current}
+                />
+                <ComponentToPrint ref={componentRef} detailValue={result.data}  companyName={loggedUser.companyName} receiptType={receiptType}/>
+
+
+          
         </Box>
       </Modal>
+
     </React.Fragment>
   );
 }

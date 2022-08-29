@@ -6,9 +6,10 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { useReactToPrint } from 'react-to-print';
+import ReactToPrint,{useReactToPrint} from 'react-to-print';
 import moment from 'moment';
+import { ComponentToPrint } from '../shared/ComponentToPrint';
+import Avatar from "@mui/material/Avatar";
 
 
 
@@ -32,26 +33,54 @@ const stl = {
 }
 
 
-export default function BasicModal({openDetailModal, detailValue, setOpenDetailModal}) {
+  
 
+export default function BasicModal({openDetailModal, detailValue, setOpenDetailModal}) {
+  // console.log(detailValue)
     // recipt printing
     const componentRef = React.useRef();
-    const handlePrint = useReactToPrint({
-      content: () => componentRef.current,
-    });
-    //end recipt printing
-
+    
     // company name first three letters
-    const companyThreeLetters = companyName.trim().split(' ').map((wrd)=>{
+    
+    function stringAvatar(name) {
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+          width: 50,
+          height: 50 
+        },
+        children: `${name.trim().split(' ').map((wrd)=>{
 
-      if (companyName.trim().split(' ').length > 1 ){
-        return (wrd.substr(0,1).toUpperCase())
-
-      }else {
-        return (wrd.substr(0,3).toUpperCase())
-
+          if (name.trim().split(' ').length > 1 ){
+            return (wrd.substr(0,1).toUpperCase())
+    
+          }else {
+            return (wrd.substr(0,3).toUpperCase())
+    
+          }
+        })}`,
+      };
+    }
+    function stringToColor(string) {
+      let hash = 0;
+      let i;
+    
+      /* eslint-disable no-bitwise */
+      for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
       }
-    })
+    
+      let color = '#';
+    
+      for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+      }
+      /* eslint-enable no-bitwise */
+    
+      return color;
+    }
+  
 
     // console.log(companyThreeLetters)
     //end company name first three letters
@@ -75,12 +104,20 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
             height: '90vh'
           }
         }}>
-            <Box ref={componentRef}>
+
+          
+            <Box >
 
               <Stack flexDirection="row" justifyContent='space-between' alignItems='center'>
-                <Typography sx={{backgroundColor:"black", color:"white", padding: '0.5rem', height: '50%' }}>
-                  {companyThreeLetters.join('')}
-                </Typography>
+                  
+                  <Avatar
+                     {...stringAvatar(companyName)}
+                    // src={''}
+                    sx={{
+                      height: "4rem",
+                      width: "4rem",
+                    }}
+                  />
                 <h2 id="child-modal-title">{companyName.toUpperCase()}</h2>
               </Stack>
 
@@ -147,33 +184,19 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
             </Box>
             <Stack flexDirection='row' justifyContent='space-between'>
               <IconButton onClick={()=>setOpenDetailModal(false)}><Button style={{width:'100%'}} variant="outlined">Back</Button></IconButton>
-              <IconButton onClick={handlePrint}><Button style={{width:'100%'}} variant="outlined">Print</Button></IconButton>
+              
+                
+                <ReactToPrint
+                  trigger={() => <IconButton ><Button style={{width:'100%'}} variant="outlined">Print</Button></IconButton>}
+                  content={() => componentRef.current}
+                />
+           
             </Stack>
           </Box>
 
       </Modal>
+      <ComponentToPrint ref={componentRef} detailValue={detailValue}  companyName={companyName} receiptType={"invoice"}/>
     </div>
   );
 }
 
-// const LabelAndText = ({label,text}) => {
-//   return (
-//     <Stack flexDirection='row' alignItems='flex-end' sx={{
-//       gap: 2
-
-//     }}>
-//       <Typography color='#3F3C3C' sx={{
-//         fontSize: '0.9rem',
-//         '@media (max-width: 600px)': {
-//           fontSize: '0.8rem',
-
-//         },
-//         }}>
-//         {label}:
-//       </Typography>
-//       <Typography sx={{'@media (max-width: 600px)':{fontSize: '0.9rem',}}}>
-//         {text}
-//       </Typography>
-//     </Stack>
-//   );
-// }
