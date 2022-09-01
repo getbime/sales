@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 import Registration from './component/Registration/Registration'
 import Login from './component/Login/Login'
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter,HashRouter, Routes, Route} from 'react-router-dom'
 import Dashboard from './component/Dashboard/Dashboard';
 import ForgetPassword from './component/ForgetPassword/ForgetPassword';
 import ChangePassword from './component/ForgetPassword/ChangePassword'
@@ -11,7 +11,7 @@ import ChangePassword from './component/ForgetPassword/ChangePassword'
 function App() {
   
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <Routes>
           <Route index element={<Registration />}/>
@@ -21,7 +21,7 @@ function App() {
           <Route path='dashboard/*' element={<Dashboard />}/>
         </Routes>
       </div>
-    </BrowserRouter> 
+    </HashRouter> 
     
   );
 }
