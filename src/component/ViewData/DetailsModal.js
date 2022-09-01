@@ -35,7 +35,7 @@ const stl = {
 
   
 
-export default function BasicModal({openDetailModal, detailValue, setOpenDetailModal}) {
+export default function BasicModal({openDetailModal, detailValue, setOpenDetailModal,deleteInvoiceAndExpense,receiptType}) {
   // console.log(detailValue)
     // recipt printing
     const componentRef = React.useRef();
@@ -123,7 +123,7 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
 
               <Divider />
 
-                <Stack flexDirection='column'>
+                {receiptType === 'invoice' && <Stack flexDirection='column'>
 
                   {/*Reciept Number and Name  */}
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
@@ -164,8 +164,8 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
                   {/* End of Time Issued */}
 
 
-                </Stack>            
-              {/* {receiptType === 'expenses' && <p id="child-modal-description">
+                </Stack>}
+              {receiptType === 'expenses' && 
                 <Stack flexDirection='column'>
 
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between' > <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
@@ -179,23 +179,26 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',fontWeight: 900}}>Time issued:</Typography> <Typography> {`${moment().format("MMM Do YY, h:mm:ss a")}`}</Typography></Stack> 
                   
                 </Stack>            
-              </p> } */}
+               }
 
             </Box>
             <Stack flexDirection='row' justifyContent='space-between'>
               <IconButton onClick={()=>setOpenDetailModal(false)}><Button style={{width:'100%'}} variant="outlined">Back</Button></IconButton>
               
                 
-                <ReactToPrint
-                  trigger={() => <IconButton ><Button style={{width:'100%'}} variant="outlined">Print</Button></IconButton>}
-                  content={() => componentRef.current}
-                />
+              <ReactToPrint
+                trigger={() => <IconButton ><Button style={{width:'100%'}} variant="outlined">Print</Button></IconButton>}
+                content={() => componentRef.current}
+              />
+
+              <IconButton onClick={()=>deleteInvoiceAndExpense(detailValue.receiptNumber, receiptType)}><Button style={{width:'100%'}} color="error" variant="outlined">Delete</Button></IconButton>
+
            
             </Stack>
           </Box>
 
       </Modal>
-      <ComponentToPrint ref={componentRef} detailValue={detailValue}  companyName={companyName} receiptType={"invoice"}/>
+      <ComponentToPrint ref={componentRef} detailValue={detailValue}  companyName={companyName} receiptType={receiptType}/>
     </div>
   );
 }

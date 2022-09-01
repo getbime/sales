@@ -104,7 +104,11 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
               {/* List of products */}
                {props.detailValue.product.map(prd => {
                 return (<>
-                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>{prd.productName}</Typography> <Typography> {prd.totalPrice}</Typography></Stack> 
+                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'>
+                     <Typography sx={{...stl,marginRight: '0.5rem'}}>{prd.productName}</Typography>
+                     <Typography> {prd.quantity}</Typography>
+                     <Typography> {prd.totalPrice}</Typography>
+                  </Stack> 
                   {/* <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Price Total:</Typography> <Typography> {prd.totalPrice}</Typography></Stack>  */}
   
                 </>)

@@ -9,11 +9,15 @@ import Tabs from '@mui/material/Tabs';
 // import postReq from './usePost'
 import Box from '@mui/material/Box';
 import MessageModal from './MessageModal'
+import Confirmation from '../shared/Confirmation'
+
 
 const SalesRecord = ({companyId,loggedUser}) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     const CREATE_INVOICE = process.env.REACT_APP_CREATE_INVOICE 
     const CREATE_EXPENSES = process.env.REACT_APP_CREATE_EXPENSES 
+    const DELETE_INVOICE = process.env.REACT_APP_DELETE_INVOICES
+    const DELETE_EXPENSES = process.env.REACT_APP_DELETE_EXPENSES 
 
     const [isPending, setIsPending] = React.useState(false)
     const [msg, setMsg] = React.useState('')
@@ -21,7 +25,9 @@ const SalesRecord = ({companyId,loggedUser}) => {
     const [showSuccess, setShowSuccess] = React.useState(false)
     const [result, setResult] = React.useState(null)
     const [receiptType, setReceiptType] = React.useState('')
-
+    const [openConfirmation, setOpenConfirmation] = React.useState(false);
+    const [confirmData, setConfirmData] = React.useState("");
+    const [isLoadingDeleteReceipt, setIsLoadingDeleteReceipt] = React.useState(false)
 
     const postReq = (url,data,type) => {
         setIsPending(true)
@@ -74,6 +80,68 @@ const SalesRecord = ({companyId,loggedUser}) => {
             setIsPending(false)
         }
     }
+
+    const handleDeleteInvoiceAndExpenses = (receiptNumber, receiptType, date) => {
+
+        // close open detail modal
+       setShowError(false)
+       setShowSuccess(false)
+        // console.log(date,receiptNumber,receiptType)
+        setOpenConfirmation(true);
+        setConfirmData({
+            header: receiptType,
+            content: receiptNumber,
+            status: "Delete",
+            date: date
+            
+          });
+    }
+
+    // delete invoice or expenses funtion to continue confirmation box
+    const handleContinue = (receiptNumber, receiptType, date) => {
+        // calling the delete useEffect function by seting date to trigger it
+        console.log(receiptNumber,receiptType)
+        setIsLoadingDeleteReceipt(true)
+        if (receiptType === 'expenses'){
+            fetch(`${BASE_URL}${DELETE_EXPENSES}?companyId=${companyId}&date=${date}&receiptNumber=${receiptNumber}`,{
+                method: 'PUT',
+                headers: {"Content-Type": "application/json"},
+                })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success === true){
+                    setIsLoadingDeleteReceipt(false)
+                    setOpenConfirmation(false)
+
+                }
+                
+            }).catch(error => {
+                setIsLoadingDeleteReceipt(false)
+                console.error('Error:', error);
+            })
+        }else {
+            fetch(`${BASE_URL}${DELETE_INVOICE}?companyId=${companyId}&date=${date}&receiptNumber=${receiptNumber}`,{
+                method: 'PUT',
+                headers: {"Content-Type": "application/json"},
+                })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success === true){
+                    setIsLoadingDeleteReceipt(false)
+                    setOpenConfirmation(false)
+
+                }
+                
+            }).catch(error => {
+                setIsLoadingDeleteReceipt(false)
+                console.error('Error:', error);
+            })
+        }
+
+        // setDate(date)
+        // setReceiptNumber(receiptNumber)
+        // setReceiptType(receiptType)
+      } 
 
     function a11yProps(index) {
         return {
@@ -130,7 +198,18 @@ const SalesRecord = ({companyId,loggedUser}) => {
                 setShowError={setShowError}
                 setShowSuccess={setShowSuccess}
                 receiptType={receiptType}
+                handleDeleteInvoiceAndExpenses= {handleDeleteInvoiceAndExpenses}
+                isLoadingDeleteReceipt={isLoadingDeleteReceipt}
             />
+
+             {/* confirmation propmt box */}
+             <Confirmation
+                    openConfirmation={openConfirmation}
+                    setOpenConfirmation={setOpenConfirmation}
+                    confirmData={confirmData}
+                    handleContinue={handleContinue}
+                />
+            {/* end of prompt confirmation box */}
             <Box sx={{
             width: '90%',
             backgroundColor: '#f7faff',

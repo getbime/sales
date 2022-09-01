@@ -13,6 +13,8 @@ import ReactToPrint,{useReactToPrint} from 'react-to-print';
 import moment from 'moment';
 import { ComponentToPrint } from '../shared/ComponentToPrint';
 import Avatar from "@mui/material/Avatar";
+import LoadingButton from '@mui/lab/LoadingButton';
+
 
 
 const style = {
@@ -28,7 +30,7 @@ const style = {
   pb: 3,
 };
 
-function ChildModal({loggedUser,result, receiptType}) {
+function ChildModal({loggedUser,result, receiptType, handleDeleteInvoiceAndExpenses, isLoadingDeleteReceipt}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -190,7 +192,10 @@ function ChildModal({loggedUser,result, receiptType}) {
           <ReactToPrint
                   trigger={() => <Button>Print</Button>}
                   content={() => componentRef.current}
-                />
+          />
+          {!isLoadingDeleteReceipt && <Button onClick={()=>handleDeleteInvoiceAndExpenses(result.data.receiptNumber, receiptType, result.data.date)} color='error'>Delete</Button> }
+          {isLoadingDeleteReceipt && <LoadingButton disabled onClick={()=>handleDeleteInvoiceAndExpenses(result.data.receiptNumber, receiptType, result.data.date)} color='error'>deleting...</LoadingButton> }
+
                 <ComponentToPrint ref={componentRef} detailValue={result.data}  companyName={loggedUser.companyName} receiptType={receiptType}/>
 
 
@@ -202,7 +207,7 @@ function ChildModal({loggedUser,result, receiptType}) {
   );
 }
 
-export default function MessageModal({loggedUser, showError, showSuccess, msg, setShowError, setShowSuccess, result, receiptType}) {
+export default function MessageModal({loggedUser, showError, showSuccess, msg, setShowError, setShowSuccess, result, receiptType,handleDeleteInvoiceAndExpenses,isLoadingDeleteReceipt}) {
   
   
   const handleClose = () => {
@@ -227,7 +232,7 @@ export default function MessageModal({loggedUser, showError, showSuccess, msg, s
           {showSuccess && <Typography id="parent-modal-title" color='#6683ed'>SUCCESS</Typography>}
             {showError && <Typography sx={{textAlign: 'center'}} id="parent-modal-title" color='red'>{msg}</Typography>}
 
-            {showSuccess && <ChildModal loggedUser={loggedUser} result={result} receiptType={receiptType}/> }
+            {showSuccess && <ChildModal loggedUser={loggedUser} result={result} receiptType={receiptType} handleDeleteInvoiceAndExpenses={handleDeleteInvoiceAndExpenses} isLoadingDeleteReceipt={isLoadingDeleteReceipt}/> }
             <IconButton onClick={handleClose}><CloseIcon /></IconButton>
 
           </Stack>

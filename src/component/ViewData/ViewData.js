@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import CustomTable from '../CustomTable/CustomTable'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -21,6 +21,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Search from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import DetailsModal from './DetailsModal'
+import Confirmation from '../shared/Confirmation'
 
 
 const ViewData = ({companyId}) => {
@@ -29,6 +30,8 @@ const ViewData = ({companyId}) => {
     const DAILY_EXPENSES = process.env.REACT_APP_DAILY_EXPENSES;
     const SEARCH_INVOICE = process.env.REACT_APP_SEARCH_INVOICES
     const SEARCH_EXPENSES = process.env.REACT_APP_SEARCH_EXPENSES 
+    const DELETE_INVOICE = process.env.REACT_APP_DELETE_INVOICES
+    const DELETE_EXPENSES = process.env.REACT_APP_DELETE_EXPENSES 
 
     const formatDate = (date) => {
         return date.toString().split(' ').splice(0,4).join(' ')
@@ -39,7 +42,38 @@ const ViewData = ({companyId}) => {
     const [byDate, setByDate] = useState(true)
     const [byText, setByText] = useState(false)
     const [openDetailModal, setOpenDetailModal] = useState(false)
+    // const [openDeleteMessageModal, setopenDeleteMessageModal] = useState(false)
     const [detailValue, setDetailValue] = useState('')
+    const [receiptNumber,setReceiptNumber] = useState(null)
+    const [receiptType, setReceiptType] = useState(null)
+
+    const [openConfirmation, setOpenConfirmation] = useState(false);
+    const [confirmData, setConfirmData] = useState("");
+
+
+    // delete invoice or expenses funtion 
+    const deleteInvoiceAndExpense = (receiptNumber, receiptType)=> {
+        // close open detail modal
+        setOpenDetailModal(false)
+        // console.log(date,receiptNumber,receiptType)
+        setOpenConfirmation(true);
+        setConfirmData({
+            header: receiptType,
+            content: receiptNumber,
+            status: "Delete",
+            
+          });
+
+        
+    }
+    // delete invoice or expenses funtion to continue confirmation box
+    const handleContinue = (receiptNumber, receiptType) => {
+        // calling the delete useEffect function by seting date to trigger it
+        setDate(date)
+        setReceiptNumber(receiptNumber)
+        setReceiptType(receiptType)
+        setOpenConfirmation(false)
+      } 
 
     function a11yProps(index) {
         return {
@@ -61,16 +95,39 @@ const ViewData = ({companyId}) => {
 
     
       
-    function handleDisplayDetail (value){
+    function handleDisplayDetail (value,receiptType){
         // console.log(value)
         setOpenDetailModal(true)
         setDetailValue(value)
+        setReceiptType(receiptType)
     }  
-      
-    const {isLoading: loadingExpenses, data: expenses} = useFetch(`${BASE_URL}${DAILY_EXPENSES}?companyId=${companyId}&date=${date}`)
-    const {isLoading: loadingInvoice, data: invoice} = useFetch(`${BASE_URL}${DAILY_INVOICE}?companyId=${companyId}&date=${date}`)
-    const {isLoading: loadingExpensesSearch, data: expensesSearch} = useFetch(`${BASE_URL}${SEARCH_EXPENSES}?companyId=${companyId}&search=${searchValue}`)
-    const {isLoading: loadingInvoiceSearch, data: invoiceSearch} = useFetch(`${BASE_URL}${SEARCH_INVOICE}?companyId=${companyId}&search=${searchValue}`)
+
+    const {isLoading: loadingExpenses, data: expenses} = useFetch(
+        `${
+            // this is checking if action is either delete receipt or get receipt
+            receiptNumber != null && receiptType === 'expenses' 
+            ? 
+            `${BASE_URL}${DELETE_EXPENSES}?companyId=${companyId}&date=${date}&receiptNumber=${receiptNumber}`
+            :
+            `${BASE_URL}${DAILY_EXPENSES}?companyId=${companyId}&date=${date}`
+        }`,
+        receiptNumber,receiptType
+        )
+
+    const {isLoading: loadingInvoice, data: invoice} = useFetch(
+        `${
+            // this is checking if action is either delete receipt or get receipt
+
+            receiptNumber != null && receiptType === 'invoice'
+            ?
+            `${BASE_URL}${DELETE_INVOICE}?companyId=${companyId}&date=${date}&receiptNumber=${receiptNumber}`
+            :
+            `${BASE_URL}${DAILY_INVOICE}?companyId=${companyId}&date=${date}`
+        }`,
+        receiptNumber,receiptType
+    )
+    const {isLoading: loadingExpensesSearch, data: expensesSearch} = useFetch(`${BASE_URL}${SEARCH_EXPENSES}?companyId=${companyId}&search=${searchValue}`,receiptNumber,receiptType)
+    const {isLoading: loadingInvoiceSearch, data: invoiceSearch} = useFetch(`${BASE_URL}${SEARCH_INVOICE}?companyId=${companyId}&search=${searchValue}`,receiptNumber,receiptType)
     return (
         <Stack spacing={2} direction='column' sx={{
             width: '97.5%',
@@ -83,7 +140,19 @@ const ViewData = ({companyId}) => {
                 openDetailModal={openDetailModal} 
                 detailValue={detailValue} 
                 setOpenDetailModal={setOpenDetailModal}
+                deleteInvoiceAndExpense={deleteInvoiceAndExpense}
+                receiptType={receiptType}
             />}
+
+             {/* confirmation propmt box */}
+                <Confirmation
+                    openConfirmation={openConfirmation}
+                    setOpenConfirmation={setOpenConfirmation}
+                    confirmData={confirmData}
+                    handleContinue={handleContinue}
+                />
+            {/* end of prompt confirmation box */}
+
             {/* {console.log(searchValue)} */}
                 {/* {!loadingInvoiceSearch && console.log(searchValue)} */}
                 {/* {!loadingExpenses && console.log(expenses)} */}
@@ -114,6 +183,11 @@ const ViewData = ({companyId}) => {
                                     setSearchValue(e.target.value)
                                     setByDate(false)
                                     setByText(true)
+
+                                    // reseting to null because delete is not happening
+                                    setReceiptNumber(null)
+                                    setReceiptType(null)
+                                    
                                     
                                 }}
                                 InputProps={{
@@ -134,6 +208,11 @@ const ViewData = ({companyId}) => {
                                     setDate(formatDate(newValue));
                                     setByDate(true)
                                     setByText(false)
+
+                                    // reseting to null because delete is not happening
+                                    setReceiptNumber(null)
+                                    setReceiptType(null)
+
                                     }}
                                     renderInput={(params) => <TextField sx={{width: '30%','@media (max-width: 600px)':{width: '76%'}}} size="small"{...params} />}
                                 />
@@ -161,7 +240,7 @@ const ViewData = ({companyId}) => {
                                                     backgroundColor: 'whitesmoke'
                                                 }
                                               }}
-                                              onClick = {()=> handleDisplayDetail(inv.invoice)}
+                                              onClick = {()=> handleDisplayDetail(inv.invoice, 'invoice')}
                                             >
                                                  <TableCell component="th" scope="row">
                                                     {inv.invoice.customerName}
@@ -198,7 +277,7 @@ const ViewData = ({companyId}) => {
                                                     backgroundColor: 'whitesmoke'
                                                 }
                                               }}
-                                              onClick = {()=> handleDisplayDetail(inv.invoice)}
+                                              onClick = {()=> handleDisplayDetail(inv.invoice, 'invoice')}
                                             >
                                                 <TableCell component="th" scope="row">
                                                     {inv.invoice.customerName}
@@ -264,11 +343,19 @@ const ViewData = ({companyId}) => {
                                         {byDate && expenses.result.length > 0 && expenses.result.map((exp) => (
                                             <TableRow
                                             key={exp.expenses.receiptNumber}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ 
+                                                '&:last-child td, &:last-child th': { border: 0 }, 
+                                                cursor: 'pointer',
+                                                ':hover': {
+                                                    backgroundColor: 'whitesmoke'
+                                                }
+                                              }}
+                                              onClick = {()=> handleDisplayDetail(exp.expenses, 'expenses')}
                                             >
                                             <TableCell component="th" scope="row">
                                                 {exp.expenses.collectorsName}
                                             </TableCell>
+                                            <TableCell align="right">{exp.expenses.purpose}</TableCell>
                                             <TableCell align="right">{exp.expenses.product}</TableCell>
                                             <TableCell align="right">{exp.expenses.amount}</TableCell>
                                             <TableCell align="right">{exp.expenses.receiptNumber}</TableCell>
@@ -279,11 +366,19 @@ const ViewData = ({companyId}) => {
                                         {byText && expensesSearch.result.length > 0 && expensesSearch.result.map((exp) => (
                                             <TableRow
                                             key={exp.expenses.receiptNumber}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{ 
+                                                '&:last-child td, &:last-child th': { border: 0 }, 
+                                                cursor: 'pointer',
+                                                ':hover': {
+                                                    backgroundColor: 'whitesmoke'
+                                                }
+                                              }}
+                                              onClick = {()=> handleDisplayDetail(exp.expenses, 'expenses')}
                                             >
                                             <TableCell component="th" scope="row">
                                                 {exp.expenses.collectorsName}
                                             </TableCell>
+                                            <TableCell align="right">{exp.expenses.purpose}</TableCell>
                                             <TableCell align="right">{exp.expenses.product}</TableCell>
                                             <TableCell align="right">{exp.expenses.amount}</TableCell>
                                             <TableCell align="right">{exp.expenses.receiptNumber}</TableCell>
