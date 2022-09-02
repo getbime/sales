@@ -10,6 +10,20 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Palette from '../../ThemeProvider';
 import LoadingButton from '@mui/lab/LoadingButton';
+import MenuItem from '@mui/material/MenuItem';
+
+const paymentMethod = [
+  {
+    value: 'Cash',
+    label: 'Cash',
+  },
+  {
+    value: 'Transfer',
+    label: 'Transfer',
+  },
+  
+];
+
 
 
 const Expences = ({HandleFormSubmitExpenses,isPending}) => {
@@ -20,11 +34,14 @@ const Expences = ({HandleFormSubmitExpenses,isPending}) => {
     const [amount, setAmount] = React.useState(0)
     const [collectorsName, setCollectorsName] = React.useState('')
     const [purpose, setPurpose] = React.useState('')
+    const [payment, setPayment] = React.useState('Cash');
+
     let data = {
         collectorsName,
         date,
         purpose,
-        amount
+        amount,
+        payment
     }
     
 
@@ -36,6 +53,23 @@ const Expences = ({HandleFormSubmitExpenses,isPending}) => {
              onChange={(e)=>setCollectorsName(e.target.value)}
              value={collectorsName}
             />
+
+            <TextField
+                id="outlined-select-payment"
+                select
+                label="Select mode of payment"
+                value={payment}
+                onChange={(e)=>{
+                    setPayment(e.target.value)
+                }}
+                size="small"
+                >
+                {paymentMethod.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                    </MenuItem>
+                ))}
+                </TextField>
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker

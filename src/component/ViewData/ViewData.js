@@ -262,6 +262,7 @@ const ViewData = ({companyId}) => {
                                                 }</TableCell>
 
                                                 <TableCell align="right">{inv.invoice.grandTotal}</TableCell>
+                                                <TableCell align="right">{inv.invoice.payment}</TableCell>
                                                 <TableCell align="right">{inv.invoice.receiptNumber}</TableCell>
                                                 <TableCell align="right">{inv.invoice.date}</TableCell>    
 
@@ -299,6 +300,7 @@ const ViewData = ({companyId}) => {
                                                 }</TableCell>
 
                                                 <TableCell align="right">{inv.invoice.grandTotal}</TableCell>
+                                                <TableCell align="right">{inv.invoice.payment}</TableCell>
                                                 <TableCell align="right">{inv.invoice.receiptNumber}</TableCell>
                                                 <TableCell align="right">{inv.invoice.date}</TableCell>    
 
@@ -356,8 +358,8 @@ const ViewData = ({companyId}) => {
                                                 {exp.expenses.collectorsName}
                                             </TableCell>
                                             <TableCell align="right">{exp.expenses.purpose}</TableCell>
-                                            <TableCell align="right">{exp.expenses.product}</TableCell>
                                             <TableCell align="right">{exp.expenses.amount}</TableCell>
+                                            <TableCell align="right">{exp.expenses.payment}</TableCell>
                                             <TableCell align="right">{exp.expenses.receiptNumber}</TableCell>
                                             <TableCell align="right">{exp.expenses.date}</TableCell>
 
@@ -379,8 +381,8 @@ const ViewData = ({companyId}) => {
                                                 {exp.expenses.collectorsName}
                                             </TableCell>
                                             <TableCell align="right">{exp.expenses.purpose}</TableCell>
-                                            <TableCell align="right">{exp.expenses.product}</TableCell>
                                             <TableCell align="right">{exp.expenses.amount}</TableCell>
+                                            <TableCell align="right">{exp.expenses.payment}</TableCell>
                                             <TableCell align="right">{exp.expenses.receiptNumber}</TableCell>
                                             <TableCell align="right">{exp.expenses.date}</TableCell>
 

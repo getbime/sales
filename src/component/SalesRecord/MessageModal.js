@@ -129,6 +129,7 @@ function ChildModal({loggedUser,result, receiptType, handleDeleteInvoiceAndExpen
 
                 {/*Reciept Number and Name  */}
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',}}>Receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Mode of payment:</Typography> <Typography> {result.data.payment}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.customerName}</Typography></Stack> 
 
                 {/*End Reciept Number and Name  */}
@@ -173,6 +174,7 @@ function ChildModal({loggedUser,result, receiptType, handleDeleteInvoiceAndExpen
               <Stack flexDirection='column'>
 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between' > <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {result.data.receiptNumber}</Typography></Stack> 
+                <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Mode of payment:</Typography> <Typography> {result.data.payment}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {result.data.collectorsName}</Typography></Stack> 
                 <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Purpose:</Typography> <Typography> {result.data.purpose}</Typography></Stack> 
                 

@@ -164,8 +164,8 @@ const SalesRecord = ({companyId,loggedUser}) => {
     const HandleFormSubmitInvoice = (data)=>{
         postReq(`${BASE_URL}${CREATE_INVOICE}`,data,'invoice')
         
-         
-
+        
+        
     }
     const HandleFormSubmitExpenses = (data) => {
         postReq(`${BASE_URL}${CREATE_EXPENSES}`,data, 'expenses')

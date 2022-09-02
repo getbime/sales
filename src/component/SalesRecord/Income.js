@@ -13,10 +13,28 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Palette from '../../ThemeProvider';
 import LoadingButton from '@mui/lab/LoadingButton';
+import MenuItem from '@mui/material/MenuItem';
+
+const paymentMethod = [
+  {
+    value: 'Cash',
+    label: 'Cash',
+  },
+  {
+    value: 'Transfer',
+    label: 'Transfer',
+  },
+  
+];
 
 
 
 const Income = ({HandleFormSubmitInvoice,isPending}) => {
+
+    const [payment, setPayment] = React.useState('Cash');
+
+    
+
     const inputLabels = {
         productLabel: "Product Name",
         priceLabel: "price",
@@ -57,7 +75,8 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                 quantity: 1,
                 totalPrice: 0,
             },].reduce((a,b)=>a + b.totalPrice,0),
-            product : inputFields
+            product : inputFields,
+            payment
         })
 
        
@@ -71,7 +90,8 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
             customerName,
             date,
             grandTotal: values.reduce((a,b)=>a + b.totalPrice,0),
-            product : values
+            product : values,
+            payment
         })
        
     }
@@ -88,7 +108,8 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
             customerName,
             date,
             grandTotal: values.reduce((a,b)=>a + b.totalPrice,0),
-            product : values
+            product : values,
+            payment
         })
                 
     }
@@ -98,7 +119,8 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
             customerName,
             date:formatDate(newValue),
             grandTotal:[...inputFields].reduce((a,b)=>a + b.totalPrice,0),
-            product : inputFields
+            product : inputFields,
+            payment
         })
         setDate(formatDate(newValue))
     }
@@ -108,11 +130,22 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
             customerName: e.target.value,
             date,
             grandTotal:[...inputFields].reduce((a,b)=>a + b.totalPrice,0),
-            product : inputFields
+            product : inputFields,
+            payment
         })
         setCustomerName(e.target.value)
     }
-    
+
+    const handleChangePayment = (event) => {
+        setData({
+            customerName,
+            date,
+            grandTotal:[...inputFields].reduce((a,b)=>a + b.totalPrice,0),
+            product : inputFields,
+            payment: event.target.value
+        })
+        setPayment(event.target.value);
+    };
 
     return (
 
@@ -134,6 +167,21 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                         renderInput={(params) => <TextField size="small"{...params} />}
                     />
                 </LocalizationProvider>
+
+                <TextField
+                    id="outlined-select-payment"
+                    select
+                    label="Select mode of payment"
+                    value={payment}
+                    onChange={handleChangePayment}
+                    size="small"
+                    >
+                    {paymentMethod.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                        </MenuItem>
+                    ))}
+                    </TextField>
 
                 {inputFields.map((form,index)=>(
                     <Stack key={index} spacing={2} direction="column">

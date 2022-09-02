@@ -127,6 +127,7 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
 
                   {/*Reciept Number and Name  */}
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem',}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
+                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Mode of payment:</Typography> <Typography> {detailValue.payment}</Typography></Stack> 
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {detailValue.customerName}</Typography></Stack> 
 
                   {/*End Reciept Number and Name  */}
@@ -169,6 +170,7 @@ export default function BasicModal({openDetailModal, detailValue, setOpenDetailM
                 <Stack flexDirection='column'>
 
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between' > <Typography sx={{...stl,marginRight: '0.5rem'}}>Receipt number:</Typography> <Typography> {detailValue.receiptNumber}</Typography></Stack> 
+                  <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Mode of payment:</Typography> <Typography> {detailValue.payment}</Typography></Stack> 
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Name:</Typography> <Typography> {detailValue.collectorsName}</Typography></Stack> 
                   <Stack flexDirection='row' spacing={0.2} justifyContent='space-between'> <Typography sx={{...stl,marginRight: '0.5rem'}}>Purpose:</Typography> <Typography> {detailValue.purpose}</Typography></Stack> 
                   
