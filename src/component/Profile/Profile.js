@@ -565,7 +565,7 @@ const Profile = ({ user }) => {
 
             {!isLoadingEdit && (
               <Button variant="contained" onClick={updateProfile}>
-                Edit
+                Update
               </Button>
             )}
             {isLoadingEdit && (

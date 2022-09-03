@@ -102,14 +102,14 @@ const MainBody = ({companyId}) => {
             {!statIsLoading && <BasicCard bg={'#3b76ef'} day={'Daily'} invoice={statis.dailyInvoice[0]} expenses={statis.dailyExpenses[0]}/>}
             {statIsLoading && <CircularProgress /> }
             
-            {!statIsLoading && <BasicCard bg={'#63c7ff'} day={'Weelky'} invoice={statis.weaklyInvoice[0]} expenses={statis.weaklyExpenses[0]}/>}
+            {!statIsLoading && <BasicCard bg={'#63c7ff'} day={'Weekly'} invoice={statis.weaklyInvoice[0]} expenses={statis.weaklyExpenses[0]}/>}
             {statIsLoading && <CircularProgress /> }
             
             {!statIsLoading && <BasicCard bg={'#a66dd4'} day={'Monthly'} invoice={statis.monthlyInvoice[0]} expenses={statis.monthlyExpenses[0]}/>}
             {statIsLoading && <CircularProgress /> }
             
-            {!statIsLoading && <BasicCard bg={'#6dd4b1'} day={'Monthly'} invoice={statis.monthlyInvoice[0]} expenses={statis.monthlyExpenses[0]}/>}
-            {statIsLoading && <CircularProgress /> }
+            {/* {!statIsLoading && <BasicCard bg={'#6dd4b1'} day={'Monthly'} invoice={statis.monthlyInvoice[0]} expenses={statis.monthlyExpenses[0]}/>}
+            {statIsLoading && <CircularProgress /> } */}
             
         </div>
     );
