@@ -60,3 +60,16 @@
     gap: 0;
   }
 }
+.mainTotal{
+  background-color: #f9f9f9;
+  width:100%;
+  height:50px;
+  display: flex;
+  flex-direction: row;
+  padding:10px;
+  justify-content: space-around;
+  align-items: center;
+}
+.mainTotal .mainTotaLabel{
+  font-weight: bold;
+}

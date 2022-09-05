@@ -14,6 +14,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Palette from '../../ThemeProvider';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
+import { useEffect } from 'react';
 
 const paymentMethod = [
   {
@@ -212,6 +213,14 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                     {isPending && <LoadingButton variant="contained" loading >...loading</LoadingButton>}
                 
                 </Palette>
+                <div className='mainTotal'>
+                 <span className='mainTotaLabel'>Grand Total</span>
+                 <span className='mainTotalTotal'>
+                 #
+                 {inputFields.reduce((a,b)=>a+b.totalPrice,0)}
+                 </span>
+                </div>
+                
                 
             </Stack>
 
@@ -247,6 +256,7 @@ const Income = ({HandleFormSubmitInvoice,isPending}) => {
                     </Palette>
                 </Fab>
             </Stack>
+            
         </Stack>
 
     );
