@@ -390,7 +390,7 @@ const ViewData = ({companyId}) => {
                                         ))}
                                     </TableBody>}
                                 </CustomTable>
-                                {(loadingExpenses || !byDate) && <Box sx={{
+                                {(loadingExpenses) && <Box sx={{
                                     margin: 'auto',
                                     marginTop: '3rem',
 
