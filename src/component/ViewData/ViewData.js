@@ -436,7 +436,7 @@ const ViewData = ({companyId}) => {
                                                                 backgroundColor: 'white',
                                                                 padding: '3rem'
                             
-                                                            }}>NO CASH INVIOCES INSERTED ON THIS DAY</Typography>}
+                                                            }}>NO CASH INVOICES INSERTED ON THIS DAY</Typography>}
                                                             </>}
 
                                                 {payment === 'Transfer' && 
