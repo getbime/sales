@@ -12,6 +12,7 @@ const useFetch = (url,receiptNumber,receiptType) => {
                 if(data.success === true){
                     setIsLoading(false)
                     setData(data)
+                    console.log(data)
                 }
                 
             }).catch(error => {
