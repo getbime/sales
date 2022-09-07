@@ -10,7 +10,7 @@ import Tabs from '@mui/material/Tabs';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { TextField, Typography } from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import Income from './Income'
 import Expenses from './Expenses'
 import TableBody from '@mui/material/TableBody';
@@ -23,6 +23,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import DetailsModal from './DetailsModal'
 import Confirmation from '../shared/Confirmation'
 import MenuItem from '@mui/material/MenuItem';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 
 
@@ -122,6 +124,25 @@ const ViewData = ({companyId}) => {
         setDetailValue(value)
         setReceiptType(receiptType)
     }  
+
+
+    //print record
+
+    function printDocument() {
+        const input = document.getElementById('docToPrint');
+        html2canvas(input)
+          .then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+                orientation: "landscape",
+                
+              });
+            pdf.addImage(imgData, 'JPEG', 0, 0);
+            // pdf.output('dataurlnewwindow');
+            pdf.save("my_record.pdf");
+          })
+        ;
+      }
 
     const handleChangePayment = (event) => {
         // setData({
@@ -343,7 +364,11 @@ const ViewData = ({companyId}) => {
                             <Box sx={{
                                 padding: '1rem 2rem 2rem 2rem'
                             }}>
-                                    
+                            <div style={{
+                            width:'100%',
+                            marginLeft:'auto',
+                            marginRight:'auto'
+                             }} id='docToPrint'>     
                                 <CustomTable>
                                     <Income />
                                     {!loadingInvoice && !loadingInvoiceSearch && <TableBody>
@@ -539,6 +564,11 @@ const ViewData = ({companyId}) => {
                                   
 
                                 </CustomTable>
+                                </div>
+
+                                <Button variant='contained' color='primary' 
+                                onClick={()=>printDocument()}>Print Pdf</Button>
+
                                 {console.log(loadingInvoice,loadingInvoiceSearch)}
                                 {loadingInvoice  && <Box sx={{
                                     margin: 'auto',
